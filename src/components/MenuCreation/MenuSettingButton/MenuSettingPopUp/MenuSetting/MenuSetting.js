@@ -51,7 +51,7 @@ const MenuSetting = ({ changeSetting }) => {
                     <h3 class="question-item-header my-3">Размер шрифта</h3>
                     <select onChange = {evt=>saveMenuHandler('menuFontSize', evt.target.value)}>
                         {fontSizeList.map((el,i)=>{
-                            return <option selected = {el == state.menu_settings.font_family} key = {i} value = {el}>{el}</option>
+                            return <option selected = {el == state.menu_settings.font_size} key = {i} value = {el}>{el}</option>
                         })}
                     </select>
                 </div>
