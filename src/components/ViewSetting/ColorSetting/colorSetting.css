@@ -1,0 +1,24 @@
+.color-setting-button {
+    display: flex;
+}
+
+.color-setting-p {
+    font-weight: 700;
+    margin-right: 12%;
+}
+
+.color-setting {
+    width: 30%;
+    padding-left: 4%;
+    margin-top: 1%;
+}
+
+.leftBorder {
+    border-right: 1px solid black;
+}
+
+@media(max-width:1024px) {
+    .color-setting-p {
+        font-weight: normal;
+    }
+}

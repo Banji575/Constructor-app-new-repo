@@ -1,0 +1,26 @@
+.timer-input-number-conteiner {
+    display: flex;
+}
+
+.timer-input-number {
+    width: 100%;
+    text-align: center;
+    /*     background-color: #FFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5); */
+    color: #828282;
+}
+
+.timer-input-item {
+    width: 3%;
+    margin-right: 1%;
+    width: 30px;
+}
+
+.input-number-label {
+    color: #828282;
+    font-size: 12px;
+}
+
+.text-center {
+    text-align: center;
+}

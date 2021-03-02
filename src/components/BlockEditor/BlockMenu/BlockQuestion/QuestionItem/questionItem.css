@@ -1,0 +1,18 @@
+.question-item-conteiner {
+    background-color: #F2F2F2;
+    padding: 1%;
+    margin-bottom: 2%;
+}
+
+.question-item-header {
+    font-size: 14px;
+    color: #254768;
+    font-weight: bold;
+}
+
+.question-item-input {
+    background-color: #FFF;
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+    border: none;
+    width: 100%;
+}

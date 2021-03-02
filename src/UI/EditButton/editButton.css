@@ -1,0 +1,10 @@
+.editButton {
+    width: 28px;
+    text-align: center;
+}
+
+.edite-button-img {
+    right: 11%;
+    position: absolute;
+    top: 17%;
+}

@@ -1,0 +1,52 @@
+.item-page-props-title {
+    font-size: 14px;
+    line-height: 17px;
+    width: 30%;
+}
+
+.item-page-conteiner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: white;
+}
+
+.item-page-props-desc {
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    width: 300px;
+    height: 20px;
+}
+
+.items-header-button {
+    padding: 5px 15px;
+}
+
+.add-button {
+    background-color: #254768;
+    color: white;
+}
+
+.cancel-button {
+    color: #828282;
+}
+
+.item-page-header {
+    padding: 10px;
+    box-shadow: 0 1px 5px 0 rgba(123, 180, 241, 0.55);
+}
+
+.item-pages-title {
+    color: #000;
+    font-size: 36px;
+    line-height: 39px;
+}
+
+.item-pages-price {
+    color: #4F4F4F;
+    font-size: 24px;
+    line-height: 29px;
+}

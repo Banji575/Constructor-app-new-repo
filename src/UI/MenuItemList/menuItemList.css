@@ -1,0 +1,26 @@
+.menu-item-option {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    left: -8%;
+    top: 11%;
+    border: 0.2px solid #E0E0E0;
+    background-color: #fff;
+}
+
+.menu-item-option::after {}
+
+.menu-item-option-open::after {
+    content: '+';
+    position: absolute;
+    right: 25%;
+    top: -25%;
+}
+
+.menu-item-option-close::after {
+    content: '-';
+    position: absolute;
+    right: 25%;
+    top: -25%;
+}

@@ -1,0 +1,30 @@
+.preview-mode {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.preview-item {
+    width: 100%;
+}
+
+
+/* .preview-item {
+    width: 60%;
+} */
+
+.preview-mode-icon-block {
+    width: 44%;
+}
+
+.preview-item-prev::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    top: 8%;
+    left: -16%;
+    transform: rotate(180deg);
+    background-image: url('../../../image/arrowRight.png');
+}

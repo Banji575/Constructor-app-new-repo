@@ -1,0 +1,34 @@
+.timer-number-item {
+    border-radius: 3px;
+    border: 1px solid #FA9917;
+    min-height: 19%;
+    margin-left: 3%;
+    position: relative;
+    z-index: 1;
+    width: 11%;
+    padding: 3%;
+}
+
+.timer-number-list {
+    display: flex;
+    list-style: none;
+    height: 50px;
+    justify-content: center;
+    width: 100%;
+}
+
+.timer-number {
+    color: #333;
+    font-size: 48px;
+}
+
+.timer-absolut-p {
+    position: absolute;
+    position: absolute;
+    bottom: -78%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #828282;
+    font-size: 12px;
+}

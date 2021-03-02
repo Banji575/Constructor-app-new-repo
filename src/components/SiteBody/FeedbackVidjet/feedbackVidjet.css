@@ -1,0 +1,16 @@
+.feedback-vidjet-h3 {
+    color: #202122;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.feedback-body {
+    width: 50%;
+    margin: 0 auto;
+}
+
+@media(max-width:425px) {
+    .feedback-body {
+        width: 100%;
+    }
+}

@@ -1,0 +1,21 @@
+.social-block-container {
+    padding-top: 1%;
+    padding-right: 3%;
+    padding-left: 3%;
+}
+
+.social-block-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-block-h {
+    font-weight: normal;
+    line-height: 17px;
+    color: #254768;
+    font-size: 22px;
+}
+
+.social-block-p {
+    margin: 0;
+}

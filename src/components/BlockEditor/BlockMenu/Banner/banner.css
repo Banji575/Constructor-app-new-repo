@@ -1,0 +1,60 @@
+.banner-upload-area-conteiner {
+    display: flex;
+    justify-content: center;
+    padding: 3% 0;
+    display: flex;
+    background-image: url('../../../../image/carusel.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+}
+
+.input-file-button--custom-height {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.input-wrapper-position {
+    position: relative;
+    height: 200px;
+    width: 70%;
+    border: 1px dotted black;
+    border-width: 1px;
+    border-style: dotted;
+    border-color: black;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.input-wrapper-position--banner {
+    width: 100%;
+}
+
+.banner-upload-logo {
+    position: absolute;
+}
+
+.banner-upload-link-conteiner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner-body {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.banner-load-img-label {
+    position: absolute;
+    bottom: -9%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hide {
+    display: none;
+}

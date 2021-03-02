@@ -1,0 +1,31 @@
+.my-items-conteiner {
+    position: absolute;
+    background-color: grey;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+.my-items-list {
+    display: flex;
+    /*  flex-wrap: wrap; */
+    list-style: none;
+    overflow-x: auto;
+}
+
+.my-items-item {
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+.my-items-item:hover {
+    transform: scale(1.1);
+}
+
+.my-items-elem-img {
+    min-width: 80px;
+}
+
+.my-items-check {
+    border: 1px solid brown;
+}

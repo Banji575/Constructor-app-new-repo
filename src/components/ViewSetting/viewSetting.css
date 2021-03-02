@@ -1,0 +1,36 @@
+.view-setting {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: 63px;
+}
+
+.view-setting-left-block {
+    width: 60%;
+}
+
+.view-setting-right-block {
+    width: 40%;
+    justify-content: flex-end;
+    margin-right: 2%;
+}
+
+@media(max-width:1024px) {
+    .view-setting-left-block {
+        justify-content: space-evenly;
+    }
+}
+
+@media(max-width:425px) {
+    .view-setting-left-block {
+        width: 30%;
+        margin-top: 10px;
+    }
+    .view-setting {
+        padding-right: 0;
+    }
+    .view-setting-right-block {
+        width: 45%;
+    }
+}

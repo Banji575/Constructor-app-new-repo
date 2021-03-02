@@ -1,0 +1,12 @@
+.preview-mode-icon {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.preview-mode-icon-deck {
+    width: 25px;
+}
+
+.preview-mode-icon-mobi {
+    width: 15px;
+}

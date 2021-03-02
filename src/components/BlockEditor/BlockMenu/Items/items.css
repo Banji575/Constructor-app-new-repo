@@ -1,0 +1,35 @@
+.items-input__wrapper {
+    font-size: 14px;
+}
+
+.input__file-button-text {}
+
+.items-input-wrapper-position {
+    position: relative;
+    /* width: 100%; */
+    height: 30px;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border-radius: 3px;
+    border: 0.75px solid #0258AE;
+    box-shadow: 0 1px 2px 0 #39F;
+    padding: 0 2%;
+}
+
+.input__file-button-text {
+    color: #4F4F4F;
+    font-size: 30px;
+    color: #4F4F4F;
+    margin-top: 16%;
+    opacity: .5;
+}
+
+.item-card {
+    min-width: 80px
+}
+
+.items-card-conteiner {
+    overflow-x: auto;
+}

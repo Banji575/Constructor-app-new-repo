@@ -1,0 +1,26 @@
+.site-header {
+    /*  border-top: 1px solid black;
+    border-bottom: 1px solid black; */
+    display: flex;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: relative;
+}
+
+.site-header-preview-mode {
+    padding-top: 2% !important;
+}
+
+@media(max-width:1024px) {
+    .site-header {
+        padding-top: 5%;
+        padding-bottom: 1%;
+    }
+}
+
+@media(max-width:425px) {
+    .site-header {
+        padding-top: 13%;
+        padding-bottom: 1%;
+    }
+}

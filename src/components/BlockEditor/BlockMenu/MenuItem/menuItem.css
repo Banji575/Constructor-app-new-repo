@@ -1,0 +1,26 @@
+.block-menu-item {
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid #808080;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%;
+}
+
+.block-menu-item:hover {
+    transform: scale(1.02);
+}
+
+.block-menu-header {}
+
+.block-menu-text {
+    font-size: 12px;
+    margin-top: 4%;
+    margin-bottom: 0;
+}

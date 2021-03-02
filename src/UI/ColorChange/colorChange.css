@@ -1,0 +1,27 @@
+.color-change {
+    width:30px;
+    height: 30px;
+    border-radius: 15%;
+    border: 1px solid grey;
+    margin-left: 2%;
+}
+
+.color-change.active{
+    box-shadow: 0 1px 2px 0 #39F;
+}
+
+.white{
+    background-color: white;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.red{
+    background-color:red;
+}
+
+.black{
+    background-color: black;
+}

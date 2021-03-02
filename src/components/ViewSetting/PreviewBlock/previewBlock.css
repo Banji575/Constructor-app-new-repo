@@ -1,0 +1,85 @@
+.preview-block {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: relative;
+}
+
+.border-rigth {
+    border-right: 1px solid #808080;
+}
+
+.preview-item {
+    cursor: pointer;
+    position: relative;
+    width: 50%;
+    padding-right: 1%;
+    text-align: center;
+}
+
+.preview-item-next {
+    cursor: pointer;
+}
+
+.preview-item-next::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    top: 39%;
+    right: 2%;
+    background-image: url('../../../image/arrowRight.png');
+}
+
+.preview-item-save {
+    width: 23%;
+    text-align: left;
+}
+
+.preview-item-save::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -38%;
+    top: 13%;
+    background-repeat: no-repeat;
+    background-image: url('../../../image/save.png');
+}
+
+@media(max-width:425px) {
+    .preview-item {
+        font-size: 12px;
+    }
+    .preview-item-next {
+        font-size: 12px;
+        margin-right: 7px;
+    }
+    .preview-item-save::after {
+        transform: scale(.7);
+        top: 8%;
+    }
+    .preview-item-next::after {
+        top: 43%;
+        right: -13%;
+        transform: scale(.7);
+    }
+}
+
+@media(max-width:375px) {
+    .preview-item {
+        font-size: 10px;
+    }
+    .preview-item-save::after {
+        transform: scale(.6);
+        top: -12%;
+        right: -48%;
+    }
+    .preview-item-next::after {
+        transform: scale(.6)
+    }
+    .preview-item-next {
+        font-size: 10px;
+    }
+}

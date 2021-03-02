@@ -1,0 +1,14 @@
+.input-color-widjet {
+    padding: 0 !important;
+    width: 30px !important;
+    height: 30px !important;
+    box-shadow: 0 1px 2px 0 #39F !important;
+}
+
+.input-color-label {
+    margin-top: 10px;
+}
+
+.input-color-margin {
+    margin-top: 5px;
+}

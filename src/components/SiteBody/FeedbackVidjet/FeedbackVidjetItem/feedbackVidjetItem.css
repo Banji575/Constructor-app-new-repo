@@ -1,0 +1,4 @@
+.feedback-vidjet-item{
+    display: flex;
+    flex-direction: column;
+}

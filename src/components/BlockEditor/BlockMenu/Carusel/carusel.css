@@ -1,0 +1,40 @@
+.items-input-hidden {
+    opacity: 0;
+    z-index: -1;
+    position: fixed;
+}
+
+.items-label {
+    background-color: #C8C8C8;
+    color: #FFF;
+    padding: 4%;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.items-list {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 60%;
+    flex-direction: column;
+}
+
+.new-slide-button {
+    color: #4F4F4F;
+    border-radius: 3px;
+    box-shadow: 1px 1px 4px -1px #39F;
+    padding: 2%;
+    border: 1px solid #39f;
+    background-color: #fff;
+}
+
+.carusel-input-duration-container {
+    width: 45%;
+}
+
+.carusel-input-duration {
+    height: 50px;
+    text-align: right;
+}

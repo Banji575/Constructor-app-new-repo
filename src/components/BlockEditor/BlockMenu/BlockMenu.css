@@ -1,0 +1,34 @@
+.block-menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.block-menu {
+    min-width: 50%;
+    max-width: 50%;
+    border-radius: 8px;
+    background-color: #FFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.block-menu-icon {
+    margin: 0 auto;
+}
+
+.block-menu-header {
+    border-bottom: 1px solid #BDBDBD;
+    color: #254768;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.block-menu-close {
+    cursor: pointer;
+}

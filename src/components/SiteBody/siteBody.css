@@ -1,0 +1,24 @@
+.site-top-line {
+    border-top: 1px solid #E0E0E0;
+}
+
+.site-body-mobil {
+    background-image: url('../../image/MobiliuS/NO-smartphones-mockup-avelina-studio-4-mrg.png');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: contain;
+    width: 375px;
+    margin: 0 auto;
+    padding: 1%;
+    padding-top: 750px;
+    position: relative;
+}
+
+.site-body-wrapper {
+    position: absolute;
+    overflow-y: auto;
+    top: 2%;
+    left: 5%;
+    right: 5%;
+    bottom: 2%;
+}

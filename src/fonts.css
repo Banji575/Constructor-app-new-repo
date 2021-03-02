@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat'), url('./fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'AkzidenzGroteskPro';
+    src: url('./fonts/Fonts/AkzidenzGroteskPro/AkzidenzGroteskPro-Md.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('./fonts/Fonts/BebasNeue/BebasNeueRegular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Bree';
+    src: url('./fonts/Fonts/Bree/BreeCYR-Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'CentroSans';
+    src: url('./fonts/Fonts/CentroSansPro/PFCentroSansPro-Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'ComicSansMS';
+    src: url('./fonts/Fonts/ComicSansMS/ComicSansMS.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'DINPro';
+    src: url('./fonts/Fonts/DINPro/DINPro-Medium.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('./fonts/Fonts/Lato/Lato-Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./fonts/Fonts/Roboto/Roboto-Regular.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}

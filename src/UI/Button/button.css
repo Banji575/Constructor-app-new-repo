@@ -1,0 +1,32 @@
+.button {
+    max-width: fit-content;
+    padding: 0.2% 2.5%;
+    border-radius: 3px;
+    background-color: #F2F2F2;
+    border: none;
+    box-shadow: 0 1px 2px 0 #39F;
+    color: #0258AE;
+    transition-property: filter;
+    transition-duration: .2s;
+}
+
+.button--transparent-color {
+    max-width: fit-content;
+    padding: 0.2% 4.5%;
+    border-radius: 3px;
+    background-color: #254768;
+    border: none;
+    box-shadow: 0 1px 2px 0 #39F;
+    transition-property: filter;
+    transition-duration: .2s;
+    color: #FFF;
+}
+
+.button:hover {
+    filter: brightness(90%);
+}
+
+.button:disabled {
+    filter: brightness(60%);
+    color: grey;
+}

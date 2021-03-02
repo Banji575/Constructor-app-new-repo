@@ -1,0 +1,70 @@
+.questions-container {
+    position: relative;
+}
+
+.question-center {
+    display: flex;
+    flex-direction: column;
+}
+
+.questions-header {
+    /*  margin: 0 auto; */
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.questions-body {
+    /*  margin: 0 auto; */
+}
+
+.question-h3 {
+    font-size: 24px;
+    margin-bottom: 0;
+}
+
+.question-p {
+    font-size: 18px;
+    color: #828282;
+}
+
+.questions-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.icon-conteiner {
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #FFF;
+    /*  padding: 4px 10px; */
+}
+
+.icon-conteiner--double-icon {
+    /*     width: 9%; */
+    width: 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-conteiner--middle-line {
+    position: relative;
+}
+
+.icon-conteiner--middle-line::after {
+    position: absolute;
+    content: '';
+    width: 1px;
+    height: 35px;
+    background-color: #808080;
+    right: 50%;
+    transform: translateX(-50%);
+    top: 8%;
+}
+
+
+/* .question-vidjet-title {
+    color: #4F4F4F;
+    font-size: 36px;
+    text-align: center;
+} */
