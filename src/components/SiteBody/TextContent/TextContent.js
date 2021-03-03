@@ -33,13 +33,13 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
     body.id = id
 
 
-    useEffect(()=>{
+  /*   useEffect(()=>{
         if(backgroundColor === '#'+bgColor) return
         const formData = new FormData()
         formData.set('landing_prop_data_id', id)
         formData.set('background_color', backgroundColor)
         doFetchColor(formData)
-    },[backgroundColor])
+    },[backgroundColor]) */
 
 
     const deleteHandler = () => {

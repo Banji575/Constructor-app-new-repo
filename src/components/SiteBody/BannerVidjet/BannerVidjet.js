@@ -76,8 +76,8 @@ const BannerVidjet = ({ body, id, replaceVidj }) => {
     }
 
     return (
-        <div className='questions-container'style = {{backgroundColor: [backgroundColor]}} >
-        <WidjetWrapper delHandler={delHandler} replaceVidj = {replaceVidj} id={id} setBackground = {setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} editWindow={<Banner setViewEdit={setViewEdit} vidjArr={vidjArr} setVidjetData={setVidjetData} id={id}  vidjetObj={body} />} >
+        <div className='questions-container'style = {{backgroundColor: ['#fff']}} >
+        <WidjetWrapper fullScreen = {true} delHandler={delHandler} replaceVidj = {replaceVidj} id={id} setBackground = {setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} editWindow={<Banner setViewEdit={setViewEdit} vidjArr={vidjArr} setVidjetData={setVidjetData} id={id}  vidjetObj={body} />} >
             <div className='banner-body' >
                 {linkSite ? <LinkWrapper link={linkSite}> <img ref={root} /></LinkWrapper> : <img ref={root} />}
             </div>

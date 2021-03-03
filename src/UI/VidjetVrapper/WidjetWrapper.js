@@ -7,7 +7,7 @@ import Context from '../../Context'
 import './widjetWrapper.css'
 import DeleteButton from '../DeleteButton/DeleteButton';
 import Utils from '../../scripts/Utils';
-const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, setBackground, backgroundColor, replaceVidj, id, changeBackground }) => {
+const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, setBackground, backgroundColor, replaceVidj, id, changeBackground , fullScreen = false}) => {
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [state, changeState, setState, catalogId, setVidjetDataasdf, vidjetData, decktopMode] = useContext(Context)
     
@@ -16,6 +16,13 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
         vidjArr.forEach((el, ind) => el.id == id ? i = ind : null)
         return i
     }, [vidjArr])
+
+
+    //для полноэкранных виджетов
+    const classes = ['question-center']
+    if(!fullScreen){
+        classes.push('container')
+    }
 
 
     const setBg = (evt) => {
@@ -53,7 +60,7 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
 
     return (
 
-        <div className='container question-center '>
+        <div className={classes.join(' ')}>
             <div className='questions-header'>
                 {decktopMode ? buttonBlock : null}
             </div>

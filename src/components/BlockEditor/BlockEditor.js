@@ -60,6 +60,7 @@ const BlockEditor = () => {
         }
         const list = [...vidjArr]
         list.push({ title: 'question', id: String(response.landing_prop_data_id), body: objNewQuestion.questions })
+        console.log('response',response)
         setVidjetData(list)
     }, [response])
     const openWidjet = () => {
@@ -78,11 +79,12 @@ const BlockEditor = () => {
             default: return null
         }
     }
+    console.log('vidjArr', vidjArr)
 
     return (
         <ContextEditor.Provider value={[setCurrentWidjet, setIsOpenEditBlock]}>
             <div className='container d-flex'>
-                {isOpenEditBlock &&  <ButtonAddComponent  onClick={() => setIsOpenEditBlock(false)}/>}
+                {isOpenEditBlock && vidjArr.length===0 ?  <ButtonAddComponent  onClick={() => setIsOpenEditBlock(false)}/>:null}
                 {!isOpenEditBlock && <PopUp closePopup={setIsOpenEditBlock} editMode={false} title='Добавить блок'> <BlockMenu setCurrentWidjet={(text) => changeWidget(text)} hideBlock={setIsOpenEditBlock} /></PopUp>}
                 {openWidjet()}
             </div>
