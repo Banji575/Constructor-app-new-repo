@@ -9,6 +9,8 @@ import FeedbackVidject from './FeedbackVidjet/FeedbackVidjet'
 import VideoVidjet from './VideoVidjet/VideoVidjet'
 import TimerVidjet from './TimerVidjet/TimerVidjet'
 import CaruselVidjet from './CaruselVidjet/CaruselVidjet'
+import { Carousel } from 'react-bootstrap'
+
 import './siteBody.css';
 import ItemsVidjet from './ItemsVidjet/ItemVIdjet'
 const SiteBody = ({ vidjArr, setVidjetData, replaceVidj }) => {
@@ -31,7 +33,7 @@ const SiteBody = ({ vidjArr, setVidjetData, replaceVidj }) => {
             case 'video': return <VideoVidjet key={i} body={el.body} bgColor={el.bgColor} id={el.id} replaceVidj={replaceVidj} />
             case 'timer': return <TimerVidjet key={i} body={el.body} bgColor={el.bgColor} id={el.id} replaceVidj={replaceVidj} />
             case 'carusel': return <CaruselVidjet key={i} body={el.body} bgColor={el.bgColor} id={el.id} replaceVidj={replaceVidj} />
-            case 'items' :return <ItemsVidjet key={i} body={el} bgColor={el.bgColor} id={el.id} replaceVidj={replaceVidj} />
+            case 'items': return <ItemsVidjet key={i} body={el} bgColor={el.bgColor} id={el.id} replaceVidj={replaceVidj} />
             default:
                 break;
         }
@@ -40,9 +42,9 @@ const SiteBody = ({ vidjArr, setVidjetData, replaceVidj }) => {
     return (
         <ContextEditor.Provider value={[setCurrentWidjet, setIsEditer, setVidjetData, vidjArr]}>
             <div className='siteBody'>
-                    {vidjArr.map((el, i) => {
-                        return renderVidjet(el, i)
-                    })}
+                {vidjArr.map((el, i) => {
+                    return renderVidjet(el, i)
+                })}
             </div>
         </ContextEditor.Provider>
     )

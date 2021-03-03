@@ -12,6 +12,7 @@ import ContextEditor from '../../../ContextEditor'
 
 import { ContextAddBlock } from '../../../ContextAddBlock'
 import ButtonAddComponent from '../../../UI/ButtonAddComponent/ButtonAddComponent'
+import Carusel from '../../BlockEditor/BlockMenu/Carusel/Carusel'
 
 const CaruselVidjet = ({ body, id, replaceVidj }) => {
     const [respDelCarusel, doFetchDelCarusel] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
@@ -49,22 +50,19 @@ const CaruselVidjet = ({ body, id, replaceVidj }) => {
 
 
     const SimpleSlider = () => (
-        <div className='questions-container' style={{ backgroundColor: [backgroundColor] }} >
-            <WidjetWrapper id={id} replaceVidj={replaceVidj} delHandler={delHandler} setBackground={setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} editWindow={<Carousel body={body} setViewEdit={setViewEdit} id={id} />} >
+        <div className='questions-container' style={{ backgroundColor: ['#fff'] }} >
+            <WidjetWrapper fullScreen= {true} id={id} replaceVidj={replaceVidj} delHandler={delHandler} setBackground={setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} editWindow={<Carousel body={body} setViewEdit={setViewEdit} id={id} />} >
                 <div className='questions-body'>
                     {
-                        body.images.map((el, i) => {
-                            console.log(el)
-                            return (
                                 <Carousel>
-                                    <Carousel.Item>
-                                      <div>
-                                    
-                                      </div>
-                                    </Carousel.Item>
+                                    {body.images.map(el=>{
+                                        return (
+                                            <Carousel.Item interval = {800}>
+                                                <img src={`https://cloudsgoods.com/images${el}`}/>
+                                            </Carousel.Item>
+                                        )
+                                    })}
                                 </Carousel>
-                            )
-                        })
                     }
 
 

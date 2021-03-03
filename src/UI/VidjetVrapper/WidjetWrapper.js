@@ -7,10 +7,11 @@ import Context from '../../Context'
 import './widjetWrapper.css'
 import DeleteButton from '../DeleteButton/DeleteButton';
 import Utils from '../../scripts/Utils';
-const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, setBackground, backgroundColor, replaceVidj, id, changeBackground , fullScreen = false}) => {
+import EditBackground from '../../components/SiteHeader/TextEditorPanel/EditBackground/EditBackground';
+const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, setBackground, backgroundColor, replaceVidj, id, changeBackground, fullScreen = false }) => {
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [state, changeState, setState, catalogId, setVidjetDataasdf, vidjetData, decktopMode] = useContext(Context)
-    
+
     const index = useMemo(() => {
         let i;
         vidjArr.forEach((el, ind) => el.id == id ? i = ind : null)
@@ -20,7 +21,7 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
 
     //для полноэкранных виджетов
     const classes = ['question-center']
-    if(!fullScreen){
+    if (!fullScreen) {
         classes.push('container')
     }
 
@@ -31,7 +32,18 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
     }
 
     const buttonBlock = (
-        <div className='questions-buttons'>
+        
+        <div className='questions-buttons container'>
+           {/*  <EditBackground/> */}
+           <div className = 'edit-background mr-3'><p className = 'edit-background-text'>Фон</p>
+           <InputColor
+                    className='input-color-widjet input-color-margin'
+                    initialValue={backgroundColor || "#f0f1f7"}
+                    onChange={(evt) => setBg(evt)}
+                    placement="right"
+
+                />
+           </div>
             <div className='icon-conteiner'>
                 {vidjArr.length - 1 == index ? null : <ArrowDown id={id} replaceVidj={replaceVidj} />}
             </div>
@@ -39,7 +51,7 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
 
                 {index != 0 ? <ArrowDown id={id} replaceVidj={replaceVidj} direction='up' /> : null}
             </div>
-            <div className='d-flex  icon-conteiner px-2 icon-container-padding'>
+           {/*  <div className='d-flex  icon-conteiner px-2 icon-container-padding'>
                 <div>
                     <p className='edit-background-text input-color-label'>Фон</p>
                 </div>
@@ -50,7 +62,7 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
                     placement="right"
 
                 />
-            </div>
+            </div> */}
             <div className='icon-conteiner icon-conteiner--middle-line icon-conteiner--double-icon' color='green'>
                 <DeleteButton onDelete={delHandler} />
                 <EditButton openEdit={setViewEdit} />

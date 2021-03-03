@@ -8,6 +8,7 @@ import Context from '../../Context'
 const Items = ({ menuId }) => {
     const [resp, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects')
     const [state, changeState, setState, catalogId] = useContext(Context)
+    const [itemList, setItemList] = useState([])
 
     useEffect(()=>{
         const formData = new FormData()
@@ -21,7 +22,8 @@ const Items = ({ menuId }) => {
 
     useEffect(()=>{
         if(!resp) return
-        console.log(resp)
+        setItemList(resp.data)
+
     },[resp])
 
     console.log(menuId)
@@ -34,7 +36,7 @@ const Items = ({ menuId }) => {
             {previewItem
                 ? <ItemPage menuId = {menuId} closePopup = {setPreviewItem} id={previewItem} />
                 : <div className='container'>
-                    <ItemsList previewItem={setPreviewItem} id={menuId} />
+                    <ItemsList itemList = {itemList} previewItem={setPreviewItem} id={menuId} />
                 </div>
             }
         </React.Fragment>

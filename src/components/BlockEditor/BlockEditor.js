@@ -59,7 +59,7 @@ const BlockEditor = () => {
             return
         }
         const list = [...vidjArr]
-        list.push({ title: 'question', id: String(response.landing_prop_data_id), body: objNewQuestion.questions })
+        list.push({ title: 'question', id: String(response.landing_prop_data_id),blockTitle:response.$update_game.title, body: objNewQuestion.questions })
         console.log('response',response)
         setVidjetData(list)
     }, [response])

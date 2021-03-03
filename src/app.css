@@ -72,3 +72,15 @@ p {
     justify-content: start;
     flex-direction: column;
 }
+
+.carousel-inner {
+    height: 60vh;
+}
+
+.carousel-inner {
+    /*  height: 200px; */
+}
+
+.carousel-item {
+    text-align: center;
+}
