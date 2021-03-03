@@ -32,7 +32,7 @@ const Items = ({ menuId }) => {
     return (
         <React.Fragment>
             {previewItem
-                ? <ItemPage closePopup = {setPreviewItem} id={previewItem} />
+                ? <ItemPage menuId = {menuId} closePopup = {setPreviewItem} id={previewItem} />
                 : <div className='container'>
                     <ItemsList previewItem={setPreviewItem} id={menuId} />
                 </div>

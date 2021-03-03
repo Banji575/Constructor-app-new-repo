@@ -39,7 +39,6 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
 
     useEffect(() => {
         const formData = new FormData()
-
         /* list.forEach(el => formData.append('slider_photo[]', el)) */
         body.body.itemsId.forEach(el=>formData.append('object_id[]', el))
         /* formData.set('object_id', body.body.itemsId) */
@@ -56,6 +55,7 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
     useEffect(() => {
         if (!response) return
         setImageArr(response.data)
+        console.log(response)
     }, [response])
 
 
