@@ -24,7 +24,7 @@ const MenuCreation = ({ menuIsView }) => {
     }
 
     const menuFontFamily = state.menu_settings.font_family
-    const wrapperClasses = ['wrapper', 'd-flex']
+    const wrapperClasses = ['wrapper', 'd-flex', 'container-menu']
 
     if (state.menuDirection == 2) {
         wrapperClasses.push('menu-vertical')
@@ -50,6 +50,10 @@ const MenuCreation = ({ menuIsView }) => {
             }
         })
         return <div className={wrapperClasses.join(' ')}>{children}</div>;
+    }
+
+    const newDrawMenu = (arrayMenu) => {
+        
     }
 
     const editItem = (value, id) => {
@@ -134,7 +138,7 @@ const MenuCreation = ({ menuIsView }) => {
                     >Главная</NavLink>
                 </p>
                 {drawMenu(state.siteMenu)}
-                <div className='ml-3'>
+                <div className='menu-buttons-add-new'>
                     {!enterName ? <button onClick={() => setEnterName(true)} className='add-menu-item'>Добавить раздел</button> : <MenuItemNameInput closeEdit={setEnterName} addNewItem={addMenuItemHandler} />}
                 </div>
             </div>
