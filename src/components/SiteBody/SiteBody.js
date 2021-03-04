@@ -42,10 +42,11 @@ const SiteBody = ({ vidjArr, setVidjetData, replaceVidj }) => {
     return (
         <ContextEditor.Provider value={[setCurrentWidjet, setIsEditer, setVidjetData, vidjArr]}>
             <div className='siteBody'>
-                {vidjArr.map((el, i) => {
-                    return renderVidjet(el, i)
-                })}
+                    {vidjArr.map((el, i) => {
+                        return renderVidjet(el, i)
+                    })}
             </div>
+
         </ContextEditor.Provider>
     )
 }

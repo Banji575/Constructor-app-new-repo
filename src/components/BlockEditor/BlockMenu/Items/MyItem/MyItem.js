@@ -6,6 +6,7 @@ import MyItemElem from './MyItemElem/MyItemElem'
 import Button from '../../../../../UI/Button/Button'
 import PopUp from '../../../../../UI/PopUp/PopUp'
 
+
 const MyItem = ({ showMyItem, renderCheckImg }) => {
     const [imageLoad, setImageIsLoad] = useState(false)
     const [checkedImg, setCheckedImg] = useState([])
@@ -48,7 +49,7 @@ const MyItem = ({ showMyItem, renderCheckImg }) => {
             <span class="sr-only ">Loading...</span>
         </div></div> :
         (
-            <PopUp title="Товары" closePopup={()=>showMyItem(false)} showSave = {false} /* saveHandler={() => saveList()} */>
+            <PopUp title="Товары" classNames = {['popup-large-height']} closePopup={()=>showMyItem(false)} showSave = {false} /* saveHandler={() => saveList()} */>
                 <div>
                     <ul className='my-items-list'>
                         {fileArr.map((el, i) => {
@@ -58,8 +59,8 @@ const MyItem = ({ showMyItem, renderCheckImg }) => {
 
                     </ul>
                     </div>
-                    <div className='d-flex justify-content-end'>
-                        <Button title='Загрузить' onClick={() => loadItemhandler()} />
+                    <div className='d-flex justify-content-end ml-1'>
+                        <Button title='Применить' onClick={() => loadItemhandler()} />
                         <Button title='Отмена' onClick={() => showMyItem(false)} />
                     </div>
             </PopUp>

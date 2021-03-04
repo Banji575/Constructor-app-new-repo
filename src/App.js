@@ -13,11 +13,12 @@ import { VidjetAddWrapper } from './ContextAddBlock';
 import Main from './Pages/Main/Main';
 import Items from './Pages/Items/Items'
 import { Carousel } from 'react-bootstrap'
+import mobileDecktop from './image/IcoNos/mobileOn.png'
 
 import { Route, Switch } from 'react-router-dom'
 import Utils from './scripts/Utils';
 
-
+const URL = '/work/user/site-creator/index.php/'
 const catalogId = window.location.href.split('?').slice(1).map(i => i.split('='))[0][1]
 
 function App() {
@@ -165,10 +166,9 @@ function App() {
             </div>
           </Body> */}
           <Switch>
-            <Route exact path='/'> <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} /></Route>
+            <Route  path='/'> <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} /></Route>
             <Route exact path='/items'><Items menuId={urlCatalogId} /></Route>
           </Switch>
-
         </div>
       </div>
     </Context.Provider>
