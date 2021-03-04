@@ -27,6 +27,7 @@ const changeDataObjForBackend = (formdata, arr) => {
     return formdata
 }
 
+
 const BlockEditor = () => {
     /*  const [isOpenEditBlock, setIsOpenEditBlock] = useState(true) */
     const [objNewQuestion, setObjNewQuestion] = useState(null)

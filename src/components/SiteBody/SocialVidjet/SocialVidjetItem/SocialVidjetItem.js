@@ -48,7 +48,7 @@ const SocialVidjetItem = ({ data }) => {
                             return
                         return (
                             <div className = 'mr-5 '>
-                             <a key={i} href={`${data[el].link}`}><img src = {nameSocialButton[el]}/></a>
+                             <a target = '_blank' key={i} href={`${data[el].link}`}><img src = {nameSocialButton[el]}/></a>
                             </div>
                             /* <React.Fragment>
                                 <a key={i} href={`https://${data[el].link}`}  className='social-vidjet-button'>{nameSocialButton[el]}</a>
