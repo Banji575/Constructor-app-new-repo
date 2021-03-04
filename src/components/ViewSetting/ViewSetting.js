@@ -1,8 +1,6 @@
 import React, { useState,useContext } from 'react';
 import SiteLogo from '../../UI/SiteLogo/SiteLogo';
-import ColorSetting from './ColorSetting/ColorSetting';
-import DirectionSetting from './DirectionSetting/DirectionSetting';
-import logo from '../../../src/image/siteLogo.png'
+import logo from '../../../src/image/newLogoDecktop.png'
 import './viewSetting.css'
 import PreviewBlock from './PreviewBlock/PreviewBlock';
 import PreviewMode from './PreviewMode/PreviewMode';

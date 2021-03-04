@@ -2,7 +2,7 @@
     display: flex;
     position: absolute;
     right: 16%;
-    top: 17%;
+    top: 28%;
 }
 
 @media(max-width:425px) {

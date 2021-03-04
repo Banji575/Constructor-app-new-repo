@@ -1,6 +1,7 @@
 .item-new-container {
     display: flex;
     margin-top: 1%;
+    justify-content: space-around;
 }
 
 .item-new-image-wrapper {
@@ -12,4 +13,12 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 5%;
+}
+
+.item-new-desc-wpapper {
+    width: 50%;
+}
+
+.reactEasyCrop_Container {
+    width: 80px;
 }

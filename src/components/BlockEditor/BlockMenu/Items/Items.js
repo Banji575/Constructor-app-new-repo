@@ -27,7 +27,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     const [resAddData, doFetchAddItem] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product`)
     /* const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data') */
     const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=add_model_to_catalog&catalog_id=2&object_id=4277')
-    
+
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const closeWindow = () => {
         if (setViewEdit) {
@@ -36,7 +36,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         }
         setCurrentWidjet(null)
     }
-
+    console.log('loadArr',loadArr)
 
     const delChangeItem = (el, i) => {
         const list = [...loadArr]
@@ -72,7 +72,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
 
         const list = [...vidjArray]
 
-        
+
         itemsContent.body.blockTitle = vidjetTitle
         list.unshift(itemsContent)
         setVidjetDataArray(list)
@@ -81,6 +81,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
 
     const onLoadHandler = (evt) => {
         const file = evt.target.files[0]
+        console.log(file)
         setFile(file)
         doLoad(file)
     }
@@ -91,7 +92,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         formData.set('catalog_id', catalogId)
         formData.set('title', text)
         formData.set('price', price)
-        
+
         formData.append('photo_file[]', file)
         doFetchAddItem(formData)
     }
@@ -99,7 +100,10 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     useEffect(() => {
         if (!resAddData) return
         const img = resAddData.object.default_preview_200
-
+        const newObj = {src:resAddData.object.default_look_preview_200, id:resAddData.object_id}
+        const arr = [...loadArr]
+        arr.push(newObj)
+        setLoadArr(arr)
     }, [resAddData])
 
     useEffect(() => {
@@ -108,7 +112,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     }, [url])
     return (
         <React.Fragment>
-            <PopUp title="Товары" closePopup={closeWindow} saveHandler={() => saveList()}>
+            <PopUp showSave={loadArr.length !== 0} title="Товары" closePopup={closeWindow} saveHandler={() => saveList()}>
                 <div className='timer-conteiner d-flex flex-column'>
                     <h3 className='question-item-header my-3'>Заголовок</h3>
                     <CKEditor
@@ -145,7 +149,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                     })}
                 </div>
             </PopUp>
-            {viewPopUp ? <PopUp title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}
+            {viewPopUp ? <PopUp showSave={false} title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}
             {myItemsPopup ? <MyItem renderCheckImg={setLoadArr} showMyItem={setMyItemsPopup} /> : null}
             <div className='d-flex flex-wrap' >
             </div>

@@ -72,3 +72,46 @@ p {
     justify-content: start;
     flex-direction: column;
 }
+
+
+/* Виджет карусель */
+
+.carousel-indicators {
+    bottom: -14%;
+}
+
+.carousel-indicators li {
+    background-color: grey;
+}
+
+.carousel-inner {
+    height: 60vh;
+}
+
+.carousel-inner {
+    /*  height: 200px; */
+}
+
+.carousel-item {
+    text-align: center;
+}
+
+
+/* Классы для основоного сайта убираем шапку и подвал  и padding*/
+
+.main-header-container {
+    display: none;
+}
+
+.footer {
+    display: none;
+}
+
+.content {
+    padding: 0;
+}
+
+.col {
+    padding-left: 0;
+    padding-right: 0;
+}

@@ -85,19 +85,17 @@ const MenuSettingButton = () => {
 
     return (
         <div className='create-menu-buttons container d-flex justify-content-end'>
-            <div className='d-flex  icon-conteiner'>
-                <div>
-                    <p className='edit-background-text input-color-label'>Фон</p>
-                </div>
-                <InputColor
+             <div className = 'edit-background mr-3'><p className = 'edit-background-text'>Фон</p>
+               <InputColor
                     className='input-color-widjet'
                     initialValue={"#5e72e4"}
                     /*  onChange={(evt)=>setBackground(evt.rgba)} */
                     placement="right"
                 />
-            </div>
-            <div className='edit-text'>
-                <EditButton openEdit={() => setIsEditText(state => !state)} />
+             </div>
+
+            <div className='icon-arrow icon-arrow--shadow'>
+                <EditButton isHeader={true} openEdit={() => setIsEditText(state => !state)} />
                 {/*    <FontAwesomeIcon fontWeight = 'light' onClick={() => setIsEdit(state => !state)} icon={faEdit} size='2x' /> */}
             </div>
             {/*  <FontAwesomeIcon fontWeight='light' onClick={() => setIsEditText(state => !state)} icon={faEdit} size='2x' /> */}
