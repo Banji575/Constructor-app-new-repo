@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import useFetch from '../../../../../hooks/useFetch'
 import Button from '../../../../../UI/Button/Button'
-import 'cropperjs/dist/cropper.css'
-
+import Cropper from 'react-easy-crop'
+import { Slider } from '@material-ui/core'
+import getCroppedImg from '../../../../../scripts/CropImage'
 import './newItems.css'
 
 const NewItem = ({ setView, img, createNewItem }) => {
@@ -15,7 +16,18 @@ const NewItem = ({ setView, img, createNewItem }) => {
     const [isVaidCategory, setIsValidCategory] = useState(true)
     const [category, setCategory] = useState(null)
 
-    const cropperRef = useRef()
+    // useState для cropper
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [zoom, setZoom] = useState(1)
+
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        console.log(croppedArea, croppedAreaPixels)
+    }, [])
+
+
+    const showCroppedImage = () => {
+        console.log('test crop button')
+    }
 
 
     useEffect(() => {
@@ -50,13 +62,32 @@ const NewItem = ({ setView, img, createNewItem }) => {
 
     }
 
-    const onCrop = (e,evt) =>{
-       console.log(cropperRef.getCroppedCanvas() )
-    }
 
     return (
         <div className='item-new-container'>
-            <div className='item-new-image-wrapper'>
+     {/*        <div className='item-new-image-wrapper'>
+                <div className = 'w-25'>
+                    <Cropper
+                        image={img}
+                        crop={crop}
+                        zoom={zoom}
+                        onCropChange={setCrop}
+                        onCropComplete={onCropComplete}
+                        onZoomChange={setZoom}
+                        aspect={4 / 3}
+                    />
+                </div>
+                <Slider
+                    value={zoom}
+                    min={1}
+                    max={3}
+                    step={0.1}
+                    onChange={(e, zoom) => setZoom(zoom)}
+                />
+
+            </div>
+            <button onclick={showCroppedImage}>Cropp</button> */}
+              <div className='item-new-image-wrapper'>
                 <img src={img} />
             </div>
             <div className='item-new-desc-wpapper'>
