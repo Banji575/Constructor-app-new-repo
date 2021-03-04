@@ -1,9 +1,6 @@
 import React,{useState, useEffect,useContext} from 'react'
 import './socialVidjet.css'
 import SocialVidjetItem from './SocialVidjetItem/SocialVidjetItem'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { faAngleUp, faAngleDown, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Social from '../../BlockEditor/BlockMenu/Social/Social'
 import useFetch from '../../../hooks/useFetch'
 import Context from '../../../Context'

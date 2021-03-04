@@ -142,7 +142,7 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
                     <div className='items-list'>
                         <CarouselList files={files} urls={body ? content : null} />
                     </div>
-                    <input ref={root} className='items-input-hidden' type='file' onChange={(evt) => addFile(evt.target.files[0])} />
+                    <input ref={root} className='items-input-hidden' accept="image/*" type='file' onChange={(evt) => addFile(evt.target.files[0])} />
                     <Button classes={['w-100 mw-100 text-left new-slide-button']} disabled={!isValidLimitSlide} onClick={clickHandler} title='+ новый слайд ' />
                     {!isValidLimitSlide ? <p className='text-danger'>Не больше трех слайдов</p> : null}
                     <div className='mt-4 carusel-input-duration-container'>
@@ -156,7 +156,6 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
             </div>
             {/*   <div className='block-question-save'><p onClick={() => saveList()} className='block-question-button-save'>Сохранить</p></div> */}
         </PopUp>
-
     )
 }
 

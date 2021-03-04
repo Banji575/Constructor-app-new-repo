@@ -12,8 +12,9 @@ import SiteBody from './components/SiteBody/SiteBody';
 import { VidjetAddWrapper } from './ContextAddBlock';
 import Main from './Pages/Main/Main';
 import Items from './Pages/Items/Items'
+import { Carousel } from 'react-bootstrap'
 
-import {Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Utils from './scripts/Utils';
 
 
@@ -32,7 +33,7 @@ function App() {
   const [decktopMode, setDecktopMode] = useState(true)
   const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */1455)
   /* const href = window.location.href.split('?')[1].split('&')[1].split('=')[1] */
-  console.log('catalogId',urlCatalogId)
+  console.log('catalogId', urlCatalogId)
 
 
 
@@ -148,7 +149,7 @@ function App() {
       <span class="sr-only ">Loading...</span>
     </div></div>)
     :
-    (<Context.Provider value={[state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode,setUrlCatalogId]}>
+    (<Context.Provider value={[state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId]}>
       <div className="app">
         <ViewSetting />
         <SiteHeader changeViewMenu={setMobilemenuIsOpen} />
@@ -164,10 +165,10 @@ function App() {
             </div>
           </Body> */}
           <Switch>
-            <Route exact path ='/'> <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} /></Route>
-            <Route exact path ='/items'><Items menuId = {urlCatalogId}/></Route>
+            <Route exact path='/'> <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} /></Route>
+            <Route exact path='/items'><Items menuId={urlCatalogId} /></Route>
           </Switch>
-         
+
         </div>
       </div>
     </Context.Provider>

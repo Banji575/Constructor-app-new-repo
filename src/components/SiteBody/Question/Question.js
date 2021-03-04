@@ -111,7 +111,7 @@ const Question = ({ body, id, replaceVidj, title, bgColor }) => {
         <div className='questions-container' style={{ backgroundColor: [backgroundColor] }}>
             <WidjetWrapper id={id} replaceVidj={replaceVidj} backgroundColor={bgColor} setBackground={setBackgroundColor} delHandler={delHandler} isView={viewEdit} setViewEdit={setViewEdit} editWindow={<BlockQueston setViewEdit={setViewEdit} id={id} changeStateVidjet={changeStateVidjet} isNew={false} listArr={body} title={title} />}>
                 <div className='questions-body'>
-                    <h1 className = 'question-vidjet-title'>{title}{/* {Utils.createHTML(title)} */}</h1>
+                    <h1 className = 'question-vidjet-title'>{/* {title} */} {Utils.createHTML(String(title))}</h1>
                     {elems()}
                 </div>
                 {body.length > 2 && !viewFullList ? <Button /* disabled = {false} */ onClick={() => viewFillLisnHundler()} title='Еще' /> : null}

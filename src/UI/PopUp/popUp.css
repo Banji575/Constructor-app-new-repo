@@ -32,7 +32,8 @@
 .popup-body {
     padding: 4% 2%;
     max-height: 90vh;
-    /*  overflow-y: auto; */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .button-disabled {

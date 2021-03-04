@@ -63,7 +63,6 @@ const MenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting
         setItemText('')
     }
     const inputChangeHandler = (evt) => {
-
         setItemText(evt.target.value)
     }
 

@@ -1,5 +1,4 @@
 .items-list-items-tepmlate {
-    background-color: red;
     overflow: hidden;
     position: relative;
     width: 20%;
@@ -52,4 +51,8 @@
     right: 50%;
     transform: translateX(50%) rotate(90deg);
     background-color: #254768;
+}
+
+.items-list-items {
+    display: flex;
 }

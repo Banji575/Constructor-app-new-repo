@@ -4,13 +4,15 @@ import Utils from '../../../scripts/Utils'
 /* import ClassicEditor from '@ckeditor/ckeditor5-build-classic' */
 import CKEditor from 'ckeditor4-react-advanced'
 const Text = ({setText, text}) => {
+    console.log(text)
     return(
         <div>
             <CKEditor
                     /* data={content ? content.title : ''} */
-                    data = {''}
+                    data = {text}
                   /*   onBlur={(evt) => changeTitleHandler(evt.editor)} */
                     /* onChange={(e,text)=>setTitle(e.editor.getData())} */
+
                     config={{
                         toolbar: [Utils.CKEditorTools],
                         height:'60px'
