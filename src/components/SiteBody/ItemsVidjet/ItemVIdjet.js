@@ -68,8 +68,7 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
                     <div className='items-conteiner d-flex '>
                         {imageArr.map((el, i) => {
                             return (
-                                <div className = 'd-flex flex-column m-3'>
-                                    asdhashashj
+                                <div key = {i} className = 'd-flex flex-column m-3'>
                                     <div>
                                         <img src={el.default_look_preview_200} />
                                     </div>

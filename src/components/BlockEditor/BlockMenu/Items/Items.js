@@ -58,7 +58,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         if (content) {
             formData.set('landing_prop_data_id', id)
         }
-        itemsIdArr.forEach(el => formData.append('object_id[]', el))
+        itemsIdArr.forEach(el => formData.append('object_id', el))
         doFetchAddVidjetItem(formData)
     }
 

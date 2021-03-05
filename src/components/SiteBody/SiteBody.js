@@ -13,7 +13,7 @@ import { Carousel } from 'react-bootstrap'
 
 import './siteBody.css';
 import ItemsVidjet from './ItemsVidjet/ItemVIdjet'
-const SiteBody = ({ vidjArr, setVidjetData, replaceVidj }) => {
+const SiteBody = ({ vidjArr = [], setVidjetData, replaceVidj }) => {
     const [isEditer, setIsEditer] = useState(true)
     const [currentWidjet, setCurrentWidjet] = useState(null)
 
