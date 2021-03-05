@@ -11,13 +11,16 @@ import TimerVidjet from './TimerVidjet/TimerVidjet'
 import CaruselVidjet from './CaruselVidjet/CaruselVidjet'
 import { Carousel } from 'react-bootstrap'
 
+
 import './siteBody.css';
 import ItemsVidjet from './ItemsVidjet/ItemVIdjet'
-const SiteBody = ({ vidjArr, setVidjetData, replaceVidj }) => {
+const SiteBody = ({ vidjArr = [], setVidjetData, replaceVidj , mobileMode}) => {
     const [isEditer, setIsEditer] = useState(true)
     const [currentWidjet, setCurrentWidjet] = useState(null)
 
+    const classes = mobileMode ? 'site-body-hide' : 'site-body'
 
+console.log('sitebody', mobileMode)
     const renderVidjet = (el, i) => {
         if (!el) {
             return
@@ -41,11 +44,12 @@ const SiteBody = ({ vidjArr, setVidjetData, replaceVidj }) => {
 
     return (
         <ContextEditor.Provider value={[setCurrentWidjet, setIsEditer, setVidjetData, vidjArr]}>
-            <div className='siteBody'>
-                {vidjArr.map((el, i) => {
-                    return renderVidjet(el, i)
-                })}
+            <div className={classes} >
+                    {vidjArr.map((el, i) => {
+                        return renderVidjet(el, i)
+                    })}
             </div>
+
         </ContextEditor.Provider>
     )
 }

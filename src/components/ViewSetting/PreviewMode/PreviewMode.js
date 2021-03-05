@@ -3,7 +3,7 @@ import './previewMode.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faDesktop, faTabletAlt, faMobileAlt } from '@fortawesome/free-solid-svg-icons'
 import PreviewBlockIcon from '../PreviewBlock/PreviewBlockIcon/PreviewBlockIcon'
-const PreviewMode = ({ changeViewMode }) => {
+const PreviewMode = ({ changeViewMode ,typeViewMode, decktopOrMobileMode}) => {
 
     return (
         <div className='preview-mode'>
@@ -14,7 +14,7 @@ const PreviewMode = ({ changeViewMode }) => {
               {/*   <FontAwesomeIcon className='mr-5' icon={faDesktop} size='3x' />
                 <FontAwesomeIcon className='mr-5' icon={faTabletAlt} size='3x' />
                 <FontAwesomeIcon className='mr-5' icon={faMobileAlt} size='3x' /> */}
-                <PreviewBlockIcon/>
+                <PreviewBlockIcon   decktopOrMobileMode = {decktopOrMobileMode} typeViewMode = {typeViewMode}/>
             </div>
         </div>
     )

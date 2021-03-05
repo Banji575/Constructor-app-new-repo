@@ -8,14 +8,18 @@
 
 .my-items-list {
     display: flex;
-    /*  flex-wrap: wrap; */
+    flex-wrap: wrap;
     list-style: none;
     overflow-x: auto;
+    overflow: auto;
+    max-height: 50vh;
 }
 
 .my-items-item {
-    margin-left: 1%;
-    margin-bottom: 1%;
+    margin-left: 5%;
+    margin-bottom: 3%;
+    width: 23%;
+    border: 1px solid #E0E0E0;
 }
 
 .my-items-item:hover {
@@ -27,5 +31,5 @@
 }
 
 .my-items-check {
-    border: 1px solid brown;
+    border: 2px solid #FA9917;
 }

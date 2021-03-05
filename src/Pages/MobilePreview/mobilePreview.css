@@ -1,0 +1,56 @@
+.mobile-preview-container {
+    display: flex;
+}
+
+iframe {
+    width: 389px;
+    height: 89vh;
+    margin: 0 auto;
+    padding: 1%;
+    border: none;
+}
+
+body::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+}
+
+
+/* body::-webkit-scrollbar-button {
+    background-color: #666;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #999;
+} */
+
+
+/* body::-webkit-scrollbar-track-piece {
+    background-color: #666;
+}
+ */
+
+body::-webkit-scrollbar-thumb {
+    height: 5px;
+    background-color: #666;
+    border-radius: 3px;
+}
+
+
+/* body::-webkit-scrollbar-corner {
+    background-color: #999;
+}
+
+body::-webkit-resizer {
+    background-color: #666;
+} */
+
+.mobile-preview-shell {
+    display: flex;
+    margin: 0 auto;
+    background-image: url('../../image/MobiliuS/NO-smartphones-mockup-avelina-studio-4-mrg.png');
+    /* background-image: url('/work/uploads/NO-smartphones-mockup-avelina-studio-4-mrg.png'); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 2%;
+}

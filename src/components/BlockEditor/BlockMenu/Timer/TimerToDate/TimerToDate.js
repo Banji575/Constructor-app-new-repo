@@ -29,7 +29,7 @@ const TimerToDate = ({getParams}) => {
             </div>
             <div className='date-picker-conteiner'>
                 <p className='question-item-header'  >Время</p>
-                <input type= 'time' value = {toDateTime} onChange = {(evt)=> setToDateTime(evt.target.value)}/>
+                <input className = 'input-time' type= 'time' value = {toDateTime} onChange = {(evt)=> setToDateTime(evt.target.value)}/>
             </div>
         </div>
     )

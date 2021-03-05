@@ -26,6 +26,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     const [vidjetTitle, setVidjetTitle] = useState(itemsContent.body.blockTitle)
     const [resAddData, doFetchAddItem] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product`)
     /* const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data') */
+    
     const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=add_model_to_catalog&catalog_id=2&object_id=4277')
 
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
@@ -58,7 +59,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         if (content) {
             formData.set('landing_prop_data_id', id)
         }
-        itemsIdArr.forEach(el => formData.append('object_id[]', el))
+        itemsIdArr.forEach(el => formData.append('object_id', el))
         doFetchAddVidjetItem(formData)
     }
 

@@ -77,7 +77,7 @@ const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
             const list = [...vidjArray]
             list.unshift(timerParams)
 
-            setVidjetDataArray(list)
+           /*  setVidjetDataArray(list) */
           
 
             console.log(respEditTimer)

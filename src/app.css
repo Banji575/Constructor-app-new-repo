@@ -115,3 +115,9 @@ p {
     padding-left: 0;
     padding-right: 0;
 }
+
+@media(max-width:400px) {
+    .carousel-inner {
+        height: 27vh;
+    }
+}

@@ -13,12 +13,19 @@ import { VidjetAddWrapper } from './ContextAddBlock';
 import Main from './Pages/Main/Main';
 import Items from './Pages/Items/Items'
 import { Carousel } from 'react-bootstrap'
+import mobileDecktop from './image/IcoNos/mobileOn.png'
 
 import { Route, Switch } from 'react-router-dom'
 import Utils from './scripts/Utils';
 
+import MobilePreview from './Pages/MobilePreview/MobilePreview';
+import { faRemoveFormat } from '@fortawesome/free-solid-svg-icons';
 
+const URL = '/work/user/site-creator/index.php/'
 const catalogId = window.location.href.split('?').slice(1).map(i => i.split('='))[0][1]
+const MOBILE_GET_PARAM = 'mobile-mode'
+const isFrameMode = window.location.href.split('?').indexOf(MOBILE_GET_PARAM) + 1
+console.log('catalog', catalogId)
 
 function App() {
   /* console.log(window.location.href.split('?').slice(1).map(i => i.split('='))[0][1]) */
@@ -30,11 +37,12 @@ function App() {
   const [stateApp, setStateApp] = useState('')
   const [vidjetData, setVidjetData] = useState(null)
   const [mobileMenuIsOpen, setMobilemenuIsOpen] = useState(true)
-  const [decktopMode, setDecktopMode] = useState(true)
+  /* const [decktopMode, setDecktopMode] = useState(false) */
+  const [decktopMode, setDecktopMode] = useState(isFrameMode > 0 ? false : true)
+  const [mobileMode, setMobileMode] = useState(false)
   const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */1455)
   /* const href = window.location.href.split('?')[1].split('&')[1].split('=')[1] */
   console.log('catalogId', urlCatalogId)
-
 
 
   useEffect(() => {
@@ -75,6 +83,8 @@ function App() {
   }, [response])
 
   const [state, setState] = useState('')
+
+
 
   //перемещение виджета
 
@@ -140,36 +150,55 @@ function App() {
     menuDirectionClasses.push('horizontalDirection')
   }
 
+  //десктопное -мобильное отображение
+  const decktopOrMobileMode = () => {
+    setDecktopMode(s => !s)
+    setMobileMode(s => !s)
+  }
 
+  //Функция только для фрейма
+
+   const findMobileGetParam = () => {
+    const href = window.location.href.split('?')
+    console.log(href, ';ladkjsflkjasdfljasdflkjasdfkljasfkljadsklfjdasklfjdaskljfdskljdskljdfs')
+    const isMobile = href.indexOf(MOBILE_GET_PARAM) + 1
+    return isMobile
+  }
+
+  console.log(findMobileGetParam(),'firndmobilegetpos')
+/* 
+  if(findMobileGetParam()>0){
+    if(!decktopMode) return
+    setDecktopMode(false)
+  }
+   */
+   
+ 
+
+  /*   addGetForIframe() */
   // Страницы для роутинга
-
 
   return !dataLoading ?
     (<div className='d-flex h-100' ><div class="spinner-border mx-auto my-auto" role="status">
       <span class="sr-only ">Loading...</span>
     </div></div>)
     :
-    (<Context.Provider value={[state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId]}>
+    (<Context.Provider value={[state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode]}>
       <div className="app">
-        <ViewSetting />
-        <SiteHeader changeViewMenu={setMobilemenuIsOpen} />
-        <div className={menuDirectionClasses.join(' ')}>
-          <MenuCreation menuIsView={mobileMenuIsOpen} />
+       {!isFrameMode  ?  <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> :null }
 
-          {/* <Body state={state}>
-            <div>
-              <VidjetAddWrapper>
-                {vidjetData ? <SiteBody replaceVidj={replaceVidj} setVidjetData={setVidjetData} vidjArr={vidjetData} /> : null}
-                <BlockEditor setVidjetData={setVidjetData} vidjArr={vidjetData} />
-              </VidjetAddWrapper>
-            </div>
-          </Body> */}
+        {!mobileMode ? <SiteHeader changeViewMenu={setMobilemenuIsOpen} /> : null}
+        <div className={menuDirectionClasses.join(' ')}>
+          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null}
           <Switch>
-            <Route exact path='/'> <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} /></Route>
+            <Route path='/'>
+              {mobileMode ? <MobilePreview /> : null}
+              <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
+            </Route>
             <Route exact path='/items'><Items menuId={urlCatalogId} /></Route>
           </Switch>
-
         </div>
+        {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
       </div>
     </Context.Provider>
     );

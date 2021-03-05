@@ -18,6 +18,7 @@ import Carusel from './BlockMenu/Carusel/Carusel'
 import PopUp from '../../UI/PopUp/PopUp'
 import ButtonAddComponent from '../../UI/ButtonAddComponent/ButtonAddComponent'
 import { ContextAddBlock } from '../../ContextAddBlock'
+import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons'
 
 const changeDataObjForBackend = (formdata, arr) => {
     arr.forEach((el, i) => {
@@ -32,7 +33,7 @@ const BlockEditor = () => {
     /*  const [isOpenEditBlock, setIsOpenEditBlock] = useState(true) */
     const [objNewQuestion, setObjNewQuestion] = useState(null)
     const [currentWidjet, setCurrentWidjet] = useState(null)
-    const [state, changeState, setState, catalogId, setVidjetData, vidjArr] = useContext(Context)
+    const [state, changeState, setState, catalogId, setVidjetData, vidjArr=[]] = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const { isOpenEditBlock, setIsOpenEditBlock } = useContext(ContextAddBlock)
     const changeWidget = (text) => {
@@ -82,10 +83,18 @@ const BlockEditor = () => {
     }
     console.log('vidjArr', vidjArr)
 
+    const showAddButtonSiteBody = () =>{
+        if(vidjArr == null) return true
+        if(vidjArr.length === 0) return true
+        return false
+    }
+
+/*     console.log(showAddButtonSiteBody(), vidjArr.length === 0) */
+
     return (
         <ContextEditor.Provider value={[setCurrentWidjet, setIsOpenEditBlock]}>
             <div className='container d-flex'>
-                {isOpenEditBlock && vidjArr.length===0 ?  <ButtonAddComponent  onClick={() => setIsOpenEditBlock(false)}/>:null}
+                {isOpenEditBlock && showAddButtonSiteBody() ?  <ButtonAddComponent  onClick={() => setIsOpenEditBlock(false)}/>:null}
                 {!isOpenEditBlock && <PopUp closePopup={setIsOpenEditBlock} editMode={false} title='Добавить блок'> <BlockMenu setCurrentWidjet={(text) => changeWidget(text)} hideBlock={setIsOpenEditBlock} /></PopUp>}
                 {openWidjet()}
             </div>
