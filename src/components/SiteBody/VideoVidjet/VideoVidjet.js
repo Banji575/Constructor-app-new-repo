@@ -68,7 +68,6 @@ const VideoVidjet = ({ body, id,replaceVidj }) => {
                 <WidjetWrapper id={id} replaceVidj = {replaceVidj} setBackground = {setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} delHandler = {delHandler} editWindow={ <Video  setViewEdit={setViewEdit} id={id} content={{ id: id, title: 'video', body: body }} />} >
                 <div className='questions-body'>
                     {Utils.createHTML(body.title)}
-                    <iframe src={getVideoLink(body.link)} />
                 </div>
                 </WidjetWrapper>
                 <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>

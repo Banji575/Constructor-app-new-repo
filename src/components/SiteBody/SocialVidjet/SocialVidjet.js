@@ -22,7 +22,6 @@ const SocialVidjet = ({ body ,id, replaceVidj}) => {
         setViewEdit(true)
     }
 
-    console.log('socialVidjetdata', body)
 
     const delHandler = () => {
         const formData = new FormData()
