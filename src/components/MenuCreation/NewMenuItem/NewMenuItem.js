@@ -7,30 +7,107 @@ import Context from '../../../Context'
 import { NavLink } from 'react-router-dom'
 import Utils from '../../../scripts/Utils'
 import MenuItemOption from './../MenuItem/menuItemOption/MenuItemOptions';
-const NewMenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting, content }) => {
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle, faEllipsisH, faMinusCircle, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+
+
+const NewMenuItem = ({ text, id, content, isRead = false }) => {
+    const [showReadPopap, setShowReadPopap] = useState(false)
+    const [isOpenMenu, setIsOpenMenu] = useState(false)
+    const [menuText, setMenuText] = useState(text)
+    const [isReadMenu, setIsReadMenu] = useState(isRead)
+
     const root = useRef()
-    const [shoeOpion, setShowOption] = useState(false)
-    const [showInput, setShowInput] = useState(false)
-    const [inputItemText, setItemText] = useState('')
-    const [showPointList, setShowPointList] = useState(false)
-    const [state, changeState, setState, calalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode,setUrlCatalogId] = useContext(Context)
-    const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
-    const [respNewMenuList, doFetchRestNewMenuList] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog&catalog_id=${calalogId}`)
-    const [enterName, setEnterName] = useState(false)
+    const rootMenu = useRef()
+    const rootReadMenu = useRef()
+    const [state, changeState, setState, calalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId] = useContext(Context)
 
-
-    const changeCatalogId = (evt) => {
-        console.log('click evt',evt.target)
-        if(evt.target.getAttribute ('data-type') === 'menuLink'){
-            setUrlCatalogId(data.id)
-        }    
+    const updateMenuItems = (newText) => {
+        fetch(`/api/CatalogController.php?mode=update_menu_item&menu_id=${id}&text=${newText}`)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json)
+                if (json.success && json.success != 'false') {
+                    setMenuText(json.text)
+                }
+            })
     }
 
+    //toggle isReadMenu 
+    useEffect(() => {
+        const onClick = e => rootReadMenu.current.contains(e.target) || setIsReadMenu(false);
+        document.addEventListener('click', onClick);
+        return () => document.removeEventListener('click', onClick);
+    }, [isReadMenu])
+
+    // toggle level menu
+    useEffect(() => {
+        const onClick = e => rootMenu.current.contains(e.target) || setIsOpenMenu(false);
+        document.addEventListener('click', onClick);
+        return () => document.removeEventListener('click', onClick);
+
+    }, [])
+
+    // toggle popap read
+    useEffect(() => {
+        const onClick = e => root.current.contains(e.target) || setShowReadPopap(false);
+        document.addEventListener('click', onClick);
+        return () => document.removeEventListener('click', onClick);
+    }, [])
+
+
     return (
-        <li className="id">
-            <NavLink onClick = {(evt)=>changeCatalogId(evt)} to={`/items?id=${calalogId}&menu_id=${data.id}`}>
-                 {content}
+        <li className='' ref={rootMenu}>
+            <div className={'new-menu-items ' + (isReadMenu ? 'd-none' : '') + (isOpenMenu ? ' open' : '')}>
+                <div className="new-menu-items-toggler" onClick={() => setIsOpenMenu(!isOpenMenu)}>
+                    <FontAwesomeIcon icon={isOpenMenu ? faMinusCircle : faPlusCircle} />
+                </div>
+                <NavLink to={`/items?id=${calalogId}&menu_id=${id}`}>
+                    {menuText}
+                </NavLink>
+                <div className="new-menu-items-read-btn" ref={root} onClick={() => setShowReadPopap(!showReadPopap)}>
+                    <FontAwesomeIcon icon={faEllipsisH} />
+                </div>
+                {content}
+                {showReadPopap && <div className="new-menu-items-read-popap">
+                    <div className="new-menu-items-read-popap__items text-danger" >
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                    </div>
+                    <div className="new-menu-items-read-popap__items ">
+                        <FontAwesomeIcon icon={faEdit} onClick={() => setIsReadMenu(true)} />
+                    </div>
+                </div>}
+            </div>
+
+            <div className={isReadMenu ? "" : "d-none"}>
+                <div className="input-group mb-3 " ref={rootReadMenu}>
+                    <input type="text" class="form-control" placeholder="Имя получателя" aria-label="Имя получателя" aria-describedby="basic-addon2" />
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-secondary" type="button">Кнопка</button>
+                    </div>
+                </div>
+            </div>
+
+            {/* <div className="new-menu-items-toggler" onClick={() => setIsOpenMenu(!isOpenMenu)}>
+                <FontAwesomeIcon icon={isOpenMenu ? faMinusCircle : faPlusCircle} />
+            </div>
+            <NavLink to={`/items?id=${calalogId}&menu_id=${id}`}>
+                {menuText}
             </NavLink>
+            <div className="new-menu-items-read-btn" ref={root} onClick={() => setShowReadPopap(!showReadPopap)}>
+                <FontAwesomeIcon icon={faEllipsisH} />
+            </div>
+            {content}
+            {showReadPopap && <div className="new-menu-items-read-popap">
+                <div className="new-menu-items-read-popap__items text-danger" >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                </div>
+                <div className="new-menu-items-read-popap__items ">
+                    <FontAwesomeIcon icon={faEdit} />
+                </div>
+            </div>} */}
         </li>
     )
 }

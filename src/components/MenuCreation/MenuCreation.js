@@ -9,10 +9,11 @@ import LoadingLogo from '../SiteHeader/loadingLogo/LoadingLogo'
 import MenuItemNameInput from './MenuItemNameInput/MenuItemNameInput'
 import { NavLink } from 'react-router-dom'
 
-
 import NewMenuItem from './NewMenuItem/NewMenuItem';
 import NewMenuToggler from './NewMenuToggler/NewMenuToggler';
 import NewMenuList from './NewMenuList/NewMenuList';
+import './newMenuCreation.css';
+
 
 const MenuCreation = ({ menuIsView }) => {
     const [state, changeState, setState, calalogId] = useContext(Context)
@@ -57,38 +58,39 @@ const MenuCreation = ({ menuIsView }) => {
         return <div className={wrapperClasses.join(' ')}>{children}</div>;
     }
 
-    const newDrawMenu = (treeMenuArray) => {
-        console.log('arrayMenu', treeMenuArray)
-        let containers = []
-        traverse(containers, treeMenuArray);
+    const NewDrawMenu = ({ childrenList }) => {
+        return (
+            <React.Fragment>
+                {childrenList.map((el, i) => {
+                    return (
+                        <ul className="new-menu-list" key={el.id}>
 
-        function traverse(container, tree) {
-            console.log('tree', tree)
-            let ul = [];
-            tree.map((el, i) => {
-                let li = [];
-                li.push(
-                    <NewMenuItem
-                        menuSetting={menuSetting}
-                        data={el}
-                        editItem={editItem}
-                        deletItem={deletItem}
-                        content={el.text}
-                    />
-                )
-                if (el.childrenList && el.childrenList.length) {
-                    traverse(li, el.childrenList)
-                }
-                ul.push(li)
-            })
-
-            container.push(
-                <NewMenuList>
-                    {ul}
-                </NewMenuList>
-            )
-        }
-        return <div className={wrapperClasses.join(' ')}>{containers}</div>;
+                            {/* <li className="new-menu-items" onClick={() => console.log(el.id)}>
+                                <div className="new-menu-items-toggler">
+                                    <FontAwesomeIcon icon={faPlusCircle} />
+                                </div>
+                                <div className="new-menu-items-body">
+                                    {el.text}
+                                </div>
+                                <div className="new-menu-items-read-btn">
+                                    <FontAwesomeIcon icon={faEllipsisH} />
+                                </div>
+                                <div className="new-menu-items-read-popap">
+                                        редактировать меню
+                                </div>
+                                {el.childrenList.length && <NewDrawMenu childrenList={el.childrenList} />}
+                            </li> */}
+                            <NewMenuItem
+                                text= {el.text}
+                                id = {el.id}
+                                
+                                content = {el.childrenList.length && <NewDrawMenu childrenList={el.childrenList} />}
+                            />
+                        </ul>
+                    )
+                })}
+            </React.Fragment>
+        )
     }
 
     const editItem = (value, id) => {
@@ -159,7 +161,7 @@ const MenuCreation = ({ menuIsView }) => {
 
         doFetchCreate(formData)
     }
-
+    console.log('state.siteMenu', state.siteMenu)
     return (
         <React.Fragment>
             <div className={classes.join(' ')} >
@@ -173,7 +175,8 @@ const MenuCreation = ({ menuIsView }) => {
                     >Главная</NavLink>
                 </p>
                 {/* {drawMenu(state.siteMenu)} */}
-                {newDrawMenu(state.siteMenu)}
+                {/* {newDrawMenu({ childrenList: state.siteMenu })} */}
+                <NewDrawMenu childrenList={state.siteMenu} />
                 <div className='menu-buttons-add-new'>
                     {!enterName ?
                         <button onClick={() => setEnterName(true)} className='add-menu-item'>Добавить раздел</button>
