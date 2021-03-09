@@ -106,7 +106,7 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
                 <h3 className='question-item-header'>Заголовок</h3>
                 <CKEditor
                     data={content ? content.title : ''}
-                    onBlur={(evt) => changeTitleHandler(evt.editor)}
+                    onChange={(evt) => changeTitleHandler(evt.editor)}
                     /* onChange={(e,text)=>setTitle(e.editor.getData())} */
                     config={{
                         toolbar: [Utils.CKEditorTools],
@@ -119,7 +119,7 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
                 <h3 className='question-item-header'>Текст</h3>
                 <CKEditor
                     data={content ? content.discription : ''}
-                    onBlur={(event) => changeTextHandler(event.editor)}
+                    onChange={(event) => changeTextHandler(event.editor)}
                     /* onChange={(e,text)=>setTitle(e.editor.getData())} */
                     config={{
                         toolbar: [Utils.CKEditorTools],

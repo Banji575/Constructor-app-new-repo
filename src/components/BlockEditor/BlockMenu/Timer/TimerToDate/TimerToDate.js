@@ -7,12 +7,14 @@ import calendar from '../../../../../image/calendar.png'
 import "react-datepicker/dist/react-datepicker.css";
 import './timerToDate.css'
 const dateFormat = date => date.toLocaleString('ru', { year: 'numeric', month: 'numeric', day: 'numeric' })
-const TimerToDate = ({getParams}) => {
-    const [toDateDate, setToDateDate] = useState( new Date())
-    const [toDateTime, setToDateTime] = useState('12:00')
+const TimerToDate = ({getParams, content}) => {
+    const [toDateDate, setToDateDate] = useState( content ? new Date(content.body.toDateDate) : new Date())
+    const [toDateTime, setToDateTime] = useState(content ? content.body.toDateTime : '12:00')
     console.log(dateFormat(toDateDate))
 
-    
+    console.log(content)
+    console.log(dateFormat('09.03.2021'))
+
     useEffect(()=>{
         getParams({toDateDate:dateFormat(toDateDate), toDateTime} )
     },[toDateDate, toDateTime])
@@ -29,7 +31,7 @@ const TimerToDate = ({getParams}) => {
             </div>
             <div className='date-picker-conteiner'>
                 <p className='question-item-header'  >Время</p>
-                <input type= 'time' value = {toDateTime} onChange = {(evt)=> setToDateTime(evt.target.value)}/>
+                <input className = 'input-time' type= 'time' value = {toDateTime} onChange = {(evt)=> setToDateTime(evt.target.value)}/>
             </div>
         </div>
     )

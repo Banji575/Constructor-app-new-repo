@@ -8,9 +8,7 @@ import './socialBlock.css'
 const SocialBlock = ({ blockTitle, itemArr, content, saveItem, blockName, saveTitle, isValid }) => {
     const [firstLoad, setFirstLoad] = useState(false)
     const [customTitle, setCustomTitle] = useState('')
-
     const [title, setTitle] = useState(!firstLoad ? content.title : customTitle)
-
 
     
     return (

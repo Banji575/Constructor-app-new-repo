@@ -7,14 +7,19 @@ import PreviewMode from './PreviewMode/PreviewMode';
 import SaveSetting from './SaveSetting/SaveSetting';
 import Context from '../../Context'
 
-const ViewSetting = () => {
+const ViewSetting = ({decktopOrMobileMode}) => {
     const [state, changeState, setState, catalogId, setVidjetData, vidjArr,decktopMode,setDecktopMode] = useContext(Context)
     const [viewMode, setViewMode] = useState(false)
-    const changeViewMode = () => {
+    const changeViewMode = (viewMode) => {
+        console.log('change view', decktopMode, viewMode)
+        decktopOrMobileMode()
         setDecktopMode(s=>!s)
         setViewMode(state => !state)
     }
-
+    const typeViewMode = (type) =>{
+      
+        console.log(type)
+    }
 
     return (
         <div className='view-setting d-flex'>
@@ -32,7 +37,7 @@ const ViewSetting = () => {
                 </React.Fragment>
             ) : (
                     <React.Fragment>
-                        <PreviewMode changeViewMode={changeViewMode} />
+                        <PreviewMode   decktopOrMobileMode = {decktopOrMobileMode} typeViewMode = {typeViewMode} changeViewMode={changeViewMode} />
                     </React.Fragment>
 
                 )}

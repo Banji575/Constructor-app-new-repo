@@ -20,15 +20,17 @@ const socialConfig = {
     },
     skype:{
         placeholder:'Введите имя пользователя',
-        createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}`
+        /* createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}` */
+        createLink: str => `skype:${Utils.checkEntry(str, '?call')}`
     },
     Telegram:{
         placeholder:'Ссылка на страницу',
-        createLink: str => `https://${Utils.checkEntry(str, 'tgtg.su/')}`
+        createLink: str => `${Utils.checkEntry(str, 'https://t.me/')}`
     },
     viber:{
         placeholder:'Введите номер',
-        createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}`
+        /* createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}` */
+        createLink: str => `https://viber.click/${Utils.checkEntry(str, '789684922812')}`
     },
     TikTok:{
         placeholder:'Ссылка на страницу',
@@ -110,7 +112,7 @@ const SocialItem = ({ title, isChecked, link, name, data, saveItem, blockName,is
                 {/*   <div className='social-button-center'>
                     <Button disabled={!checked} title='настройки' onClick={settingToggle} />
                 </div> */}
-
+                
             </div>
             {
                 isEdit || checked ? (

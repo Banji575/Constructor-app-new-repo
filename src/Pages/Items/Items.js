@@ -26,11 +26,9 @@ const Items = ({ menuId }) => {
 
     },[resp])
 
-    console.log(menuId)
-    console.log('ItemsPages')
     const [id, setId] = useState(catalogId)
     const [previewItem, setPreviewItem] = useState(null)
-    console.log('previewItem', previewItem)
+
     return (
         <React.Fragment>
             {previewItem

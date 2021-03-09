@@ -6,18 +6,16 @@ import Body from '../../HOC/SiteBody'
 
 
 
-const Main = ({state, vidjetData, replaceVidj, setVidjetData}) => {
-   
-    return(
-        <Body state={state}>
-            <div>
-              <VidjetAddWrapper>
-                {vidjetData ? <SiteBody replaceVidj={replaceVidj} setVidjetData={setVidjetData} vidjArr={vidjetData} /> : null}
-                <BlockEditor setVidjetData={setVidjetData} vidjArr={vidjetData} />
-              </VidjetAddWrapper>
-            </div>
-          </Body>
-    )
+const Main = ({ state, vidjetData, replaceVidj, setVidjetData, mobileMode }) => {
+  return (
+    <Body state={state}>
+      <div>
+        <VidjetAddWrapper>
+          {vidjetData ? <SiteBody replaceVidj={replaceVidj} setVidjetData={setVidjetData} vidjArr={vidjetData} mobileMode={mobileMode} /> : null}
+          <BlockEditor setVidjetData={setVidjetData} vidjArr={vidjetData} />
+        </VidjetAddWrapper>
+      </div>
+    </Body>
+  )
 }
-
 export default Main

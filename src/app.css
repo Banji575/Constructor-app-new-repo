@@ -40,6 +40,8 @@ p {
 
 .verticalDirection {
     flex-direction: column;
+    width: 100%;
+    height: 100vh;
 }
 
 .horizontalDirection {
@@ -143,4 +145,10 @@ div::-webkit-resizer  {
 .col {
     padding-left: 0;
     padding-right: 0;
+}
+
+@media(max-width:400px) {
+    .carousel-inner {
+        height: 27vh;
+    }
 }

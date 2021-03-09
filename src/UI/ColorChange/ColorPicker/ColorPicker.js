@@ -10,7 +10,6 @@ const ColorPicker = ({ propsName, show }) => {
   const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_background_color')
   const [resTitleColor, doFetchTitleColor] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_title_background')
   const [state, changeState, setState, catalogId] = useContext(Context)
-  console.log(state[propsName])
   useEffect(() => {
     if (!firstLoad) return
 
@@ -48,9 +47,7 @@ const ColorPicker = ({ propsName, show }) => {
 
   useEffect(() => {
     if (!response) return
-    console.log(color)
     changeState({ backgroundColor: color })
-    console.log(InputColor)
   }, [response])
 
 
