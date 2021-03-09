@@ -25,13 +25,26 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     const [myItemsPopup, setMyItemsPopup] = useState(false)
     const [vidjetTitle, setVidjetTitle] = useState(itemsContent.body.blockTitle)
     const [resAddData, doFetchAddItem] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product`)
-    /* const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data') */
+    const [resGetCatalogItem, doFetchGetCatalogItem] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects&catalog_id=${catalogId}&objects_all=all`)
     
     const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=add_model_to_catalog&catalog_id=2&object_id=4277')
     /* const [resGetObjectCatalogId, doFethGetObjectCatalogId] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product&object_id=${5033}`) */
     const [resGetObjectCatalogId, doFethGetObjectCatalogId] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data&catalog_id=${5033}`)
 
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
+
+    useEffect(()=>{
+        doFetchGetCatalogItem()
+    },[])
+
+    useEffect(()=>{
+        if(!resGetCatalogItem) return
+        console.log('GET ITEM CATALOG')
+        console.log(resGetCatalogItem)
+    },[resGetCatalogItem])
+
+
+
     const closeWindow = () => {
         if (setViewEdit) {
             setViewEdit(false)
@@ -56,12 +69,12 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     },[resGetObjectCatalogId])
 
     const saveList = () => {
-        console.log('savelist', loadArr)
+/*         console.log('savelist', loadArr)
         const formData = new FormData()
-        
-        doFethGetObjectCatalogId()
+         */
+     /*    doFethGetObjectCatalogId() */
 
-/*         const itemsIdArr = new Array(loadArr.length)
+        const itemsIdArr = new Array(loadArr.length)
             .fill('')
             .map((el, i) => {
                 return loadArr[i].id
@@ -75,7 +88,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
             formData.set('landing_prop_data_id', id)
         }
         itemsIdArr.forEach(el => formData.append('object_id', el))
-        doFetchAddVidjetItem(formData) */
+        doFetchAddVidjetItem(formData)
     }
 
     useEffect(() => {
@@ -128,7 +141,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     }, [url])
     return (
         <React.Fragment>
-            <PopUp showSave={loadArr.length !== 0} title="Товары" closePopup={closeWindow} saveHandler={() => saveList()}>
+            <PopUp showSave={loadArr.length !== 0} title="Товарыs" closePopup={closeWindow} saveHandler={() => saveList()}>
                 <div className='timer-conteiner d-flex flex-column'>
                     <h3 className='question-item-header my-3'>Заголовок</h3>
                     <CKEditor
@@ -141,19 +154,19 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                     />
                     {/*  <input type='text' className=' question-item-input' /> */}
                     <div className='mt-3'>
-                        <div className='items-buttons-block d-flex justify-content-between'>
-                            <div /* ref={root} */ className="items-input__wrapper items-input-wrapper-position" >
-                                <input disabled={viewPopUp} name="fileItem" type="file" name="file" id="input__file_item" className="input input__file" multiple onChange={(evt) => onLoadHandler(evt)}/* onChange={(evt) => fileChange(evt)} */ />
+                       {/*  <div className='items-buttons-block d-flex justify-content-between'>
+                            <div className="items-input__wrapper items-input-wrapper-position" >
+                                <input disabled={viewPopUp} name="fileItem" type="file" name="file" id="input__file_item" className="input input__file" multiple onChange={(evt) => onLoadHandler(evt)} />
                                 <label htmlFor="input__file_item" className="input__file-button input-file-button--custom-height items-input__wrapper">
                                     <p className='mx-auto my-0'>Загрузить новый товар</p>
                                 </label>
                             </div>
-                            <div /* ref={root} */ onClick={() => setMyItemsPopup(true)} className="items-input__wrapper items-input-wrapper-position" >
+                            <div  onClick={() => setMyItemsPopup(true)} className="items-input__wrapper items-input-wrapper-position" >
                                 <label className="input__file-button input-file-button--custom-height items-input__wrapper">
                                     <p className='mx-auto my-0'>Выбрать из загруженных товаров</p>
                                 </label>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className='d-flex items-card-conteiner'>
@@ -164,9 +177,10 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                             </div></div>)
                     })}
                 </div>
+                <MyItem />
             </PopUp>
-            {viewPopUp ? <PopUp showSave={false} title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}
-            {myItemsPopup ? <MyItem renderCheckImg={setLoadArr} showMyItem={setMyItemsPopup} /> : null}
+           {/*  {viewPopUp ? <PopUp showSave={false} title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}
+            {myItemsPopup ? <MyItem renderCheckImg={setLoadArr} showMyItem={setMyItemsPopup} /> : null} */}
             <div className='d-flex flex-wrap' >
             </div>
         </React.Fragment>

@@ -49,7 +49,7 @@ const MyItem = ({ showMyItem, renderCheckImg }) => {
             <span class="sr-only ">Loading...</span>
         </div></div> :
         (
-            <PopUp title="Товары" classNames = {['popup-large-height']} closePopup={()=>showMyItem(false)} showSave = {false} /* saveHandler={() => saveList()} */>
+            <React.Fragment>
                 <div>
                     <ul className='my-items-list'>
                         {fileArr.map((el, i) => {
@@ -63,7 +63,7 @@ const MyItem = ({ showMyItem, renderCheckImg }) => {
                         <Button title='Применить' onClick={() => loadItemhandler()} />
                         <Button title='Отмена' onClick={() => showMyItem(false)} />
                     </div>
-            </PopUp>
+                    </React.Fragment>
         )
 
 }

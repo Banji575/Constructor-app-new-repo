@@ -53,7 +53,7 @@ const PreviewBlockIcon = ({typeViewMode,decktopOrMobileMode}) => {
                         </div>
                         {/* <div onClick = {()=>previewMode === 'decktop' ? setPreviewMode('mobile') : null}> */}
                         <div onClick = {()=>changeMode('mobile')}>
-                            <img src='' className='preview-mode-icon preview-mode-icon-mobi' />
+                            <img src={decktopSrc} className='preview-mode-icon preview-mode-icon-mobi' />
                         </div>
                     </div>
                 </React.Fragment> 
