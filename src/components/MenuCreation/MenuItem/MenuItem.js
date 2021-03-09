@@ -27,7 +27,6 @@ const MenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting
         formData.set('parent_id', data.id)
         formData.set('catalog_id', calalogId)
         formData.set('text', 'text')
-       /*  const menuObject = {catalog_id: calalogId,  } */
         doFetchCreate(formData)
     }
 
@@ -60,10 +59,11 @@ const MenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting
     const editText = () => {
         setShowInput(false)
         editItem(inputItemText, data.id)
-        setItemText('')
+        setItemText('Новая категория')
     }
     const inputChangeHandler = (evt) => {
-        setItemText(evt.target.value)
+        let val = evt.target.value.length ? evt.target.value : 'Без названия'; 
+        setItemText(val)
     }
 
     const changeCatalogId = (evt) => {
@@ -86,7 +86,7 @@ const MenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting
     if (isList) {
         return (
             <ul className='menu-list'>
-                <NavLink onClick = {(evt)=>changeCatalogId(evt)} to={`/items?id=${calalogId}=${data.id}`}>
+                <NavLink onClick = {(evt)=>changeCatalogId(evt)} to={`/items?id=${calalogId}&menu_id=${data.id}`}>
                     <li className='menu-item' data-type='menuLink' style={menuSetting}>{data.text}<MenuItemOption editItem={editItemInput} id={data.id} show={shoeOpion} setShow={setShowOption} deletItem={deletItem} />
                         <MenuItemList isOpen={showPointList} clickHandler={setShowPointList} />
                         <div className='menu-list-opions'  onClick={() => setShowOption(!shoeOpion)} >...</div>
@@ -108,7 +108,7 @@ const MenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting
     } else {
         return (
             <ul className='menu-list'>
-                <NavLink  onClick = {(evt)=>changeCatalogId(evt)} to={`/items?id=${calalogId}=${data.id}`}>
+                <NavLink  onClick = {(evt)=>changeCatalogId(evt)} to={`/items?id=${calalogId}&menu_id=${data.id}`}>
                     <li data-type='menuLink'  className='menu-item' style={menuSetting}>
                         <MenuItemList isOpen={showPointList} clickHandler={setShowPointList} />
                         {data.text}

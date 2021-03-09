@@ -8,7 +8,8 @@ const MenuItemList = ({clickHandler, isOpen}) => {
     }else{
         classes.push('menu-item-option-open')
     }
-    return ( <div onClick = {()=>clickHandler(s=>!s)} className = {classes.join(' ')}></div>
+    return ( 
+        <div onClick = {()=>clickHandler(s=>!s)} className = {classes.join(' ')}></div>
     )
 }
 

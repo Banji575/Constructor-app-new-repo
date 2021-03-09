@@ -102,7 +102,7 @@ div::-webkit-scrollbar-thumb  {
 body::-webkit-resizer, 
 div::-webkit-resizer  {
     background-color: #254768;
-
+}
 /* Виджет карусель */
 
 .carousel-indicators {
