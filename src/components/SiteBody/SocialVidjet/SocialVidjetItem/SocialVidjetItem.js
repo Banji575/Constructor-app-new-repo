@@ -33,10 +33,13 @@ const nameSocialButton = {
     telegram: telegram,
 }
 
+
+
 const SocialVidjetItem = ({ data }) => {
     const goToLink = (link) => {
         document.location.href = link
     }
+
     
     return (
         <div className='social-vidjet-item-conteiner mb-3 container '>
@@ -56,7 +59,6 @@ const SocialVidjetItem = ({ data }) => {
                         )
                     })}
             </div>
-
         </div>
     )
 }

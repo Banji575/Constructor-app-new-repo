@@ -1,13 +1,28 @@
 .mobile-preview-container {
-    display: flex;
+    /*     display: flex; */
+    display: block;
+    max-width: 470px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    height: 100vh;
 }
 
 iframe {
-    width: 389px;
+    /*   width: 389px;
     height: 89vh;
     margin: 0 auto;
     padding: 1%;
+    border: none; */
     border: none;
+    position: absolute;
+    top: 1%;
+    left: 2%;
+    right: 0;
+    bottom: 0;
+    width: 95%;
+    height: 97%;
+    border-radius: 46px;
 }
 
 body::-webkit-scrollbar {
@@ -46,11 +61,24 @@ body::-webkit-resizer {
 } */
 
 .mobile-preview-shell {
-    display: flex;
+    /*    display: flex;
     margin: 0 auto;
     background-image: url('../../image/MobiliuS/NO-smartphones-mockup-avelina-studio-4-mrg.png');
-    /* background-image: url('/work/uploads/NO-smartphones-mockup-avelina-studio-4-mrg.png'); */
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5px;
+    overflow: hidden; */
+    margin: 0 auto;
+    background-image: url('../../image/MobiliuS/NO-smartphones-mockup-avelina-studio-4-mrg.png');
     background-repeat: no-repeat;
     background-size: contain;
-    padding: 2%;
+    position: absolute;
+    padding-top: 210%;
+    max-width: 470px;
+    left: 0;
+    top: 0;
+    right: 0;
+    transform: translateX(-50%);
+    width: 100%;
 }
