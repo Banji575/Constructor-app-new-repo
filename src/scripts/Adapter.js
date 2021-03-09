@@ -104,7 +104,7 @@ export default class Adapter {
                 case 'Карусель картинок':
                     return { title: 'carusel', id: el.id, bgColor: el.background_color, body: { images: el.settings ? el.settings.fields.slider_photo.value : null, interval: el.settings ? el.settings.fields.interval.value : null } }
                 case 'Товары':
-                    return { title: 'items', id: el.id, bgColor: el.background_color, body: { itemsId: el.settings.fields.object_id.value, blockTitle: el.settings.fields.title.value } }
+                    return { title: 'items', id: el.id, bgColor: el.background_color, body: { itemsId: el.settings.fields.catalog_object_id.value, blockTitle: el.settings.fields.title.value } }
                 default:
                     return null
             }

@@ -10,6 +10,7 @@ import Items from '../../BlockEditor/BlockMenu/Items/Items'
 const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
     const [viewEdit, setViewEdit] = useState(false)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_by_ids')
+    
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [respDelItem, doFetchDelItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
     const [imageArr, setImageArr] = useState([])
@@ -39,15 +40,16 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
 
     useEffect(() => {
         const formData = new FormData()
+        console.log(body)
         /* list.forEach(el => formData.append('slider_photo[]', el)) */
-        body.body.itemsId.forEach(el=>formData.append('object_id[]', el))
+       /*  body.body.itemsId.forEach(el=>formData.append('object_id[]', el)) */
         /* formData.set('object_id', body.body.itemsId) */
        /*  formData.set('mode', 'get_catalog_objects')
         formData.set('catalog_id', catalogId)
         formData.set('menu_id', 0)
         formData.set('start', 0)
         formData.append('limit', 50) */
-        doFetch(formData)
+        /* doFetch(formData) */
     }, [])
 
 

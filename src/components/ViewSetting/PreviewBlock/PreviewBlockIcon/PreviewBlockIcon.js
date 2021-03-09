@@ -14,10 +14,10 @@ import mobileOn from '../../../../image/IcoNos/mobileOn.png' */
 import './previewBlockIcon.css'
 
 
-let mobileOn = '//cloudsgoods.com/work/uploads/mobile.png'
+let mobileOn = '//cloudsgoods.com/work/uploads/mobileOn.png'
 let mobileOff = '//cloudsgoods.com/work/uploads/mobileOff.png'
 let decktopOn = '//cloudsgoods.com/work/uploads/decktopOn.png'
-let decktopOff = '//cloudsgoods.com/work/uploads/decktoOff.png'
+let decktopOff = '//cloudsgoods.com/work/uploads/decktopOff.png'
 
 let deck
 const PreviewBlockIcon = ({typeViewMode,decktopOrMobileMode}) => {
@@ -53,7 +53,7 @@ const PreviewBlockIcon = ({typeViewMode,decktopOrMobileMode}) => {
                         </div>
                         {/* <div onClick = {()=>previewMode === 'decktop' ? setPreviewMode('mobile') : null}> */}
                         <div onClick = {()=>changeMode('mobile')}>
-                            <img src={decktopSrc} className='preview-mode-icon preview-mode-icon-mobi' />
+                            <img src={mobileSrc} className='preview-mode-icon preview-mode-icon-mobi' />
                         </div>
                     </div>
                 </React.Fragment> 

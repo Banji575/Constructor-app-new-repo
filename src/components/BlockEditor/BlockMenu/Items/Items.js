@@ -26,22 +26,22 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     const [vidjetTitle, setVidjetTitle] = useState(itemsContent.body.blockTitle)
     const [resAddData, doFetchAddItem] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product`)
     const [resGetCatalogItem, doFetchGetCatalogItem] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects&catalog_id=${catalogId}&objects_all=all`)
-    
-    const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=add_model_to_catalog&catalog_id=2&object_id=4277')
+
+    const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data&catalog_id=${catalogId}`)
     /* const [resGetObjectCatalogId, doFethGetObjectCatalogId] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product&object_id=${5033}`) */
     const [resGetObjectCatalogId, doFethGetObjectCatalogId] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data&catalog_id=${5033}`)
 
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
 
-    useEffect(()=>{
+    useEffect(() => {
         doFetchGetCatalogItem()
-    },[])
+    }, [])
 
-    useEffect(()=>{
-        if(!resGetCatalogItem) return
+    useEffect(() => {
+        if (!resGetCatalogItem) return
         console.log('GET ITEM CATALOG')
         console.log(resGetCatalogItem)
-    },[resGetCatalogItem])
+    }, [resGetCatalogItem])
 
 
 
@@ -52,27 +52,27 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         }
         setCurrentWidjet(null)
     }
-    console.log('loadArr',loadArr)
+    console.log('loadArr', loadArr)
 
     const delChangeItem = (el, i) => {
         const list = [...loadArr]
         list.splice(i, 1)
         setLoadArr(list)
-      
+
     }
 
-    useEffect(()=>{
-        if(!resGetObjectCatalogId){
+    useEffect(() => {
+        if (!resGetObjectCatalogId) {
             return
         }
         console.log(resGetObjectCatalogId)
-    },[resGetObjectCatalogId])
+    }, [resGetObjectCatalogId])
 
     const saveList = () => {
-/*         console.log('savelist', loadArr)
-        const formData = new FormData()
-         */
-     /*    doFethGetObjectCatalogId() */
+        /*         console.log('savelist', loadArr)
+                const formData = new FormData()
+                 */
+        /*    doFethGetObjectCatalogId() */
 
         const itemsIdArr = new Array(loadArr.length)
             .fill('')
@@ -87,7 +87,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         if (content) {
             formData.set('landing_prop_data_id', id)
         }
-        itemsIdArr.forEach(el => formData.append('object_id', el))
+        itemsIdArr.forEach(el => formData.append('object_id[]', el))
         doFetchAddVidjetItem(formData)
     }
 
@@ -129,7 +129,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     useEffect(() => {
         if (!resAddData) return
         const img = resAddData.object.default_preview_200
-        const newObj = {src:resAddData.object.default_look_preview_200, id:resAddData.object_id}
+        const newObj = { src: resAddData.object.default_look_preview_200, id: resAddData.object_id }
         const arr = [...loadArr]
         arr.push(newObj)
         setLoadArr(arr)
@@ -154,7 +154,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                     />
                     {/*  <input type='text' className=' question-item-input' /> */}
                     <div className='mt-3'>
-                       {/*  <div className='items-buttons-block d-flex justify-content-between'>
+                        {/*  <div className='items-buttons-block d-flex justify-content-between'>
                             <div className="items-input__wrapper items-input-wrapper-position" >
                                 <input disabled={viewPopUp} name="fileItem" type="file" name="file" id="input__file_item" className="input input__file" multiple onChange={(evt) => onLoadHandler(evt)} />
                                 <label htmlFor="input__file_item" className="input__file-button input-file-button--custom-height items-input__wrapper">
@@ -169,7 +169,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                         </div> */}
                     </div>
                 </div>
-                <div className='d-flex items-card-conteiner'>
+                <div className = 'd-flex items-card-conteiner'>
                     {loadArr.map((el, i) => {
                         return (
                             <div className='mr-3 item-card d-flex'><img src={el.src} /><div className='icon-conteiner'/*  onClick={delHandler} */ color='green'>
@@ -177,9 +177,13 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                             </div></div>)
                     })}
                 </div>
-                <MyItem />
+                <div className='d-flex items-card-conteiner'>
+                    <h3 className='question-item-header my-3'>Выбрать</h3>
+
+                </div>
+                <MyItem loadArr={loadArr} loadArr={loadArr} setLoadArr={setLoadArr} />
             </PopUp>
-           {/*  {viewPopUp ? <PopUp showSave={false} title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}
+            {/*  {viewPopUp ? <PopUp showSave={false} title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}
             {myItemsPopup ? <MyItem renderCheckImg={setLoadArr} showMyItem={setMyItemsPopup} /> : null} */}
             <div className='d-flex flex-wrap' >
             </div>
