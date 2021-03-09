@@ -15,8 +15,8 @@ const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
     const [timerParams, setTimerParams] = useState(content || { title: 'timer', type: 'to_date', id: generateId(), body: { toDateDate: dateFormat(new Date), toDateTime: '12:00', onDateDatumPoint: 'firstView', onDateDuration: '0:00:00', cyclingDatePoint: '12:00', cyclingDuration: '0:00', test: 'test' } })
     const [setCurrentWidjet, setIsEditer] = useContext(ContextEditor)
     const [state, changeState, setState, catalogId] = useContext(Context)
-
-    const [type, setType] = useState(content ? content.type : 'to_date')
+    const [respDelVideo, doFetchDelVideo] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
+    const [type, setType] = useState(content ? content.body.type : 'to_date')
     const [respEditTimer, doFetchEditTimer] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     console.log(timerParams, 'a;ljdaslkjdsaflkjdsfkljdaskljdas')
   /*   console.log(setIsEditer, 'closeEdit') */
@@ -26,11 +26,9 @@ const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
         } else
             setCurrentWidjet(null)
     }
-
-    console.log(content)
+    
 
     const getTimerParametr = (obj) => {
-        console.log(type)
         const { toDateDate, toDateTime, onDateDatumPoint, onDateDuration, cyclingDuration, cyclingDatePoint } = obj
         const body = { ...timerParams.body, toDateDate, toDateTime, onDateDatumPoint, onDateDuration, cyclingDuration, cyclingDatePoint }
         setTimerParams(state => ({ ...state, type, body }))
@@ -38,9 +36,9 @@ const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
 
     const timerTypeObj = (type) => {
         switch (type) {
-            case 'to_date': return <TimerToDate getParams={getTimerParametr} />
-            case 'on_date': return <TimerForInterval getParams={getTimerParametr} />
-            case 'cycle': return <TimerCyclical getParams={getTimerParametr} />
+            case 'to_date': return <TimerToDate content = {content} getParams={getTimerParametr} />
+            case 'on_date': return <TimerForInterval content = {content} getParams={getTimerParametr} />
+            case 'cycle': return <TimerCyclical content = {content} getParams={getTimerParametr} />
         }
     }
 
@@ -48,6 +46,9 @@ const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
 
 
     const saveList = () => {
+        if (content){    
+            delHandler(content.id)
+        }
         const { toDateDate, toDateTime, onDateDatumPoint, onDateDuration, cyclingDuration, cyclingDatePoint } = timerParams.body
         const formData = new FormData()
         formData.set('landing_prop_id', 7)
@@ -74,8 +75,8 @@ const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
     useEffect(() => {
         if (!respEditTimer) return
         if (respEditTimer.success === 'Успешно!') {
-            const list = [...vidjArray]
-            list.unshift(timerParams)
+          /*   const list = [...vidjArray]
+            list.unshift(timerParams) */
 
            /*  setVidjetDataArray(list) */
           
@@ -85,6 +86,23 @@ const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
             closeWindow()
         }
     }, [respEditTimer])
+
+
+    //Режим редактирования
+    //редактирование нового - удаление старого и создание нового таймера
+    const delHandler = (id) => {
+        const formData = new FormData()
+        formData.set('landing_prop_id', 4)
+        formData.set('catalog_id', catalogId)
+        formData.set('landing_prop_data_id', id)
+        doFetchDelVideo(formData)
+    }
+    
+    console.log('content', content)
+    console.log('type', type)
+
+
+
 
     return (
         <PopUp title="Таймер" closePopup={closeWindow} saveHandler={() => saveList()}>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import './timerCyclical.css'
 
-const TimerCyclical = ({getParams}) => {
-  const [cyclingDatePoint, setCyclingDatePonit] = useState('12:00')
-  const [cyclingDuration, setCyclingDuration] = useState('0:00')
+const TimerCyclical = ({getParams, content}) => {
+  const [cyclingDatePoint, setCyclingDatePonit] = useState(content ? content.body.cyclingDatePoint : '12:00')
+  const [cyclingDuration, setCyclingDuration] = useState(content ? content.body.cyclingDuration : '0:00')
 
   const changeDateValue = (id, value) => {
     console.log(id, value)
@@ -18,6 +18,8 @@ const TimerCyclical = ({getParams}) => {
         setCyclingDuration(newDate)
     }
 }
+
+console.log('цикличный таймер')
 
 useEffect(()=>{
   getParams({cyclingDatePoint, cyclingDuration} )

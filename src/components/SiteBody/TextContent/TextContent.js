@@ -27,6 +27,9 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
 
     const closeEdit = () => setViewEdit(false)
 
+
+    console.log('body', body)
+
     useState(()=>{
     },[backgroundColor])
 
@@ -74,7 +77,7 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
                     <WidjetWrapper  setBackground = {setBackgroundColor} backgroundColor = {bgColor} id={id} replaceVidj = {replaceVidj} isView={viewEdit} setViewEdit={setViewEdit} delHandler = {deleteHandler} editWindow={ <Text setVidjetData={setVidjetData} vidjArr={vidjArr} content={body} closeEdit={() => setViewEdit(false)} />} >
                     <div className='text-title' >
                         <h3 className='text-h3'>{createHTML(body.title)}</h3>
-                        <p className='text-p'>{createHTML(body.discription)}</p>
+                        <p className='text-p'>{createHTML(body.discription)}</p> 
                     </div>
                     <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>
                     </WidjetWrapper>

@@ -3,8 +3,8 @@ import './timerForInterval.css'
 
 const lessTen = num => num.length < 2 ? `0${num}` : num
 
-const TimerForInterval = ({getParams}) => {
-    const [onDateDatumPoint, setOnDateDatumPoint] = useState('first_view')
+const TimerForInterval = ({getParams, content}) => {
+    const [onDateDatumPoint, setOnDateDatumPoint] = useState(content ? content.body.onDateDatumPoint :  'first_view')
     const [onDateDuration, setOnDateDuration] = useState('0:00:00')
     console.log(onDateDuration)
     useState(() => {
@@ -12,13 +12,17 @@ const TimerForInterval = ({getParams}) => {
         console.log(dateDurationArr)
     }, [onDateDuration])
 
-    console.log(onDateDuration)
+
     const startCountHandler = (elem) => {
         setOnDateDatumPoint(elem.getAttribute('id'))
     }
     useEffect(()=>{
         getParams({onDateDatumPoint, onDateDuration} )
     },[onDateDatumPoint, onDateDuration])
+
+
+console.log('таймер на промежуток времени', content)
+
 
     const changeDateValue = (id, value) => {
         console.log(id, value)

@@ -25,6 +25,8 @@ const VideoVidjet = ({ body, id,replaceVidj }) => {
         setViewEdit(true)
     }
 
+
+
     const delHandler = () => {
         const formData = new FormData()
         formData.set('landing_prop_id', 3)
@@ -45,7 +47,7 @@ const VideoVidjet = ({ body, id,replaceVidj }) => {
             setVidjetData(list)
         }
     }, [respDelVideo])
-
+    console.log(body)
 
     return (
         <div className='questions-container' style = {{backgroundColor: [backgroundColor]}}>
@@ -68,6 +70,8 @@ const VideoVidjet = ({ body, id,replaceVidj }) => {
                 <WidjetWrapper id={id} replaceVidj = {replaceVidj} setBackground = {setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} delHandler = {delHandler} editWindow={ <Video  setViewEdit={setViewEdit} id={id} content={{ id: id, title: 'video', body: body }} />} >
                 <div className='questions-body'>
                     {Utils.createHTML(body.title)}
+                    <iframe width = {'100%'} src={getVideoLink(body.link)} />
+                
                 </div>
                 </WidjetWrapper>
                 <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>
