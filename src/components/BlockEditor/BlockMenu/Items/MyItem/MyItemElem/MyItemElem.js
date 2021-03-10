@@ -1,8 +1,16 @@
 import React, {useState} from 'react'
 
-const MyItemElem = ({src,addImgCheckArr,id}) => {
+const MyItemElem = ({src,addImgCheckArr,id,loadArr, setLoadArr}) => {
     const [checkImg, setCheckImg] = useState(false)
     const checkImgHandler = () =>{
+        console.log('click', id)
+        console.log('loadArr', loadArr)
+        
+        const list = [...loadArr]
+        list.push({id, src})
+
+        setLoadArr(list)
+
         addImgCheckArr(state=>{
             const list = [...state]
            const index =  list.findIndex((el,i)=>{
@@ -20,9 +28,9 @@ const MyItemElem = ({src,addImgCheckArr,id}) => {
         setCheckImg(state=>!state)
     }
     const classes = ['my-items-item']
-    if(checkImg){
+    /* if(checkImg){
         classes.push('my-items-check')
-    }
+    } */
     return (
     <li onClick = {()=>checkImgHandler()} className={classes.join(' ')}><img className = 'my-items-elem-img' src={src} /></li>
     )

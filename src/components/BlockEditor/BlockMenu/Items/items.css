@@ -33,3 +33,9 @@
     overflow-x: auto;
     margin-top: 7%;
 }
+
+@media(max-width:425px) {
+    .input__file-button-text {
+        font-size: 12px;
+    }
+}

@@ -12,7 +12,8 @@ const ViewSetting = ({decktopOrMobileMode}) => {
     const [viewMode, setViewMode] = useState(false)
     const changeViewMode = (viewMode) => {
         console.log('change view', decktopMode, viewMode)
-        decktopOrMobileMode()
+        /* Отключил для включения сначала десктоп версии предпросмотра */
+        /* decktopOrMobileMode() */
         setDecktopMode(s=>!s)
         setViewMode(state => !state)
     }

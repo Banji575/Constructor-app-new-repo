@@ -70,7 +70,7 @@ const VideoVidjet = ({ body, id,replaceVidj }) => {
                 <WidjetWrapper id={id} replaceVidj = {replaceVidj} setBackground = {setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} delHandler = {delHandler} editWindow={ <Video  setViewEdit={setViewEdit} id={id} content={{ id: id, title: 'video', body: body }} />} >
                 <div className='questions-body'>
                     {Utils.createHTML(body.title)}
-                    <iframe width = {'100%'} src={getVideoLink(body.link)} />
+                    <iframe className = 'video-i-frame' width = {'100%'} src={getVideoLink(body.link)} />
                 
                 </div>
                 </WidjetWrapper>

@@ -15,6 +15,7 @@
 
 .preview-mode-icon-block {
     width: 44%;
+    display: flex;
 }
 
 .preview-item-prev::before {
@@ -27,4 +28,10 @@
     left: -16%;
     transform: rotate(180deg);
     background-image: url('../../../image/arrowRight.png');
+}
+
+@media(max-width:425px) {
+    .preview-mode-icon-block {
+        display: none;
+    }
 }

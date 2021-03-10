@@ -17,7 +17,7 @@ const SiteTitle = () => {
     const siteTitle = state.siteTitle ? state.siteTitle : 'Введите текст'
     return (
         <div className='site-title'>
-            {parse(siteTitle)}
+            <p className = 'site-title-body'>{parse(siteTitle)}</p>
         </div>
     )
 }

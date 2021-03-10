@@ -46,6 +46,7 @@
 .banner-body {
     text-align: center;
     margin: 0 auto;
+    height: 60vh;
 }
 
 .banner-load-img-label {
