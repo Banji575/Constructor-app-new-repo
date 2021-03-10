@@ -8,7 +8,7 @@ const MobilePreview = () => {
         <div className='mobile-preview-container'>
             <div className = 'mobile-preview-shell'>
              {/*    <iframe src={`/?id=${catalogId}&?mobile-mode`}></iframe> */}
-                <iframe src={`${url}&?mobile-mode`}></iframe>
+                <iframe className = 'iframe' src={`${url}&?mobile-mode`}></iframe>
             </div>
         </div>
     )

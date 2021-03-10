@@ -7,7 +7,7 @@ import Button from '../../../../../UI/Button/Button'
 import PopUp from '../../../../../UI/PopUp/PopUp'
 import NoItemsBlock from './NoitemsBlock/NoItemsBlock'
 
-const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr}) => {
+const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr, setAllItemArr}) => {
     const [imageLoad, setImageIsLoad] = useState(false)
     const [checkedImg, setCheckedImg] = useState([])
     const [fileArr, setFileArr] = useState(null)
@@ -34,6 +34,7 @@ const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr}) => {
     useEffect(() => {
         if (!response) return
         console.log(response.data)
+        setAllItemArr(response.data)
         const list = []
         response.data.forEach(el => {
             list.push(el)
@@ -56,7 +57,7 @@ const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr}) => {
                         <NoItemsBlock/>
                         :
                         fileArr.map((el, i) => {
-                            return <MyItemElem loadArr={loadArr} setLoadArr = {setLoadArr}  id={el.catalog_object_id} addImgCheckArr={setCheckedImg} showMyItem={showMyItem} key={i} src={el.default_look_preview_200} />
+                            return <MyItemElem  loadArr={loadArr} setLoadArr = {setLoadArr}  id={el.catalog_object_id} addImgCheckArr={setCheckedImg} showMyItem={showMyItem} key={i} src={el.default_look_preview_200} />
                         })}
 
                     </ul>

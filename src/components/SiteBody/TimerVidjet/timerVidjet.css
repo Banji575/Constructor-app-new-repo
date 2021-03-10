@@ -41,7 +41,7 @@
     }
 }
 
-@media(max-width:425px) {
+@media(max-width:455px) {
     .timer-number {
         font-size: 18px;
     }

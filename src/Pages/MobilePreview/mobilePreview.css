@@ -14,6 +14,9 @@ iframe {
     margin: 0 auto;
     padding: 1%;
     border: none; */
+}
+
+.iframe {
     border: none;
     position: absolute;
     top: 1%;

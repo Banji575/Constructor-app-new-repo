@@ -8,6 +8,9 @@ import ContextEditor from '../../../ContextEditor'
 import Items from '../../BlockEditor/BlockMenu/Items/Items'
 
 const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
+
+    console.log('body', body)
+
     const [viewEdit, setViewEdit] = useState(false)
     /*  const [response, doFetch] = useFetch('https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_by_ids') */
     const [state, changeState, setState, catalogId] = useContext(Context)

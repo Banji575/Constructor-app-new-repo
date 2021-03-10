@@ -152,7 +152,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
                 <div className='banner-upload-area-conteiner'>
                     {/*   <FontAwesomeIcon className='banner-upload-logo' size='10x' icon={faImage} /> */}
                     <div ref={root} className="input__wrapper input-wrapper-position input-wrapper-position--banner" >
-                        <input name="file" type="file" name="file" id="input__file_banner" className="input input__file" multiple onChange={(evt) => onLoadHandler(evt)}/* onChange={(evt) => fileChange(evt)} */ />
+                        <input accept="image/*" name="file" type="file" name="file" id="input__file_banner" className="input input__file" multiple onChange={(evt) => onLoadHandler(evt)}/* onChange={(evt) => fileChange(evt)} */ />
                         <label htmlFor="input__file_banner" className="input__file-button input-file-button--custom-height">
                             <span className="input__file-button-text"></span>
                             <p className={clasess.join(' ')}>Загрузить картинку</p>

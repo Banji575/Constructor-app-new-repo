@@ -24,14 +24,44 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [myItemsPopup, setMyItemsPopup] = useState(false)
     const [vidjetTitle, setVidjetTitle] = useState(itemsContent.body.blockTitle)
+    const [allItemsArr, setAllItemArr] = useState([])
     const [resAddData, doFetchAddItem] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product`)
     const [resGetCatalogItem, doFetchGetCatalogItem] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects&catalog_id=${catalogId}&objects_all=all`)
 
     const [resAddVidjetItem, doFetchAddVidjetItem] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data&catalog_id=${catalogId}`)
-    /* const [resGetObjectCatalogId, doFethGetObjectCatalogId] = useFetch(`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_add_product&object_id=${5033}`) */
     const [resGetObjectCatalogId, doFethGetObjectCatalogId] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data&catalog_id=${5033}`)
 
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
+    const [respDelItem, doFetchDelItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
+
+    console.log('loadArr', loadArr)
+
+/* временно удаляем текущий редактироруемый и создаем новый */
+const delHandler = () => {
+    const formData = new FormData()
+    formData.set('landing_prop_id', 5)
+    formData.set('catalogId', catalogId)
+    formData.set('landing_prop_data_id', content.id)
+    doFetchDelItem(formData)
+}
+
+    /* При редактировании проверяем, загружены ли товары */
+
+    useEffect(() => {
+        if (!allItemsArr.length === 0) return
+        if (!content) return
+        const list = [...loadArr]
+        console.log(content, list, allItemsArr)
+        content.body.itemsId.forEach(el => {
+            allItemsArr.forEach(elem => {
+                if (elem.catalog_object_id == el) {
+                    console.log('Нашли элемент', elem)
+                    list.push({ id: el, src: elem.default_look_preview_200 })
+                }
+            })
+        })
+        setLoadArr(list)
+    }, [allItemsArr])
 
     useEffect(() => {
         doFetchGetCatalogItem()
@@ -41,6 +71,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         if (!resGetCatalogItem) return
         console.log('GET ITEM CATALOG')
         console.log(resGetCatalogItem)
+
     }, [resGetCatalogItem])
 
 
@@ -58,7 +89,6 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         const list = [...loadArr]
         list.splice(i, 1)
         setLoadArr(list)
-
     }
 
     useEffect(() => {
@@ -86,6 +116,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         formData.set('title', vidjetTitle)
         if (content) {
             formData.set('landing_prop_data_id', id)
+
         }
         itemsIdArr.forEach(el => formData.append('catalog_object_id[]', el))
         doFetchAddVidjetItem(formData)
@@ -99,12 +130,23 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
         }))
         itemsContent.id = resAddVidjetItem.landing_prop_data_id
 
-        const list = [...vidjArray]
 
-
-        itemsContent.body.blockTitle = vidjetTitle
-        list.unshift(itemsContent)
-        setVidjetDataArray(list)
+        if (!content) {
+            const list = [...vidjArray]
+            itemsContent.body.blockTitle = vidjetTitle
+            list.unshift(itemsContent)
+            setVidjetDataArray(list)
+        }else{
+            delHandler()
+           /*  window.location.reload() */
+            console.log(vidjArr)
+            const list = [...vidjArr]
+            console.log(vidjArr ,content,'klhasfkdasfkjh')
+        /*     list.forEach(el=>{
+                if(el)
+            }) */
+        }
+        
         closeWindow()
     }, [resAddVidjetItem])
 
@@ -152,27 +194,13 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                         data={vidjetTitle}
                         onChange={(e) => setVidjetTitle(e.editor.getData())}
                     />
-                    {/*  <input type='text' className=' question-item-input' /> */}
                     <div className='mt-3'>
-                        {/*  <div className='items-buttons-block d-flex justify-content-between'>
-                            <div className="items-input__wrapper items-input-wrapper-position" >
-                                <input disabled={viewPopUp} name="fileItem" type="file" name="file" id="input__file_item" className="input input__file" multiple onChange={(evt) => onLoadHandler(evt)} />
-                                <label htmlFor="input__file_item" className="input__file-button input-file-button--custom-height items-input__wrapper">
-                                    <p className='mx-auto my-0'>Загрузить новый товар</p>
-                                </label>
-                            </div>
-                            <div  onClick={() => setMyItemsPopup(true)} className="items-input__wrapper items-input-wrapper-position" >
-                                <label className="input__file-button input-file-button--custom-height items-input__wrapper">
-                                    <p className='mx-auto my-0'>Выбрать из загруженных товаров</p>
-                                </label>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
-                <div className = 'd-flex items-card-conteiner'>
+                <div className='d-flex items-card-conteiner'>
                     {loadArr.map((el, i) => {
                         return (
-                            <div className='mr-3 item-card d-flex'><img src={el.src} /><div className='icon-conteiner'/*  onClick={delHandler} */ color='green'>
+                            <div key={i} className='mr-3 item-card d-flex'><img src={el.src} /><div className='icon-conteiner'/*  onClick={delHandler} */ color='green'>
                                 <FontAwesomeIcon onClick={() => delChangeItem(el, i)} color={'red'} icon={faTrashAlt} />
                             </div></div>)
                     })}
@@ -181,7 +209,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                     <h3 className='question-item-header my-3'>Выбрать</h3>
 
                 </div>
-                <MyItem loadArr={loadArr} loadArr={loadArr} setLoadArr={setLoadArr} />
+                <MyItem /* loadArr={loadArr}  */ setAllItemArr={setAllItemArr} loadArr={loadArr} setLoadArr={setLoadArr} />
             </PopUp>
             {/*  {viewPopUp ? <PopUp showSave={false} title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}
             {myItemsPopup ? <MyItem renderCheckImg={setLoadArr} showMyItem={setMyItemsPopup} /> : null} */}
