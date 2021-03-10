@@ -5,7 +5,7 @@ import useFetch from '../../../../../hooks/useFetch'
 import MyItemElem from './MyItemElem/MyItemElem'
 import Button from '../../../../../UI/Button/Button'
 import PopUp from '../../../../../UI/PopUp/PopUp'
-
+import NoItemsBlock from './NoitemsBlock/NoItemsBlock'
 
 const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr}) => {
     const [imageLoad, setImageIsLoad] = useState(false)
@@ -14,6 +14,9 @@ const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr}) => {
     const [state, changeState, setState, catalogId, setVidjetData, vidjArr] = useContext(Context)
     const [response, doFetch] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects&catalog_id=${catalogId}&objects_all=all`)
   /*   const [response, doFetch] = useFetch('https://cloudsgoods.com/api/actionsAdmin.php?') */
+
+
+
 
 
 
@@ -48,8 +51,12 @@ const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr}) => {
             <React.Fragment>
                 <div>
                     <ul className='my-items-list'>
-                        {fileArr.map((el, i) => {
-                            return <MyItemElem loadArr={loadArr} setLoadArr = {setLoadArr}  id={el.id} addImgCheckArr={setCheckedImg} showMyItem={showMyItem} key={i} src={el.default_look_preview_200} />
+                        {fileArr.length === 0 
+                        ? 
+                        <NoItemsBlock/>
+                        :
+                        fileArr.map((el, i) => {
+                            return <MyItemElem loadArr={loadArr} setLoadArr = {setLoadArr}  id={el.catalog_object_id} addImgCheckArr={setCheckedImg} showMyItem={showMyItem} key={i} src={el.default_look_preview_200} />
                         })}
 
                     </ul>

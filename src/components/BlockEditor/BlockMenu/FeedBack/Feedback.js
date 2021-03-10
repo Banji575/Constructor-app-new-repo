@@ -23,6 +23,7 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
     const [respEditFeedback, doFetchEditFeedback] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [isValid, setIsValid] = useState(true)
+    const [isEmail, setIsEmail] = useState(true)
     console.log(content)
     const closeWindow = () => {
         if (setViewEdit) {
@@ -45,6 +46,7 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
             const list = { ...data }
             console.log(list.body.ourEmail)
             list.body.ourEmail.text = text
+            setIsEmail(true)
             setIsValid(true)
             setData(list)
         } else {
@@ -65,6 +67,13 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
         if (!isValid) {
             return
         }
+
+        if(data.body.ourEmail.text === ''){
+            setIsEmail(false)
+            return
+        }
+        console.log(data.body)
+
         const formData = new FormData()
         formData.set('landing_prop_id', 9)
         formData.set('catalog_id', catalogId)
@@ -73,7 +82,6 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
         }
 
         formData.set('our_email', data.body.ourEmail.text)
-        //formData.set('show_title', data.body.ourEmail.show === true ? 1 : 0)
         formData.set('name', data.body.name.text)
         formData.set('show_name', data.body.name.show === true ? 1 : 0)
         formData.set('email', data.body.email.text)
@@ -84,7 +92,6 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
         formData.set('show_message', data.body.message.show === true ? 1 : 0)
         formData.set('title', data.body.title.text)
         formData.set('show_title', data.body.title.show === true ? 1 : 0)
-
 
         doFetchEditFeedback(formData)
     }
@@ -127,6 +134,8 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
                 <p className='question-item-header mb-1'>Введите ваш e-mail адрес куда будут приходить сообщения</p>
                 <input type='email' placeholder={data.body.ourEmail.text} onBlur={(evt) => saveEmailHandler(evt.target.value)} />
                 {!isValid && <p className='text-danger'>Не правильный формат записи</p>}
+                {!isEmail && <p className='text-danger'>Обязательное поле</p>}
+          
             </div>
             {/* <div className='block-question-save'><p onClick={saveList} className='block-question-button-save'>Сохранить</p></div> */}
         </PopUp>

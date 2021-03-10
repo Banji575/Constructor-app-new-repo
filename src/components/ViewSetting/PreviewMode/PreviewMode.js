@@ -10,7 +10,7 @@ const PreviewMode = ({ changeViewMode ,typeViewMode, decktopOrMobileMode}) => {
             <div className = 'd-flex justify-content-center flex-column'>
                 <p onClick={() => changeViewMode()} className='preview-item preview-item-prev text-left mb-0  mr-3 pr-3'> Редактировать </p>
             </div>
-            <div className='preview-mode-icon-block d-flex justify-content-center flex-column'>
+            <div className='preview-mode-icon-block   justify-content-center flex-column'>
               {/*   <FontAwesomeIcon className='mr-5' icon={faDesktop} size='3x' />
                 <FontAwesomeIcon className='mr-5' icon={faTabletAlt} size='3x' />
                 <FontAwesomeIcon className='mr-5' icon={faMobileAlt} size='3x' /> */}

@@ -5,6 +5,9 @@
 }
 
 @media(max-width:425px) {
+    .preview-block-save {
+        padding-right: 7%;
+    }
     .preview-item-save {
         padding-left: 6%;
     }

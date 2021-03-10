@@ -4,6 +4,7 @@
     right: 0;
     left: 0;
     top: 0;
+    overflow: auto;
 }
 
 .my-items-list {

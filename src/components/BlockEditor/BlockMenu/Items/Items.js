@@ -177,7 +177,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                             </div></div>)
                     })}
                 </div>
-                <div className='d-flex items-card-conteiner'>
+                <div className='d-flex items-card-conteiner m-0'>
                     <h3 className='question-item-header my-3'>Выбрать</h3>
 
                 </div>

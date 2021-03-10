@@ -5,6 +5,7 @@
 .question-center {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .questions-header {

@@ -1,0 +1,13 @@
+.no-items-block-conteiner-title {
+    background-color: rgba(255, 95, 88, 0.55);
+    width: 50%;
+    padding: 1px 15px;
+    border-radius: 6px;
+    color: #343A40;
+    font-size: 14px;
+}
+
+.no-items-block-counteiner-body {
+    color: #343A40;
+    font-size: 14px;
+}
