@@ -8,7 +8,7 @@ import './widjetWrapper.css'
 import DeleteButton from '../DeleteButton/DeleteButton';
 import Utils from '../../scripts/Utils';
 import EditBackground from '../../components/SiteHeader/TextEditorPanel/EditBackground/EditBackground';
-const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, setBackground, backgroundColor, replaceVidj, id, changeBackground, fullScreen = false }) => {
+const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, setBackground, backgroundColor, replaceVidj, id, changeBackground,cutHeight = false, fullScreen = false }) => {
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [state, changeState, setState, catalogId, setVidjetDataasdf, vidjetData, decktopMode] = useContext(Context)
 
@@ -23,6 +23,10 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
     const classes = ['question-center']
     if (!fullScreen) {
         classes.push('container')
+    }
+
+    if(cutHeight){
+        classes.push('cut-height')
     }
 
 
