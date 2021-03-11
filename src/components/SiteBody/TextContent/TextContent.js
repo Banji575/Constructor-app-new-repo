@@ -30,14 +30,15 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
 
     console.log('backgroundColor', backgroundColor, bgColor)
 
-    useState(()=>{
-    },[backgroundColor])
+ 
 
     body.id = id
 
 
     useEffect(()=>{
-        if(backgroundColor === bgColor) return
+        if(backgroundColor == bgColor) {
+            console.log('цвет перезагружаем')
+        }
         const formData = new FormData()
         formData.set('landing_prop_data_id', id)
         formData.set('background_color', backgroundColor.replace('#',''))
