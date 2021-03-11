@@ -30,8 +30,8 @@ const socialConfig = {
     viber:{
         placeholder:'Введите номер',
         /* createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}` */
-        createLink: str => `viber://chat?number="${str}"`
-      /*   <a href = 'viber://chat?number="+79684922812"'>viber</a> */
+        createLink: str => `viber://chat?number=${str}`
+
     },
     TikTok:{
         placeholder:'Ссылка на страницу',
