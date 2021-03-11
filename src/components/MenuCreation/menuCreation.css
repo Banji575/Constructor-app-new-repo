@@ -31,7 +31,9 @@
 .container-menu ul:nth-child(1) {
     padding-left: 10px;
 }
-
+.horizontalDirection .menu-creation-container {
+    position: fixed;
+}
 @media(max-width:1024px) {
     .verticalDirection .menu-creation-container {
         justify-content: flex-start;
@@ -43,7 +45,7 @@
     .menu-creation-container {
         background: #fff;
         padding: 10px;
-        position: absolute;
+        /* position: absolute; */
         visibility: hidden;
         display: none;
         opacity: 1;
@@ -66,7 +68,11 @@
 
     }
 }
-
+@media(max-width:562px) { 
+    .horizontalDirection .menu-creation-container {
+        position: absolute;
+    }
+}
 .menu-vertical {
     flex-direction: column;
 }
