@@ -21,7 +21,8 @@ const socialConfig = {
     skype:{
         placeholder:'Введите имя пользователя',
         /* createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}` */
-        createLink: str => `skype:${Utils.checkEntry(str, '?call')}`
+        createLink: str => `skype:${Utils.checkEntry(str, 'call:')}`
+       /*  <a href="skype:+1234567890?call">Call Me</a> */
     },
     Telegram:{
         placeholder:'Ссылка на страницу',
@@ -30,7 +31,8 @@ const socialConfig = {
     viber:{
         placeholder:'Введите номер',
         /* createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}` */
-        createLink: str => `https://viber.click/${Utils.checkEntry(str, '789684922812')}`
+        createLink: str => `viber://chat?number="${str}"`
+      /*   <a href = 'viber://chat?number="+79684922812"'>viber</a> */
     },
     TikTok:{
         placeholder:'Ссылка на страницу',
