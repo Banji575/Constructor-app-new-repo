@@ -22,7 +22,6 @@ const socialConfig = {
         placeholder:'Введите имя пользователя',
         /* createLink: str => `https://${Utils.checkEntry(str, 'msng.link/o/?')}` */
         createLink: str => `skype:${Utils.checkEntry(str, 'call:')}`
-       /*  <a href="skype:+1234567890?call">Call Me</a> */
     },
     Telegram:{
         placeholder:'Ссылка на страницу',
