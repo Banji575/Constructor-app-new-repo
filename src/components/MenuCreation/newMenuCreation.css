@@ -1,0 +1,203 @@
+:root{
+    --max-device-sm: 562px;
+}
+
+
+.new-menu-container {
+    max-width: 100%;
+    width: 100%;
+}
+
+.new-menu {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.new-menu-items {
+    list-style: none;
+    display: flex;
+}
+
+.new-menu-items {
+    position: relative;
+    min-width: 120px;
+    /* max-width: 160px; */
+    width: 100%;
+    padding-left: 24px;
+    padding-right: 30px;
+    border-radius: 5px;
+    background-color: inherit;
+    border: 1px solid rgba(37, 71, 104, 0.2);
+    box-shadow: 0 1px 2px 0 #E0E0E0;
+}
+
+.new-menu-btn-add {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    margin-left: 10px;
+    margin-top: 10px;
+    flex: 0 0 170px;
+}
+
+.new-menu-list {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-left: 10px;
+    flex: 0 1 180px;
+}
+
+.new-menu-list li {
+    list-style: none;
+}
+
+li .new-menu-btn-add {
+    margin-left: 0;
+    padding: 0;
+}
+
+li .new-menu-list li .new-menu-btn-add {
+    /* margin-top: 2; */
+}
+
+li .new-menu-list li .new-menu-items {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.new-menu-list ul .new-menu-items-children {
+    position: relative;
+}
+
+.new-menu-items>.new-menu-items-children {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /* right: 0; */
+    min-width: 100%;
+    z-index: 2;
+}
+
+
+.new-menu-items.open>.new-menu-items-children {
+    display: block;
+    background-color: inherit;
+    z-index: 1;
+    padding: 5px;
+    margin: 0;
+}
+
+
+.new-menu-items.open>.new-menu-items-children ul {
+    padding-left: 0.3em;
+    margin-top: 10px;
+}
+
+/* Toggler */
+.new-menu-items-toggler {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    left: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #254768;
+    ;
+}
+
+/* Calling popap read items */
+.new-menu-items-read-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+}
+
+/* Popap read items */
+.new-menu-items-read-popap {
+    /* display: none; */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    z-index: 11;
+    display: flex;
+    box-shadow: 0 1px 2px 0 #BDBDBD;
+    border-radius: 3px;
+
+}
+
+.new-menu-items-read-popap__items {
+    font-size: 20px;
+    width: 50px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Активный пункт */
+.active-new-menu-items {
+    background-color: red;
+}
+.new-menu-items.open >.new-menu-items-read-btn{
+    display: none;
+}
+
+
+/* .horizontalDirection  MODE */
+.horizontalDirection .new-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 33%;
+}
+
+.horizontalDirection .new-menu .new-menu-list,
+.horizontalDirection .new-menu .new-menu-btn-add {
+    flex: 0 1 auto;
+}
+
+.horizontalDirection .new-menu .new-menu-btn-add {
+    max-width: 170px;
+}
+
+.horizontalDirection .new-menu-items.open>.new-menu-items-children {
+    position: relative;
+    padding: 0;
+}
+.horizontalDirection .new-menu-items.open {
+    padding: 5px 15px;
+}
+.horizontalDirection .new-menu-items.open >.new-menu-items-read-btn{
+    display: none;
+}
+.horizontalDirection .new-menu-items {
+    display: flex;
+    flex-direction: column;
+}
+/* --------------------------------------- */
+
+
+/* MEDIA  */
+@media (max-width: 562px) {
+    .new-menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .new-menu-btn-add {
+        flex: 0 0 auto;
+        width: auto;
+    }
+    .horizontalDirection .new-menu {
+        padding-left: 0;
+    }
+}

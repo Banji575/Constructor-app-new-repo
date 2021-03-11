@@ -7,7 +7,16 @@ import MenuSettingButton from './MenuSettingButton/MenuSettingButton'
 import './menuCreation.css'
 import LoadingLogo from '../SiteHeader/loadingLogo/LoadingLogo'
 import MenuItemNameInput from './MenuItemNameInput/MenuItemNameInput'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+
+import NewMenuItem from './NewMenuItem/NewMenuItem';
+import NewMenuToggler from './NewMenuToggler/NewMenuToggler';
+import NewMenuList from './NewMenuList/NewMenuList';
+import './newMenuCreation.css';
+import ArrowButton from './../../UI/ArrowButton/ArrowButton';
+import { getUrlParams } from '../../scripts/Common'
+
+import styled from 'styled-components';
 
 const MenuCreation = ({ menuIsView }) => {
     const [state, changeState, setState, calalogId] = useContext(Context)
@@ -16,21 +25,26 @@ const MenuCreation = ({ menuIsView }) => {
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
     const [enterName, setEnterName] = useState(false)
     const [direction, setDirection] = useState(state.menuDirection)
-    console.log('state', state)
+
+
+    const apiKey = 'api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bis2t0aoczw2a280e2e2ddedf8fe9acfe5625949396';
+
+    const newCatalogId = getUrlParams()['id'] || 0;
 
     const menuSetting = {
         fontFamily: state.menu_settings.font_family,
         fontSize: state.menu_settings.font_size + 'px'
     }
+    console.log('state', state['menu_settings'])
 
     const menuFontFamily = state.menu_settings.font_family
-    const wrapperClasses = ['wrapper', 'd-flex']
+    const wrapperClasses = ['wrapper', 'd-flex', 'container-menu']
 
     if (state.menuDirection == 2) {
         wrapperClasses.push('menu-vertical')
     }
 
-    const classes = ['menu-creation-container container d-flex ']
+    const classes = ['menu-creation-container container  ']
     if (!menuIsView) {
         classes.push('menu-creation-container---view')
     }
@@ -41,7 +55,7 @@ const MenuCreation = ({ menuIsView }) => {
             if (el.childrenList.length !== 0) {
                 level += 1
                 children.push(
-                   <MenuItem key={i} menuSetting={menuSetting} isList={true} data={el} editItem={editItem} deletItem={deletItem}>  {drawMenu(data[i].childrenList)}</MenuItem>
+                    <MenuItem key={i} menuSetting={menuSetting} isList={true} data={el} editItem={editItem} deletItem={deletItem}>  {drawMenu(data[i].childrenList)}</MenuItem>
                 )
             } else {
                 children.push(
@@ -50,6 +64,127 @@ const MenuCreation = ({ menuIsView }) => {
             }
         })
         return <div className={wrapperClasses.join(' ')}>{children}</div>;
+    }
+
+    const addNewMenu = (text = '', parentId = 0) => {
+        console.log('addNewMenu', text, parentId)
+        const NFD = new FormData()
+        NFD.set('parent_id', parentId || '0')
+        NFD.set('catalog_id', newCatalogId)
+        NFD.set('text', text)
+
+        fetch(`https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item&${apiKey}`, { method: 'post', body: NFD })
+            .then(resp => resp.json())
+            .then(json => {
+                if (json.success && json.success != 'false') {
+                    let newMenu = [...state.siteMenu];
+                    let newData = {
+                        catalog_id: newCatalogId,
+                        deleted: "0",
+                        href: null,
+                        id: json.id,
+                        isRead: true,
+                        parent_id: parentId,
+                        text: json.text,
+                        childrenList: []
+                    }
+                    function searchMenu(arr) {
+                        arr.map((el, i) => {
+                            if (el.id == parentId) {
+                                el.childrenList.push(newData)
+                            } else if (el.childrenList.length) {
+                                searchMenu(el.childrenList)
+                            }
+                        })
+                    }
+                    if (parentId == 0) {
+                        newMenu.push(newData)
+                    } else {
+                        searchMenu(newMenu);
+                    }
+
+                    console.log('oldMenu', newMenu)
+                    changeState({ 'siteMenu': newMenu })
+
+                }
+            })
+    }
+
+    /**
+     * NEW MENU 
+     * @returns 
+     */
+
+    const StyledMenu = styled.div`
+           font-size: ${state.menu_settings.font_size + 'px' || '12px'};
+           font-family: ${state.menu_settings.font_family || 'Montserrat'};
+           button{
+                    color: inherit;
+                    background-color: inherit;
+                    width: 100%;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+           & .new-menu-items  {
+               &:hover{
+                   svg {
+                    color: #${state.menu_settings.with_allocation_font_color || '254768'};
+                   }
+                   background: #${state.menu_settings.with_allocation_background_color || 'fff'};
+                   color: #${state.menu_settings.with_allocation_font_color || '254768'};
+               }
+                background: #${state.menu_settings.without_allocation_background_color || 'fff'};
+                color: #${state.menu_settings.without_allocation_font_color || '254768'};
+
+                & a, button{
+                    color: inherit;
+                    background-color: inherit;
+                    width: 100%;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+           }
+           svg {
+            color: #${state.menu_settings.without_allocation_font_color || '254768'};
+            &:hover{
+                color: #${state.menu_settings.with_allocation_font_color || '254768'};
+            }
+           }
+        `;
+    const NewDrawMenu = ({ childrenList, lvl = 1 }) => {
+        let menuSettings = state.menu_settings;
+        console.log('menuSettings', menuSettings)
+        let parId = 0
+
+        return (
+            <React.Fragment>
+
+                {childrenList.map((el, i) => {
+                    parId = el.parent_id
+                    return (
+                        <StyledMenu>
+                            <ul className="new-menu-list" key={el.id} >
+                                <NewMenuItem
+                                    text={el.text}
+                                    id={el.id}
+                                    menuDeletter={deletItem}
+                                    parentId={el.parent_id}
+                                    changeState={changeState}
+                                    apiKey={apiKey}
+                                    lvl={lvl}
+                                    isAddNew={lvl <= 3}
+                                    childrenList={el.childrenList}
+                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList} /> : <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', (el.id))}>Добавить раздел</button>}
+                                />
+                            </ul>
+                        </StyledMenu>
+                    )
+                })}
+                <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', parId)}>Добавить раздел</button>
+            </React.Fragment>
+        )
     }
 
     const editItem = (value, id) => {
@@ -74,9 +209,7 @@ const MenuCreation = ({ menuIsView }) => {
     }
 
     const deletItem = (id) => {
-        console.log(id)
         const newList = [...state.siteMenu]
-        console.log(newList)
         const findEl = (arr, currentId) => {
             arr.forEach((elem, i, array) => {
                 if (elem.id == currentId) {
@@ -99,7 +232,6 @@ const MenuCreation = ({ menuIsView }) => {
         if (!resp) return
         console.log(resp)
         if (resp) {
-
             const siteMenu = [...state.siteMenu, { id: [resp.id], catalog_id: [resp.catalog_id], parentId: [resp.parent_id], text: resp.text, childrenList: [] }]
             changeState({ 'siteMenu': siteMenu })
         }
@@ -120,22 +252,40 @@ const MenuCreation = ({ menuIsView }) => {
 
         doFetchCreate(formData)
     }
-
+    console.log('state.siteMenu', state.siteMenu)
     return (
         <React.Fragment>
             <div className={classes.join(' ')} >
                 <MenuSettingButton state={state} />
                 {state.menuDirection == 2 ? <LoadingLogo /> : null}
-                <p className='block-question-button-save'>
-                    <NavLink 
-                    className = 'menu-link' 
-                    activeStyle ={{color:'red'}}  
-                    to={`/?id=${calalogId}`}
+                {/* <p className='block-question-button-save'>
+                    <NavLink
+                        className='menu-link'
+                        activeStyle={{ color: '#fff' }}
+                        to={`/?id=${calalogId}`}
                     >Главная</NavLink>
-                </p>
-                {drawMenu(state.siteMenu)}
-                <div className='ml-3'>
-                    {!enterName ? <button onClick={() => setEnterName(true)} className='add-menu-item'>Добавить раздел</button> : <MenuItemNameInput closeEdit={setEnterName} addNewItem={addMenuItemHandler} />}
+                </p> */}
+                {/* {drawMenu(state.siteMenu)} */}
+                {/* {newDrawMenu({ childrenList: state.siteMenu })} */}
+
+                <div className="new-menu-container">
+                    <div className="new-menu">
+                        <StyledMenu>
+                            <ul className='new-menu-list'>
+                                <li>
+                                    <div className="new-menu-items">
+                                        <NavLink
+                                            className='menu-link'
+                                            to={`/?id=${calalogId}`}
+                                        >
+                                            Главная
+                                        </NavLink>
+                                    </div>
+                                </li>
+                            </ul>
+                        </StyledMenu>
+                        <NewDrawMenu childrenList={state.siteMenu} />
+                    </div>
                 </div>
             </div>
         </React.Fragment>

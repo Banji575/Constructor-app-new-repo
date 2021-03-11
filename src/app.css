@@ -1,4 +1,5 @@
 @import url('./fonts.css');
+
 .app {
     min-height: 100vh;
     /*     font-family: 'Montserrat reg'; */
@@ -47,10 +48,11 @@ p {
     flex-direction: row;
 }
 
-.horizontalDirection .site-body {
+.horizontalDirection  {
     width: 100%;
     padding-left: 30%;
 }
+
 
 .horizontalDirection .menu-creation-container {
     justify-content: start;
@@ -75,6 +77,35 @@ p {
     flex-direction: column;
 }
 
+/* scroll */
+body::-webkit-scrollbar,
+div::-webkit-scrollbar {
+    width: 8px;
+    height: 7px;
+}
+
+
+body::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+    background-color: #254768;
+}
+
+body::-webkit-scrollbar-track-piece,
+div::-webkit-scrollbar-track-piece {
+    background-color: #ffffff;
+}
+
+body::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: #254768;
+    border-radius: 8px;
+}
+
+body::-webkit-resizer,
+div::-webkit-resizer {
+    background-color: #254768;
+}
 
 /* Виджет карусель */
 
@@ -133,5 +164,9 @@ p {
 @media(max-width:400px) {
     .carousel-inner {
         height: 27vh;
+    }
+
+    .horizontalDirection {
+        padding-left: 0;
     }
 }

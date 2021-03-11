@@ -16,16 +16,16 @@ const MenuSettingButton = () => {
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [siteSetting, setSiteSetting] = useState({
         direction: state.menuDirection,
-        menuFontFamily: state.menu_settings.font_family,
-        menuFontSize: state.menu_settings.font_size,
-        menuWithAllFontColor: state.menu_settings.with_allocation_font_color,
-        menuWithOutAllFontColor: state.menu_settings.without_allocation_font_color,
-        menuWithAllBackColor: state.menu_settings.with_allocation_background_color,
-        menuWithOutAllBackColor: state.menu_settings.without_allocation_background_color,
-        breadCrumbsFontFamily: state.bread_crumbs_settings.font_family,
-        breadCrumbsFontSize: state.bread_crumbs_settings.font_size,
-        breadCrumbsWithAllFontColor: state.bread_crumbs_settings.with_allocation_font_color,
-        breadCrumbsWithoutAllFontColor: state.bread_crumbs_settings.without_allocation_font_color
+        menuFontFamily: state.menu_settings.font_family || 'Montserrat',
+        menuFontSize: state.menu_settings.font_size || '12',
+        menuWithAllFontColor: state.menu_settings.with_allocation_font_color || '803dff',
+        menuWithOutAllFontColor: state.menu_settings.without_allocation_font_color || '254768',
+        menuWithAllBackColor: state.menu_settings.with_allocation_background_color || 'fff',
+        menuWithOutAllBackColor: state.menu_settings.without_allocation_background_color || 'fff',
+        breadCrumbsFontFamily: state.bread_crumbs_settings.font_family || '',
+        breadCrumbsFontSize: state.bread_crumbs_settings.font_size || '',
+        breadCrumbsWithAllFontColor: state.bread_crumbs_settings.with_allocation_font_color || '',
+        breadCrumbsWithoutAllFontColor: state.bread_crumbs_settings.without_allocation_font_color || ''
     })
     const closePopUp = () => {
         setIsEditText(s => !s)
@@ -44,6 +44,13 @@ const MenuSettingButton = () => {
         list.menuDirection = siteSetting.direction
         list.menu_settings.font_family = siteSetting.menuFontFamily
         list.menu_settings.font_size = siteSetting.menuFontSize
+
+        list.menu_settings.with_allocation_font_color = siteSetting.menuWithAllFontColor
+        list.menu_settings.without_allocation_font_color = siteSetting.menuWithOutAllFontColor
+        list.menu_settings.with_allocation_background_color = siteSetting.menuWithAllBackColor
+        list.menu_settings.without_allocation_background_color = siteSetting.menuWithOutAllBackColor
+        
+
         setState(list)
 
         formData.set('catalog_id', catalogId)
