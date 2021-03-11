@@ -28,7 +28,7 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
     const closeEdit = () => setViewEdit(false)
 
 
-    console.log('backgroundColor', backgroundColor)
+    console.log('backgroundColor', backgroundColor, bgColor)
 
     useState(()=>{
     },[backgroundColor])
@@ -36,13 +36,13 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
     body.id = id
 
 
-  /*   useEffect(()=>{
-        if(backgroundColor === '#'+bgColor) return
+    useEffect(()=>{
+        if(backgroundColor === bgColor) return
         const formData = new FormData()
         formData.set('landing_prop_data_id', id)
-        formData.set('background_color', backgroundColor)
+        formData.set('background_color', backgroundColor.replace('#',''))
         doFetchColor(formData)
-    },[backgroundColor]) */
+    },[backgroundColor])
 
 
     const deleteHandler = () => {
