@@ -9,7 +9,7 @@ import Utils from '../../../../scripts/Utils'
 
 
 const randomId = () => Math.random()
-const BlockQueston = ({ changeStateVidjet, listArr, id, setViewEdit, title, setVidjetData,vidjArr }) => {
+const BlockQueston = ({ changeStateVidjet, listArr, id, setViewEdit, title, setVidjetData,vidjArr , body}) => {
     const mockQuest = [{ id: 1, question: 'test queston', answer: 'test answer' }]
 
     const [temporaryId, setTemporaryId] = useState('1')
@@ -19,7 +19,7 @@ const BlockQueston = ({ changeStateVidjet, listArr, id, setViewEdit, title, setV
     const [tempoparyList, setTemoraryList] = useState(questonsList)
     const [isMoreOne, setIsMoreOne] = useState(() => questonsList.length > 1 ? true : false)
 
-    console.log(vidjArr, 'VIDJET ARR')
+    console.log(listArr, 'VIDJET ARR')
 
     const onBlackAnswer = () => {
         const list = [...questonsList]
@@ -36,18 +36,17 @@ const BlockQueston = ({ changeStateVidjet, listArr, id, setViewEdit, title, setV
     }
 
     const saveList = () => {
-        if (id) {
-            console.log(changeStateVidjet)
-            console.log('asl;fjdaslfkjdafjs')
-        }
-        const list = [...questonsList]
-        console.log({ questions: list },blockTitle)
-        setQuestionList(list)
-        changeStateVidjet({ questions: list },blockTitle)
-        setCurrentWidjet(null)
-        
-
-
+        setTimeout(()=>{
+            if (id) {
+                console.log(changeStateVidjet)
+                console.log('asl;fjdaslfkjdafjs')
+            }
+            const list = [...questonsList]
+            console.log({ questions: list },blockTitle)
+            setQuestionList(list)
+            changeStateVidjet({ questions: list },blockTitle)
+            setCurrentWidjet(null)
+        },200)
     }
 
     //Пилу костыль для редактирования заголовка

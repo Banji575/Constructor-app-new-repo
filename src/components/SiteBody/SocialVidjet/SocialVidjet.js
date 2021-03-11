@@ -57,6 +57,7 @@ const SocialVidjet = ({ body ,id, replaceVidj}) => {
                         })}
                     </div>
                 </div>
+                <a title="Должен быть установлен Viber для ПК" href="viber://chat?number=+380950000000">Написать в Viber</a>
                 </WidjetWrapper>
                 <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>
              {viewEdit ? <Social content = {body} setViewEdit={setViewEdit} id={id} /* changeStateVidjet={changeStateVidjet} isNew={false} listArr={body} */ /> : null}

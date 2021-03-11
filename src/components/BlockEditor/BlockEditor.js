@@ -21,6 +21,7 @@ import { ContextAddBlock } from '../../ContextAddBlock'
 import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons'
 
 const changeDataObjForBackend = (formdata, arr) => {
+    console.log('dataforbackend',arr)
     arr.forEach((el, i) => {
         formdata.set(`issue[${i}]`, `${el.answer}`)
         formdata.set(`answer[${i}]`, `${el.answer}`)
@@ -52,7 +53,7 @@ const BlockEditor = () => {
         formData.set('landing_prop_id', 2)
         formData.set('catalog_id', catalogId)
         formData.set('title', questionTitle)
-        changeDataObjForBackend(formData, obj.questions)
+      /*   changeDataObjForBackend(formData, obj.questions) */
         doFetch(changeDataObjForBackend(formData, obj.questions))
     }
 
@@ -63,6 +64,7 @@ const BlockEditor = () => {
         const list = [...vidjArr]
         list.push({ title: 'question', id: String(response.landing_prop_data_id),blockTitle:response.$update_game.title, body: objNewQuestion.questions })
         console.log('response',response)
+        console.log(list)
         setVidjetData(list)
     }, [response])
     const openWidjet = () => {

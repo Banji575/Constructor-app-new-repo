@@ -20,7 +20,7 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
 
 
     //для полноэкранных виджетов
-    const classes = ['question-center']
+    const classes = ['question-center padding-top-for-edit']
     if (!fullScreen) {
         classes.push('container')
     }

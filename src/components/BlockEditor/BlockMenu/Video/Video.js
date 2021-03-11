@@ -59,7 +59,6 @@ const Video = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) => {
                     if (el.id == id) {
                         console.log('элемент найден', el)
                         el.body = { title, link }
-
                     }
                 })
                 console.log(list)
@@ -73,6 +72,9 @@ const Video = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) => {
             }
             closeWindow()
         }
+
+
+
     }, [respEditVideo])
 
 
@@ -90,7 +92,7 @@ const Video = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) => {
                 />
                     {/* <textarea className='video-textarea' value={title} onChange={(evt) => setTitle(evt.target.value)} /> */}
                     <p className='question-item-header mt-3'>Ссылка на видео</p>
-                    <input className = 'input-text' type='text' value={link} onChange={(evt) => checkLink(evt.target.value)} />
+                    <input className = 'input-text' type='text' value={link}/*  onChange={(evt) => checkLink(evt.target.value)} */ onChange = {evt=>setLink(evt.target.value)}/>
                     {!validLink ? <p className='text-danger'>Поле не должно быть пустым</p> : null}
                 </div>
                 {/* <div className='block-question-save'><p onClick={saveList} className='block-question-button-save'>Сохранить</p></div> */}

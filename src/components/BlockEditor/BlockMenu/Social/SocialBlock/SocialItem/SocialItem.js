@@ -34,7 +34,7 @@ const socialConfig = {
     },
     TikTok:{
         placeholder:'Ссылка на страницу',
-        createLink: str=>`https://${str}`
+        createLink: str=>`https://tiktok.com/${Utils.checkEntry(str, '@')}`
     },
     Twitter:{
         placeholder:'Введите имя пользователя ',

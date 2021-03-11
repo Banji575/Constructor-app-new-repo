@@ -39,7 +39,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
 
     //класс для скрывания надписи загрузить картинку
     const clasess = ['banner-load-img-label']
-    if(previewImage){
+    if (previewImage) {
         clasess.push('hide')
     }
 
@@ -171,9 +171,8 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
                             <label className='label-text' htmlFor='upload-check'>Сделать баннер ссылкой</label>
                         </div>
                     </div>
-                        <h3 className="question-item-header">Ссылка</h3>
+                    <h3 className="question-item-header">Ссылка</h3>
                     <input className='input-text' type='text' value={link} pattern='/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/' onChange={(evt) => setLink(evt.target.value)} />
-
                     {!isValidUrl ? <p className='text-danger'>Не верный формат ссылки</p> : null}
                 </div>
             </div>
