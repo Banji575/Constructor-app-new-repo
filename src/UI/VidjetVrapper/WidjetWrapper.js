@@ -45,7 +45,6 @@ const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, 
                     initialValue={backgroundColor || "#f0f1f7"}
                     onChange={(evt) => setBg(evt)}
                     placement="right"
-
                 />
            </div>
             <div className='icon-conteiner'>
