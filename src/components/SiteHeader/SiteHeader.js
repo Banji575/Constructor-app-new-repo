@@ -5,14 +5,14 @@ import './siteHeader.css'
 import Context from '../../Context'
 import TextEditorPanel from './TextEditorPanel/TextEditorPanel'
 import MobileMenuIcon from '../../UI/MobileMenuIcon/MobileMenuIcon'
-const SiteHeader = ({changeViewMenu}) => {
+const SiteHeader = ({changeViewMenu , styleClassHeader}) => {
     const [state, changeState, setState, catalogId, setVidjetData, vidjetData,decktopMode] = useContext(Context)
     const backgroundColor =  state.titleBackground
-    const classes = ['site-header']
+    const classes = ['site-header'].concat(styleClassHeader)
 
     if(!decktopMode){
         classes.push('site-header-preview-mode')
-    }
+    } 
 
     const styles = {backgroundColor}
     console.log('site-list', state)

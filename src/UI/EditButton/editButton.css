@@ -1,14 +1,21 @@
 .editButton {
-    width: 28px;
+    width: 100%;
+    min-width: 30px;
+    max-width: 40px;
     text-align: center;
+    position: relative;
+    height: 100%;
+    cursor: pointer;
 }
 
 .edite-button-img {
-    right: 11%;
+    /* right: 11%; */
     position: absolute;
-    top: 17%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
 }
 
 .edite-button-img--header-menu {
-    right: 2%;
+    /* right: 2%; */
 }

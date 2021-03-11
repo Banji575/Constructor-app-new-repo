@@ -14,7 +14,7 @@ const MobileMenuIcon = ({ changeViewMenu }) => {
     return (
         <div className = 'mobile-menu-wrapper'>
             <div onClick={openMenuHandler} className={classes.join(' ')}>
-
+                
             </div>
         </div>
     )

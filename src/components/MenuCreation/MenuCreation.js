@@ -16,6 +16,7 @@ import './newMenuCreation.css';
 import ArrowButton from './../../UI/ArrowButton/ArrowButton';
 import { getUrlParams } from '../../scripts/Common'
 
+import styled from 'styled-components';
 
 const MenuCreation = ({ menuIsView }) => {
     const [state, changeState, setState, calalogId] = useContext(Context)
@@ -24,6 +25,8 @@ const MenuCreation = ({ menuIsView }) => {
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
     const [enterName, setEnterName] = useState(false)
     const [direction, setDirection] = useState(state.menuDirection)
+
+
     const apiKey = 'api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bis2t0aoczw2a280e2e2ddedf8fe9acfe5625949396';
 
     const newCatalogId = getUrlParams()['id'] || 0;
@@ -32,6 +35,7 @@ const MenuCreation = ({ menuIsView }) => {
         fontFamily: state.menu_settings.font_family,
         fontSize: state.menu_settings.font_size + 'px'
     }
+    console.log('state', state['menu_settings'])
 
     const menuFontFamily = state.menu_settings.font_family
     const wrapperClasses = ['wrapper', 'd-flex', 'container-menu']
@@ -40,7 +44,7 @@ const MenuCreation = ({ menuIsView }) => {
         wrapperClasses.push('menu-vertical')
     }
 
-    const classes = ['menu-creation-container container d-flex ']
+    const classes = ['menu-creation-container container  ']
     if (!menuIsView) {
         classes.push('menu-creation-container---view')
     }
@@ -110,15 +114,58 @@ const MenuCreation = ({ menuIsView }) => {
      * NEW MENU 
      * @returns 
      */
+
+    const StyledMenu = styled.div`
+           font-size: ${state.menu_settings.font_size + 'px' || '12px'};
+           font-family: ${state.menu_settings.font_family || 'Montserrat'};
+           button{
+                    color: inherit;
+                    background-color: inherit;
+                    width: 100%;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+           & .new-menu-items  {
+               &:hover{
+                   svg {
+                    color: #${state.menu_settings.with_allocation_font_color || '254768'};
+                   }
+                   background: #${state.menu_settings.with_allocation_background_color || 'fff'};
+                   color: #${state.menu_settings.with_allocation_font_color || '254768'};
+               }
+                background: #${state.menu_settings.without_allocation_background_color || 'fff'};
+                color: #${state.menu_settings.without_allocation_font_color || '254768'};
+
+                & a, button{
+                    color: inherit;
+                    background-color: inherit;
+                    width: 100%;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+           }
+           svg {
+            color: #${state.menu_settings.without_allocation_font_color || '254768'};
+            &:hover{
+                color: #${state.menu_settings.with_allocation_font_color || '254768'};
+            }
+           }
+        `;
     const NewDrawMenu = ({ childrenList, lvl = 1 }) => {
+        let menuSettings = state.menu_settings;
+        console.log('menuSettings', menuSettings)
         let parId = 0
+
         return (
             <React.Fragment>
+
                 {childrenList.map((el, i) => {
                     parId = el.parent_id
                     return (
-                        <React.Fragment>
-                            <ul className="new-menu-list" key={el.id}>
+                        <StyledMenu>
+                            <ul className="new-menu-list" key={el.id} >
                                 <NewMenuItem
                                     text={el.text}
                                     id={el.id}
@@ -128,11 +175,11 @@ const MenuCreation = ({ menuIsView }) => {
                                     apiKey={apiKey}
                                     lvl={lvl}
                                     isAddNew={lvl <= 3}
-                                    childrenList = {el.childrenList}
+                                    childrenList={el.childrenList}
                                     content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList} /> : <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', (el.id))}>Добавить раздел</button>}
                                 />
                             </ul>
-                        </React.Fragment>
+                        </StyledMenu>
                     )
                 })}
                 <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', parId)}>Добавить раздел</button>
@@ -211,27 +258,34 @@ const MenuCreation = ({ menuIsView }) => {
             <div className={classes.join(' ')} >
                 <MenuSettingButton state={state} />
                 {state.menuDirection == 2 ? <LoadingLogo /> : null}
-                <p className='block-question-button-save'>
+                {/* <p className='block-question-button-save'>
                     <NavLink
                         className='menu-link'
                         activeStyle={{ color: '#fff' }}
                         to={`/?id=${calalogId}`}
                     >Главная</NavLink>
-                </p>
+                </p> */}
                 {/* {drawMenu(state.siteMenu)} */}
                 {/* {newDrawMenu({ childrenList: state.siteMenu })} */}
-                
+
                 <div className="new-menu-container">
                     <div className="new-menu">
+                        <StyledMenu>
+                            <ul className='new-menu-list'>
+                                <li>
+                                    <div className="new-menu-items">
+                                        <NavLink
+                                            className='menu-link'
+                                            to={`/?id=${calalogId}`}
+                                        >
+                                            Главная
+                                        </NavLink>
+                                    </div>
+                                </li>
+                            </ul>
+                        </StyledMenu>
                         <NewDrawMenu childrenList={state.siteMenu} />
                     </div>
-                </div>
-
-
-                <div className='menu-buttons-add-new d-none'>
-                    {!enterName ?
-                        <button onClick={() => setEnterName(true)} className='add-menu-item'>Добавить раздел</button>
-                        : <MenuItemNameInput closeEdit={setEnterName} addNewItem={addMenuItemHandler} />}
                 </div>
             </div>
         </React.Fragment>

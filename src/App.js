@@ -144,9 +144,12 @@ function App() {
 
 
   const menuDirectionClasses = ['d-flex']
+  const styleClassHeader = []
+
   if (state.menuDirection == '1') {
     menuDirectionClasses.push('verticalDirection')
   } else {
+    styleClassHeader.push('horizontalDirection')
     menuDirectionClasses.push('horizontalDirection')
   }
 
@@ -187,9 +190,9 @@ function App() {
       <div className="app">
        {!isFrameMode  ?  <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> :null }
 
-        {!mobileMode ? <SiteHeader changeViewMenu={setMobilemenuIsOpen} /> : null}
+        {!mobileMode ? <SiteHeader styleClassHeader = {styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
         <div className={menuDirectionClasses.join(' ')}>
-       {/*    {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null} */}
+          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen}/> : null}
           <Switch>
             <Route path='/' exact>
               {mobileMode ? <MobilePreview /> : null}

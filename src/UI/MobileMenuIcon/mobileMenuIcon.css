@@ -49,4 +49,10 @@
     right: 6%;
     top: 64%;
     display: none;
+} 
+
+@media(max-width: 562px) {
+    .mobile-menu-wrapper {
+        display: block;
+    }
 }

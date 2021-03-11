@@ -50,6 +50,7 @@
     width: 90px;
     display: flex;
     justify-content: space-between;
+    flex: 0 0 90px;
 }
 
 .icon-conteiner--middle-line {
