@@ -71,6 +71,13 @@
     .horizontalDirection .menu-creation-container {
         position: absolute;
     }
+    .menu-creation-container {
+        display: none;
+    }
+    .menu-creation-container.menu-creation-container---view {
+        display: flex;
+    }
+
 }
 
 .menu-vertical {

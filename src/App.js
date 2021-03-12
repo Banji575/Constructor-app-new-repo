@@ -190,9 +190,9 @@ function App() {
       <div className="app">
         {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
 
-        {!mobileMode ? <SiteHeader styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
+        {!mobileMode ? <SiteHeader menuIsClose={mobileMenuIsOpen}  styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
         <div className={menuDirectionClasses.join(' ')}>
-          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen}/> : null}
+          {!mobileMode ? <MenuCreation changeViewMenu={setMobilemenuIsOpen} menuIsClose={mobileMenuIsOpen}/> : null}
           <Switch>
             <Route exact  path='/work/user/site-creator/index.php'>
               {mobileMode ? <MobilePreview /> : null}
