@@ -78,7 +78,8 @@ const MenuCreation = ({ menuIsView }) => {
             .then(resp => resp.json())
             .then(json => {
                 if (json.success && json.success != 'false') {
-                    let newMenu = [...state.siteMenu];
+                    // let newMenu = [...state.siteMenu];
+                    let newMenu = state.siteMenu;
                     let newData = {
                         catalog_id: newCatalogId,
                         deleted: "0",
@@ -104,8 +105,8 @@ const MenuCreation = ({ menuIsView }) => {
                         searchMenu(newMenu);
                     }
 
-                    console.log('oldMenu', newMenu)
-                    changeState({ 'siteMenu': newMenu })
+                    console.log('newMenu', newMenu)
+                    changeState({'siteMenu': newMenu })
 
                 }
             })
@@ -122,6 +123,9 @@ const MenuCreation = ({ menuIsView }) => {
            @media(max-width: 562px) {
                width: 100%;
                & .new-menu-items {
+                    border-radius: 0px;
+                    ${'' /* border-left: 0;
+                    border-right: 0; */}
                      a, button {
                         padding-top: 5px;
                         padding-bottom: 5px;
