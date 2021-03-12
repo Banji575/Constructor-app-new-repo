@@ -1,34 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import ViewSetting from './components/ViewSetting/ViewSetting';
-import Body from './HOC/SiteBody'
 import Context from './Context'
 import SiteHeader from './components/SiteHeader/SiteHeader'
-import './app.css'
 import MenuCreation from './components/MenuCreation/MenuCreation';
 import useFetch from './hooks/useFetch'
 import Adapter from './scripts/Adapter';
-import BlockEditor from './components/BlockEditor/BlockEditor';
-import SiteBody from './components/SiteBody/SiteBody';
-import { VidjetAddWrapper } from './ContextAddBlock';
 import Main from './Pages/Main/Main';
 import Items from './Pages/Items/Items'
-import { Carousel } from 'react-bootstrap'
-import mobileDecktop from './image/IcoNos/mobileOn.png'
-
-import { Route, Switch } from 'react-router-dom'
-import Utils from './scripts/Utils';
-
+import { Route, Switch } from 'react-router-dom' 
 import MobilePreview from './Pages/MobilePreview/MobilePreview';
-import { faRemoveFormat } from '@fortawesome/free-solid-svg-icons';
+import './app.css'
+
 
 const URL = '/work/user/site-creator/index.php/'
 const catalogId = window.location.href.split('?').slice(1).map(i => i.split('='))[0][1]
 const MOBILE_GET_PARAM = 'mobile-mode'
 const isFrameMode = window.location.href.split('?').indexOf(MOBILE_GET_PARAM) + 1
-console.log('catalog', catalogId)
+
 
 function App() {
-  /* console.log(window.location.href.split('?').slice(1).map(i => i.split('='))[0][1]) */
   const [response, doFetch] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog&catalog_id=${catalogId}`)
   const [respReplace, doFetchReplace] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=replace_order_landing_prop_data&catalog_id=${catalogId}`)
   const [responseVidjetData, doFetchVidjetData] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_landing_props_data_in_catalog&catalog_id=${catalogId}`)
@@ -41,7 +31,7 @@ function App() {
   const [decktopMode, setDecktopMode] = useState(isFrameMode > 0 ? false : true)
   const [mobileMode, setMobileMode] = useState(false)
   const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */1455)
-  /* const href = window.location.href.split('?')[1].split('&')[1].split('=')[1] */
+
   console.log('catalogId', urlCatalogId)
 
 
@@ -169,16 +159,7 @@ function App() {
   }
 
   console.log(findMobileGetParam(), 'firndmobilegetpos')
-  /* 
-    if(findMobileGetParam()>0){
-      if(!decktopMode) return
-      setDecktopMode(false)
-    }
-     */
 
-
-
-  /*   addGetForIframe() */
   // Страницы для роутинга
 
   return !dataLoading ?

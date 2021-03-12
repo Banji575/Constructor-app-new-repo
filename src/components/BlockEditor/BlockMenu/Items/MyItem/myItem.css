@@ -17,9 +17,10 @@
 }
 
 .my-items-item {
-    margin-left: 5%;
-    margin-bottom: 3%;
-    width: 23%;
+    /* margin-left: 5%; */
+    /* margin-bottom: 3%; */
+    width: 100%;
+    padding-top: 100%;
     border: 1px solid #E0E0E0;
 }
 

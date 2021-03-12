@@ -27,7 +27,7 @@ const MyItems = ({ showMyItem, previewItem }) => {
         previewItem(id)
     }
 
-    
+
     useEffect(() => {
         if (!response) return
         const items = response.data
@@ -50,7 +50,14 @@ const MyItems = ({ showMyItem, previewItem }) => {
             <div>
                 <ul className='my-items-list'>
                     {itemList ? itemList.map((el, i) => {
-                        return <div key={i} onClick={() => getItemsParams(el.id)} className='my-items-item'><img className='my-items-elem-img' src={el.default_look_preview_700} /></div>
+                        return <div className="col-2">
+                            <div
+                                key={i}
+                                onClick={() => getItemsParams(el.id)}
+                                className='my-items-item'>
+                                <img className='my-items-elem-img' src={el.default_look_preview_700} />
+                            </div>
+                        </div>
                     }) : <Loader />}
                 </ul>
             </div>

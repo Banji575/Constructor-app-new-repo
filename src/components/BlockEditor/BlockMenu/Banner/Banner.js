@@ -86,7 +86,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
     }
 
     useEffect(() => {
-/*         if (!respEditBanner) return
+        if (!respEditBanner) return
         setOneLoad(false)
         if (respEditBanner.success = 'Успешно!') {
             if (!vidjetObj) {
@@ -119,7 +119,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
                 closeWindow()
             }
         }
- */
+
     }, [respEditBanner])
 
     const closeWindow = () => {
