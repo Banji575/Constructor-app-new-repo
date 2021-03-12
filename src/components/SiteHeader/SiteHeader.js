@@ -5,7 +5,7 @@ import './siteHeader.css'
 import Context from '../../Context'
 import TextEditorPanel from './TextEditorPanel/TextEditorPanel'
 import MobileMenuIcon from '../../UI/MobileMenuIcon/MobileMenuIcon'
-const SiteHeader = ({changeViewMenu , styleClassHeader}) => {
+const SiteHeader = ({menuIsClose, changeViewMenu , styleClassHeader}) => {
     const [state, changeState, setState, catalogId, setVidjetData, vidjetData,decktopMode] = useContext(Context)
     const backgroundColor =  state.titleBackground
     const classes = ['site-header'].concat(styleClassHeader)
@@ -22,7 +22,7 @@ const SiteHeader = ({changeViewMenu , styleClassHeader}) => {
                {state.menuDirection == '1' ?  <LoadingLogo /> : null}
                 <SiteTitle />
                { decktopMode ? <TextEditorPanel/> : null}
-                <MobileMenuIcon changeViewMenu={changeViewMenu}/>
+                <MobileMenuIcon menuIsClose={menuIsClose} changeViewMenu={changeViewMenu}/>
             </div>
         </div>
     )

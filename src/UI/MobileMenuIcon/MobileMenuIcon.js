@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import './mobileMenuIcon.css'
-const MobileMenuIcon = ({ changeViewMenu }) => {
-    const [clicked, setClicked] = useState(false)
+const MobileMenuIcon = ({menuIsClose, changeViewMenu }) => {
     const classes = ['mobileMenuIcon']
-    if (clicked) {
+    if (!menuIsClose) {
         classes.push('mobileMenuIcon--clicked')
     }
 
     const openMenuHandler = () => {
-        setClicked(c => !c)
         changeViewMenu(c => !c)
     }
     return (
