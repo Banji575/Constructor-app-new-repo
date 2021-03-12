@@ -192,7 +192,7 @@ function App() {
 
         {!mobileMode ? <SiteHeader styleClassHeader = {styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
         <div className={menuDirectionClasses.join(' ')}>
-         {/*  {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null} */}
+          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null}
           <Switch>
             <Route exact path='/'>
               {mobileMode ? <MobilePreview /> : null}
