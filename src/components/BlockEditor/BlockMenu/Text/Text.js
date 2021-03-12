@@ -16,8 +16,10 @@ const randomId = () => Math.random()
 const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [setCurrentWidjet, setIsEditer] = useContext(ContextEditor)
-    const [textContent, setTextContent] = useState(content || { id: randomId(), title: '', description: '' })
+    const [textContent, setTextContent] = useState(content || { id: randomId(), title: '', discription: '' })
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
+
+    console.log(content)
 
     const closeWindow = () => {
         if (closeEdit) {
@@ -26,13 +28,14 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
             setCurrentWidjet(null)
     }
 
+    
 
     const saveList = () => {
         const formData = new FormData()
         formData.set('landing_prop_id', 4)
         formData.set('catalog_id', catalogId)
         formData.set('title', textContent.title)
-        formData.set('description', textContent.description)
+        formData.set('description', textContent.discription)
         if (content) {
             formData.set('landing_prop_data_id', content.id)
         } else {
@@ -45,8 +48,10 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
         if (!respEditText) {
             return
         }
+        console.log(textContent, content,';sdjafdjasfjasdfkljdasfkljdasklj')
+        closeWindow()
         if (respEditText.success === 'Успешно!') {
-            closeWindow()
+       
             const list = [...vidjArr]
             if (content) {
                 list.map(el => {
@@ -55,18 +60,16 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
                     }
                     if (el.id === content.id) {
                         console.log(el.id, content.id, el)
-                        const newBody = { id: String(content.id), title: textContent.title, discription: textContent.description }
+                        const newBody = { id: String(content.id), title: textContent.title, discription: textContent.discription }
                         el.body = newBody
                         return el
                     }
                 })
-
-                console.log(list)
             } else {
                 const id = respEditText.landing_prop_data_id;
                 const newObj = {
                     title: "text", id, body: {
-                        discription: textContent.description,
+                        discription: textContent.discription,
                         id,
                         title: textContent.title
                     }
@@ -74,7 +77,6 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
                 list.push(newObj)
             }
             setVidjetData(list)
-
         }
     }, [respEditText])
 
@@ -90,12 +92,12 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
 
     const changeTextHandler = editor => {
         console.log(editor)
-        const description = editor.getData()
-        console.log(description)
+        const discription = editor.getData()
+        console.log(discription)
         setTextContent(state => {
             return {
                 ...state,
-                description
+                discription
             }
         })
     }

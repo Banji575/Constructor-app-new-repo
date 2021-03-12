@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import Button from '../../../../UI/Button/Button'
 import './socialVidjetItem.css'
 import facebook from '../../../../image/facebook.png'
@@ -33,25 +33,36 @@ const nameSocialButton = {
     telegram: telegram,
 }
 
+const isMobile = (1 && window.share)
 
+const createViberLink = link => {
+    if (link.indexOf('viber') + isMobile) {  
+        return link.replace('chat', 'add' )
+    }
+    return link
+}
 
 const SocialVidjetItem = ({ data }) => {
     const goToLink = (link) => {
         document.location.href = link
     }
 
-    
+    console.log('navigator', data, navigator.share)
+
+
     return (
         <div className='social-vidjet-item-conteiner mb-3 container '>
             <h3 className='social-vidjet-title'>{Utils.createHTML(data.title)}</h3>
             <div className='social-vidjet-item-buttons d-flex flex-row justify-center'>
                 {Object.keys(data)
                     .map((el, i) => {
-                        if (el === 'title' || !data[el].checked)
+                        if (el === 'title' || !data[el].checked) {
                             return
+                        }
+                        console.log(el)
                         return (
-                            <div className = 'mr-5 '>
-                             <a target = '_blank' key={i} href={`${data[el].link}`}><img src = {nameSocialButton[el]}/></a>
+                            <div className='mr-5 '>
+                                <a target='_blank' key={i} href={`${createViberLink(data[el].link)}`}><img src={nameSocialButton[el]} /></a>
                             </div>
                             /* <React.Fragment>
                                 <a key={i} href={`https://${data[el].link}`}  className='social-vidjet-button'>{nameSocialButton[el]}</a>

@@ -276,7 +276,7 @@ const MenuCreation = ({ menuIsView }) => {
                                     <div className="new-menu-items">
                                         <NavLink
                                             className='menu-link'
-                                            to={`/?id=${calalogId}`}
+                                            to={`work/user/site-creator/index.php/?id=${calalogId}`}
                                         >
                                             Главная
                                         </NavLink>

@@ -7,8 +7,20 @@
     max-height: none;
 }
 
-@media(max-width:400px) {
+@media(max-width:680px) {
     .banner-body {
-        height: 44vh;
+        height: 40vh;
+    }
+}
+
+@media(max-width:425px) {
+    .banner-body {
+        height: 35vh;
+    }
+}
+
+@media(max-width:375px) {
+    .banner-body {
+        height: 30vh;
     }
 }

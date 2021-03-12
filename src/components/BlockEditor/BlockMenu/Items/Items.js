@@ -193,7 +193,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
                 <div className='d-flex items-card-conteiner'>
                     {loadArr.map((el, i) => {
                         return (
-                            <div key={i} className='mr-3 item-card d-flex'><img src={el.src} /><div className='icon-conteiner'/*  onClick={delHandler} */ color='green'>
+                            <div key={i} onClick={() => delChangeItem(el, i)} className='mr-3 item-card d-flex'><img src={el.src} /><div className='icon-conteiner'/*  onClick={delHandler} */ color='green'>
                                 <FontAwesomeIcon onClick={() => delChangeItem(el, i)} color={'red'} icon={faTrashAlt} />
                             </div></div>)
                     })}
