@@ -17,6 +17,7 @@ import ArrowButton from './../../UI/ArrowButton/ArrowButton';
 import { getUrlParams } from '../../scripts/Common'
 
 import styled from 'styled-components';
+import WidjetWrapper from './../../UI/VidjetVrapper/WidjetWrapper';
 
 const MenuCreation = ({ menuIsView }) => {
     const [state, changeState, setState, calalogId] = useContext(Context)
@@ -118,6 +119,18 @@ const MenuCreation = ({ menuIsView }) => {
     const StyledMenu = styled.div`
            font-size: ${state.menu_settings.font_size + 'px' || '12px'};
            font-family: ${state.menu_settings.font_family || 'Montserrat'};
+           @media(max-width: 562px) {
+               width: 100%;
+               & .new-menu-items {
+                     a, button {
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                    }
+                    .new-menu-items-toggler {
+                        font-size: 20px;
+                    }
+               } 
+           }
            button{
                     color: inherit;
                     background-color: inherit;
@@ -146,6 +159,9 @@ const MenuCreation = ({ menuIsView }) => {
                     }
                 }
            }
+           .new-menu-items-toggler {
+                font-size: 16px;
+            }
            svg {
             color: #${state.menu_settings.without_allocation_font_color || '254768'};
             &:hover{
