@@ -35,7 +35,7 @@
 
 .popup-body {
     padding: 4% 2%;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow-y: auto;
     overflow-x: hidden;
 }

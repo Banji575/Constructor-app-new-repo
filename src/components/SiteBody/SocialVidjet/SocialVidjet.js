@@ -57,6 +57,7 @@ const SocialVidjet = ({ body ,id, replaceVidj}) => {
                         })}
                     </div>
                 </div>
+                
                 </WidjetWrapper>
                 <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>
              {viewEdit ? <Social content = {body} setViewEdit={setViewEdit} id={id} /* changeStateVidjet={changeStateVidjet} isNew={false} listArr={body} */ /> : null}

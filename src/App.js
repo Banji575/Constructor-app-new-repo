@@ -192,9 +192,9 @@ function App() {
 
         {!mobileMode ? <SiteHeader styleClassHeader = {styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
         <div className={menuDirectionClasses.join(' ')}>
-          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen}/> : null}
+         {/*  {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null} */}
           <Switch>
-            <Route path='/' exact>
+            <Route exact path='/'>
               {mobileMode ? <MobilePreview /> : null}
               <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
             </Route>
@@ -203,6 +203,7 @@ function App() {
         </div>
         {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
       </div>
+   
     </Context.Provider>
     );
 }

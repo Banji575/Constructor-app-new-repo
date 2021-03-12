@@ -28,7 +28,7 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
     const closeEdit = () => setViewEdit(false)
 
 
-    console.log('body', body)
+    console.log('backgroundColor', backgroundColor)
 
     useState(()=>{
     },[backgroundColor])

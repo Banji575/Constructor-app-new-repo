@@ -36,14 +36,14 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
 
     console.log('loadArr', loadArr)
 
-/* временно удаляем текущий редактироруемый и создаем новый */
-const delHandler = () => {
-    const formData = new FormData()
-    formData.set('landing_prop_id', 5)
-    formData.set('catalogId', catalogId)
-    formData.set('landing_prop_data_id', content.id)
-    doFetchDelItem(formData)
-}
+    /* временно удаляем текущий редактироруемый и создаем новый */
+    const delHandler = () => {
+        const formData = new FormData()
+        formData.set('landing_prop_id', 5)
+        formData.set('catalogId', catalogId)
+        formData.set('landing_prop_data_id', content.id)
+        doFetchDelItem(formData)
+    }
 
     /* При редактировании проверяем, загружены ли товары */
 
@@ -51,11 +51,10 @@ const delHandler = () => {
         if (!allItemsArr.length === 0) return
         if (!content) return
         const list = [...loadArr]
-        console.log(content, list, allItemsArr)
+        console.log(content, content.id, list, allItemsArr)
         content.body.itemsId.forEach(el => {
             allItemsArr.forEach(elem => {
                 if (elem.catalog_object_id == el) {
-                    console.log('Нашли элемент', elem)
                     list.push({ id: el, src: elem.default_look_preview_200 })
                 }
             })
@@ -69,9 +68,6 @@ const delHandler = () => {
 
     useEffect(() => {
         if (!resGetCatalogItem) return
-        console.log('GET ITEM CATALOG')
-        console.log(resGetCatalogItem)
-
     }, [resGetCatalogItem])
 
 
@@ -83,7 +79,6 @@ const delHandler = () => {
         }
         setCurrentWidjet(null)
     }
-    console.log('loadArr', loadArr)
 
     const delChangeItem = (el, i) => {
         const list = [...loadArr]
@@ -95,15 +90,9 @@ const delHandler = () => {
         if (!resGetObjectCatalogId) {
             return
         }
-        console.log(resGetObjectCatalogId)
     }, [resGetObjectCatalogId])
 
     const saveList = () => {
-        /*         console.log('savelist', loadArr)
-                const formData = new FormData()
-                 */
-        /*    doFethGetObjectCatalogId() */
-
         const itemsIdArr = new Array(loadArr.length)
             .fill('')
             .map((el, i) => {
@@ -115,7 +104,7 @@ const delHandler = () => {
         formData.set('landing_prop_id', 5)
         formData.set('title', vidjetTitle)
         if (content) {
-            formData.set('landing_prop_data_id', id)
+            formData.set('landing_prop_data_id', content.id)
 
         }
         itemsIdArr.forEach(el => formData.append('catalog_object_id[]', el))
@@ -124,35 +113,39 @@ const delHandler = () => {
 
     useEffect(() => {
         if (!resAddVidjetItem) return
-        console.log(loadArr, 'loadArr')
         loadArr.forEach((el => {
             itemsContent.body.itemsId.push(el.id)
         }))
         itemsContent.id = resAddVidjetItem.landing_prop_data_id
-
 
         if (!content) {
             const list = [...vidjArray]
             itemsContent.body.blockTitle = vidjetTitle
             list.unshift(itemsContent)
             setVidjetDataArray(list)
-        }else{
+        } else {
             delHandler()
-           /*  window.location.reload() */
-            console.log(vidjArr)
+            /*  window.location.reload() */
             const list = [...vidjArr]
-            console.log(vidjArr ,content,'klhasfkdasfkjh')
-        /*     list.forEach(el=>{
-                if(el)
-            }) */
+            const itemIdArr = resAddVidjetItem.$fields.catalog_object_id.value
+            const id = resAddVidjetItem.landing_prop_data_id
+            list.forEach(el=>{
+                if(el.id === id){
+                    el.body.itemsId = []
+                }
+            })
+            console.log('отредактировал лист',list)
+            setVidjetData(list)
+            window.location.reload()
+            /*     list.forEach(el=>{
+                    if(el)
+                }) */
         }
-        
         closeWindow()
     }, [resAddVidjetItem])
 
     const onLoadHandler = (evt) => {
         const file = evt.target.files[0]
-        console.log(file)
         setFile(file)
         doLoad(file)
     }
@@ -183,7 +176,7 @@ const delHandler = () => {
     }, [url])
     return (
         <React.Fragment>
-            <PopUp showSave={loadArr.length !== 0} title="Товарыs" closePopup={closeWindow} saveHandler={() => saveList()}>
+            <PopUp showSave={loadArr.length !== 0} title="Товары" closePopup={closeWindow} saveHandler={() => saveList()}>
                 <div className='timer-conteiner d-flex flex-column'>
                     <h3 className='question-item-header my-3'>Заголовок</h3>
                     <CKEditor
@@ -209,6 +202,7 @@ const delHandler = () => {
                     <h3 className='question-item-header my-3'>Выбрать</h3>
 
                 </div>
+               
                 <MyItem /* loadArr={loadArr}  */ setAllItemArr={setAllItemArr} loadArr={loadArr} setLoadArr={setLoadArr} />
             </PopUp>
             {/*  {viewPopUp ? <PopUp showSave={false} title="Загрузить товар" closePopup={closeWindow} saveHandler={() => saveList()}> <NewItem createNewItem={createNewItem} img={url} setView={setViewPopUp} /></PopUp> : null}

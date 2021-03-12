@@ -10,7 +10,7 @@ import {ContextAddBlock} from '../../../ContextAddBlock'
 import ButtonAddComponent from '../../../UI/ButtonAddComponent/ButtonAddComponent'
 
 const getVideoLink = (link) => {
-    console.log(link.replace(/.+\?v=/, "https://www.youtube.com/embed/"))
+  /*   console.log(link.replace(/.+\?v=/, "https://www.youtube.com/embed/")) */
     return link.replace(/.+\?v=/, "https://www.youtube.com/embed/")
 }
 
@@ -46,10 +46,13 @@ const VideoVidjet = ({ body, id,replaceVidj }) => {
             })
             setVidjetData(list)
         }
+       
     }, [respDelVideo])
     console.log(body)
-
-    return (
+   const changeLink = body.link.replace('https://youtu.be/', 'https://www.youtube.com/embed/')
+   
+   console.log(changeLink) 
+   return (
         <div className='questions-container' style = {{backgroundColor: [backgroundColor]}}>
                {/*  <div className='questions-header'>
                     <div className='questions-buttons'>
@@ -70,7 +73,7 @@ const VideoVidjet = ({ body, id,replaceVidj }) => {
                 <WidjetWrapper id={id} replaceVidj = {replaceVidj} setBackground = {setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} delHandler = {delHandler} editWindow={ <Video  setViewEdit={setViewEdit} id={id} content={{ id: id, title: 'video', body: body }} />} >
                 <div className='questions-body'>
                     {Utils.createHTML(body.title)}
-                    <iframe className = 'video-i-frame' width = {'100%'} src={getVideoLink(body.link)} />
+                    <iframe className = 'video-i-frame' width = {'100%'} src={getVideoLink(changeLink)} />
                 
                 </div>
                 </WidjetWrapper>

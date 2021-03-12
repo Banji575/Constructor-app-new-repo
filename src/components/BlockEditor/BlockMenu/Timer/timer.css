@@ -21,3 +21,9 @@
 .timer-number-list {
     width: fit-content;
 }
+
+@media(max-width:375px) {
+    .timer-number-list {
+        width: 92%;
+    }
+}

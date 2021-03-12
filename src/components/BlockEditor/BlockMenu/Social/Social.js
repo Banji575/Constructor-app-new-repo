@@ -133,6 +133,7 @@ const Social = ({ content,setViewEdit ,id,setVidjetDataArray, vidjArray}) => {
             <SocialBlock isValid = {setIsValid} saveTitle = {saveTitle} itemArr={itemArrSocial} blockName = 'social' saveItem = {saveItem}  content = {data.social} blockTitle='Социальные сети' />
             <SocialBlock isValid = {setIsValid} saveTitle = {saveTitle} itemArr={itemArrMessedger} blockName = 'messeger' saveItem = {saveItem} content = {data.messeger} blockTitle='Месседжеры' />
           {/*   <div className='block-question-save'><p onClick={saveList} className='block-question-button-save'>Сохранить</p></div> */}
+         
         </PopUp>
     )
 }

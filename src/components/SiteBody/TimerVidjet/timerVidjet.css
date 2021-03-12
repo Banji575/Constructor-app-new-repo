@@ -14,8 +14,8 @@
     list-style: none;
     height: 50px;
     /*  justify-content: center; */
-    margin-left: 17%;
-    width: 100%;
+    margin-left: 20%;
+    width: 89%;
 }
 
 .timer-number {
@@ -35,13 +35,25 @@
     padding-left: 60%;
 }
 
-@media(max-width: 768px) {
+@media(max-width:980px) {
     .timer-number {
-        font-size: 36px;
+        font-size: 32px;
     }
 }
 
-@media(max-width:455px) {
+@media(max-width: 768px) {
+    .timer-number {
+        font-size: 28px;
+    }
+}
+
+@media(max-width: 640px) {
+    .timer-number {
+        font-size: 24px;
+    }
+}
+
+@media(max-width:480px) {
     .timer-number {
         font-size: 18px;
     }

@@ -11,11 +11,11 @@ import ButtonAddComponent from '../../../UI/ButtonAddComponent/ButtonAddComponen
 import Utils from '../../../scripts/Utils'
 
 const changeDataObjForBackend = (formdata, arr) => {
-    arr.forEach((el, i) => {
+   /*  arr.forEach((el, i) => {
         formdata.set(`issue[${i}]`, `${el.answer}`)
         formdata.set(`answer[${i}]`, `${el.answer}`)
     })
-    return formdata
+    return formdata */
 }
 
 

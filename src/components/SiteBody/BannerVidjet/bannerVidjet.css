@@ -4,6 +4,7 @@
 
 .banner-vidjet-img {
     width: 100%;
+    max-height: none;
 }
 
 @media(max-width:400px) {
