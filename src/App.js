@@ -194,7 +194,7 @@ function App() {
         <div className={menuDirectionClasses.join(' ')}>
           {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen}/> : null}
           <Switch>
-            <Route   path='/work/user/site-creator/index.php'>
+            <Route exact  path='/work/user/site-creator/index.php'>
               {mobileMode ? <MobilePreview /> : null}
               <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
             </Route>

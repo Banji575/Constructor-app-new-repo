@@ -1,23 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context'
-import MenuItemWrapper from './MenuItemWrapper/MenuItemWrapper'
 import useFetch from '../../hooks/useFetch'
 import MenuItem from './MenuItem/MenuItem'
 import MenuSettingButton from './MenuSettingButton/MenuSettingButton'
-import './menuCreation.css'
 import LoadingLogo from '../SiteHeader/loadingLogo/LoadingLogo'
-import MenuItemNameInput from './MenuItemNameInput/MenuItemNameInput'
 import { NavLink } from 'react-router-dom'
-
 import NewMenuItem from './NewMenuItem/NewMenuItem';
-import NewMenuToggler from './NewMenuToggler/NewMenuToggler';
-import NewMenuList from './NewMenuList/NewMenuList';
-import './newMenuCreation.css';
-import ArrowButton from './../../UI/ArrowButton/ArrowButton';
 import { getUrlParams } from '../../scripts/Common'
-
 import styled from 'styled-components';
-import WidjetWrapper from './../../UI/VidjetVrapper/WidjetWrapper';
+import './menuCreation.css'
+import './newMenuCreation.css';
+
 
 const MenuCreation = ({ menuIsView }) => {
     const [state, changeState, setState, calalogId] = useContext(Context)
@@ -296,7 +289,7 @@ const MenuCreation = ({ menuIsView }) => {
                                     <div className="new-menu-items">
                                         <NavLink
                                             className='menu-link'
-                                            to={`work/user/site-creator/index.php/?id=${calalogId}`}
+                                            to={`/work/user/site-creator/index.php/?id=${calalogId}`}
                                         >
                                             Главная
                                         </NavLink>

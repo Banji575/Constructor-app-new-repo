@@ -60,8 +60,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
 
     useEffect(() => {
         if (!respAddItem) return
-        closePopup(null)
-        console.log(respAddItem)
+        closePopup()
     }, [respAddItem])
 
 
