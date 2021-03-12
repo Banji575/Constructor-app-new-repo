@@ -33,6 +33,8 @@ const CaruselVidjet = ({ body, id, replaceVidj }) => {
     }
 
 
+    console.log(body,body.interval*1000)
+
     useEffect(() => {
         if (!respDelCarusel) return
         console.log(respDelCarusel)
@@ -57,7 +59,7 @@ const CaruselVidjet = ({ body, id, replaceVidj }) => {
                                 <Carousel>
                                     {body.images.map(el=>{
                                         return (
-                                            <Carousel.Item interval = {800}>
+                                            <Carousel.Item interval = {body.interval*1000 || 800}>
                                                 <img src={`https://cloudsgoods.com/images${el}`}/>
                                             </Carousel.Item>
                                         )

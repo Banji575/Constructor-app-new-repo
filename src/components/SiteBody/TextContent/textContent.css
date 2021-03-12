@@ -9,6 +9,7 @@
 
 .text-header {
     margin: 0 auto;
+    position: relative;
 }
 
 .text-body {

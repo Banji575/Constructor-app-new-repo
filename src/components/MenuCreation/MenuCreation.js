@@ -1,33 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../Context'
-import MenuItemWrapper from './MenuItemWrapper/MenuItemWrapper'
 import useFetch from '../../hooks/useFetch'
 import MenuItem from './MenuItem/MenuItem'
 import MenuSettingButton from './MenuSettingButton/MenuSettingButton'
-import './menuCreation.css'
 import LoadingLogo from '../SiteHeader/loadingLogo/LoadingLogo'
-import MenuItemNameInput from './MenuItemNameInput/MenuItemNameInput'
 import { NavLink } from 'react-router-dom'
-
 import NewMenuItem from './NewMenuItem/NewMenuItem';
-import NewMenuToggler from './NewMenuToggler/NewMenuToggler';
-import NewMenuList from './NewMenuList/NewMenuList';
-import './newMenuCreation.css';
-import ArrowButton from './../../UI/ArrowButton/ArrowButton';
 import { getUrlParams } from '../../scripts/Common'
-
 import styled from 'styled-components';
-import WidjetWrapper from './../../UI/VidjetVrapper/WidjetWrapper';
+import './menuCreation.css'
+import './newMenuCreation.css';
 
-const MenuCreation = ({ menuIsView }) => {
+
+const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const [state, changeState, setState, calalogId] = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_menu_item')
     const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
     const [enterName, setEnterName] = useState(false)
     const [direction, setDirection] = useState(state.menuDirection)
-
-
     const apiKey = 'api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bis2t0aoczw2a280e2e2ddedf8fe9acfe5625949396';
 
     const newCatalogId = getUrlParams()['id'] || 0;
@@ -46,7 +37,7 @@ const MenuCreation = ({ menuIsView }) => {
     }
 
     const classes = ['menu-creation-container container  ']
-    if (!menuIsView) {
+    if (!menuIsClose) {
         classes.push('menu-creation-container---view')
     }
     const drawMenu = (data, isSub, lev) => {
@@ -187,6 +178,7 @@ const MenuCreation = ({ menuIsView }) => {
                         <StyledMenu>
                             <ul className="new-menu-list" key={el.id} >
                                 <NewMenuItem
+                                    isMobileMenuView = {menuIsClose}
                                     text={el.text}
                                     id={el.id}
                                     menuDeletter={deletItem}
@@ -196,6 +188,7 @@ const MenuCreation = ({ menuIsView }) => {
                                     lvl={lvl}
                                     isAddNew={lvl <= 3}
                                     childrenList={el.childrenList}
+                                    togglerMobileMenu = {changeViewMenu}
                                     content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList} /> : <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', (el.id))}>Добавить раздел</button>}
                                 />
                             </ul>
@@ -278,15 +271,6 @@ const MenuCreation = ({ menuIsView }) => {
             <div className={classes.join(' ')} >
                 <MenuSettingButton state={state} />
                 {state.menuDirection == 2 ? <LoadingLogo /> : null}
-                {/* <p className='block-question-button-save'>
-                    <NavLink
-                        className='menu-link'
-                        activeStyle={{ color: '#fff' }}
-                        to={`/?id=${calalogId}`}
-                    >Главная</NavLink>
-                </p> */}
-                {/* {drawMenu(state.siteMenu)} */}
-                {/* {newDrawMenu({ childrenList: state.siteMenu })} */}
 
                 <div className="new-menu-container">
                     <div className="new-menu">
@@ -296,7 +280,8 @@ const MenuCreation = ({ menuIsView }) => {
                                     <div className="new-menu-items">
                                         <NavLink
                                             className='menu-link'
-                                            to={`/?id=${calalogId}`}
+                                            to={`/work/user/site-creator/index.php/?id=${calalogId}`}
+                                            onClick={()=> changeViewMenu(true)}
                                         >
                                             Главная
                                         </NavLink>

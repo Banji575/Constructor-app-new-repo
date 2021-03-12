@@ -15,7 +15,7 @@ import { faPlusCircle, faEllipsisH, faMinusCircle, faTrashAlt, faEdit } from '@f
 import { getUrlParams } from '../../../scripts/Common'
 
 
-const NewMenuItem = ({ childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
+const NewMenuItem = ({isMobileMenuView, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
     const [showReadPopap, setShowReadPopap] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [menuText, setMenuText] = useState(text)
@@ -65,12 +65,6 @@ const NewMenuItem = ({ childrenList, lvl, text, id, content, isRead = false, api
         }
     }
 
-    const toggleActiveMenu = () => {
-        const activeMenuId = getUrlParams()['menu_id'];
-        console.log('activeMenuId == id', activeMenuId, id)
-        activeMenuId == id ? setActiveMenu(true) : setActiveMenu(false)
-    }
-
     // toggle form read menu 
     useEffect(() => {
         const onClick = e => {
@@ -103,8 +97,9 @@ const NewMenuItem = ({ childrenList, lvl, text, id, content, isRead = false, api
     }, [showReadPopap])
 
     const changeCatalogId = (evt) => {
-        console.log('click evt',evt.target)
         setUrlCatalogId(id)
+        togglerMobileMenu(true)
+        console.log('changeView', togglerMobileMenu)
     }
 
     return (

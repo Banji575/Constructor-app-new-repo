@@ -6,12 +6,12 @@ import WidjetWrapper from '../../../UI/VidjetVrapper/WidjetWrapper'
 import Utils from '../../../scripts/Utils'
 import ContextEditor from '../../../ContextEditor'
 import Items from '../../BlockEditor/BlockMenu/Items/Items'
+import ButtonAddComponent from '../../../UI/ButtonAddComponent/ButtonAddComponent'
+import { ContextAddBlock } from '../../../ContextAddBlock'
 
 const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
 
-    console.log('body', body)
-
-    const [viewEdit, setViewEdit] = useState(false)
+const [viewEdit, setViewEdit] = useState(false)
     /*  const [response, doFetch] = useFetch('https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_by_ids') */
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [respDelItem, doFetchDelItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
@@ -24,6 +24,7 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [background, setBackground] = useState('')
     const [blockVidjet, setlockVidjet] = useState(body.body.blockTitle)
+    const {isOpenEditBlock, setIsOpenEditBlock} = useContext(ContextAddBlock)
 
     const delHandler = () => {
         const formData = new FormData()
@@ -62,9 +63,7 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
 
     useEffect(() => {
         if (!respGetItems) return
-        console.log(respGetItems)
         setItemdArr(respGetItems.data)
-        console.log(itemsArr)
     }, [respGetItems])
 
     return (
@@ -89,6 +88,7 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
                         })}
                     </div>
                 </div>
+                <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>
             </WidjetWrapper>
             {/*   <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/> */}
         </div>

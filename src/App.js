@@ -40,7 +40,7 @@ function App() {
   /* const [decktopMode, setDecktopMode] = useState(false) */
   const [decktopMode, setDecktopMode] = useState(isFrameMode > 0 ? false : true)
   const [mobileMode, setMobileMode] = useState(false)
-  const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */1455)
+  const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */2501)
   /* const href = window.location.href.split('?')[1].split('&')[1].split('=')[1] */
   console.log('catalogId', urlCatalogId)
 
@@ -190,16 +190,15 @@ function App() {
       <div className="app">
         {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
 
-        {!mobileMode ? <SiteHeader styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
+        {!mobileMode ? <SiteHeader menuIsClose={mobileMenuIsOpen}  styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
         <div className={menuDirectionClasses.join(' ')}>
-          {/*  {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null} */}
-          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null}
+          {!mobileMode ? <MenuCreation changeViewMenu={setMobilemenuIsOpen} menuIsClose={mobileMenuIsOpen}/> : null}
           <Switch>
-            <Route exact path='/'>
+            <Route exact  path='/work/user/site-creator/index.php'>
               {mobileMode ? <MobilePreview /> : null}
               <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
             </Route>
-            <Route exact path='/items'><Items menuId={urlCatalogId} /></Route>
+            <Route path='/items'><Items menuId={urlCatalogId} /></Route>
           </Switch>
         </div>
         {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
