@@ -40,7 +40,7 @@ function App() {
   /* const [decktopMode, setDecktopMode] = useState(false) */
   const [decktopMode, setDecktopMode] = useState(isFrameMode > 0 ? false : true)
   const [mobileMode, setMobileMode] = useState(false)
-  const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */1455)
+  const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */2501)
   /* const href = window.location.href.split('?')[1].split('&')[1].split('=')[1] */
   console.log('catalogId', urlCatalogId)
 
