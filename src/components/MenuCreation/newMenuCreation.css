@@ -119,6 +119,12 @@ li .new-menu-list li .new-menu-items {
     top: 50%;
     right: 5px;
     transform: translateY(-50%);
+    border-left: solid 1px #ccc;
+    padding-left: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Popap read items */
@@ -199,5 +205,8 @@ li .new-menu-list li .new-menu-items {
     }
     .horizontalDirection .new-menu {
         padding-left: 0;
+    }
+    .new-menu-container {
+        padding-top: 50px;
     }
 }

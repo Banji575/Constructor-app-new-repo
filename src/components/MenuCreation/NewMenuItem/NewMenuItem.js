@@ -37,9 +37,22 @@ const NewMenuItem = ({ childrenList, lvl, text, id, content, isRead = false, api
             .then(resp => resp.json())
             .then(json => {
                 console.log(json)
+                let value = json.text;
                 if (json.success && json.success != 'false') {
                     setMenuText(json.text)
                     setIsReadMenu(false)
+                    const newList = [...state.siteMenu]
+                    const findEl = (arr, currentId) => {
+                        arr.forEach((elem, i, array) => {
+                            if (elem.id == currentId) {
+                                elem.text = value
+                                changeState({ siteMenu: newList })
+                            } else {
+                                findEl(elem.childrenList, currentId)
+                            }
+                        })
+                    }
+                    findEl(newList, id)
                 }
             })
     }
@@ -107,7 +120,7 @@ const NewMenuItem = ({ childrenList, lvl, text, id, content, isRead = false, api
                     {menuText}
                 </NavLink>
 
-                <div className="new-menu-items-read-btn" ref={root} onClick={() => setShowReadPopap(!showReadPopap)}>
+                <div className="new-menu-items-read-btn" role="button" ref={root} onClick={() => setShowReadPopap(!showReadPopap)}>
                     <FontAwesomeIcon icon={faEllipsisH} />
                 </div>
 
@@ -117,11 +130,11 @@ const NewMenuItem = ({ childrenList, lvl, text, id, content, isRead = false, api
                     </div>}
 
                 {showReadPopap && <div className="new-menu-items-read-popap">
-                    <div className="new-menu-items-read-popap__items text-danger" >
-                        <FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteMenu()} />
+                    <div className="new-menu-items-read-popap__items text-danger" role="button"  onClick={() => deleteMenu()}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
                     </div>
-                    <div className="new-menu-items-read-popap__items ">
-                        <FontAwesomeIcon icon={faEdit} onClick={() => setIsReadMenu(true)} />
+                    <div className="new-menu-items-read-popap__items " role="button" onClick={() => setIsReadMenu(true)}>
+                        <FontAwesomeIcon icon={faEdit}  />
                     </div>
                 </div>}
             </div>
