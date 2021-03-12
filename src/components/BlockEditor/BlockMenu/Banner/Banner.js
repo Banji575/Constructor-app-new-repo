@@ -43,6 +43,8 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
         clasess.push('hide')
     }
 
+    console.log(';lakjsdflkjsdf', id)
+
 
     if (vidjetObj && !oneLoad) {
 
@@ -67,7 +69,9 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
         }
         setIsValidUrl(true)
         const formData = new FormData()
-        formData.set('banner_photo', file)
+        if (file) {
+            formData.set('banner_photo', file)
+        }
         formData.set('catalog_id', catalogId)
         formData.set('landing_prop_id', 6)
         if (vidjetObj) {
@@ -82,7 +86,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
     }
 
     useEffect(() => {
-        if (!respEditBanner) return
+/*         if (!respEditBanner) return
         setOneLoad(false)
         if (respEditBanner.success = 'Успешно!') {
             if (!vidjetObj) {
@@ -94,7 +98,6 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
                 closeWindow()
                 console.log(respEditBanner, 'new', id)
             } else {
-
                 console.log(respEditBanner, 'edit')
                 const list = [...vidjArr]
                 console.log(list, 'old')
@@ -116,7 +119,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
                 closeWindow()
             }
         }
-
+ */
     }, [respEditBanner])
 
     const closeWindow = () => {

@@ -18,58 +18,26 @@ import Carusel from './BlockMenu/Carusel/Carusel'
 import PopUp from '../../UI/PopUp/PopUp'
 import ButtonAddComponent from '../../UI/ButtonAddComponent/ButtonAddComponent'
 import { ContextAddBlock } from '../../ContextAddBlock'
-import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons'
-
-const changeDataObjForBackend = (formdata, arr) => {
-    console.log('dataforbackend',arr)
-    arr.forEach((el, i) => {
-        formdata.set(`issue[${i}]`, `${el.answer}`)
-        formdata.set(`answer[${i}]`, `${el.answer}`)
-    })
-    return formdata
-}
+import { faCommentsDollar, faLessThanEqual } from '@fortawesome/free-solid-svg-icons'
+import { queryByTestId } from '@testing-library/dom'
 
 
 const BlockEditor = () => {
     /*  const [isOpenEditBlock, setIsOpenEditBlock] = useState(true) */
-    const [objNewQuestion, setObjNewQuestion] = useState(null)
+   
     const [currentWidjet, setCurrentWidjet] = useState(null)
     const [state, changeState, setState, catalogId, setVidjetData, vidjArr=[]] = useContext(Context)
-    const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
+   
     const { isOpenEditBlock, setIsOpenEditBlock } = useContext(ContextAddBlock)
     const changeWidget = (text) => {
         setIsOpenEditBlock(true)
         setCurrentWidjet(text)
     }
 
-    const changeStateVidjet = (obj, questionTitle) => {
-        const vidjetName = Object.keys(obj)[0]
-        const newState = { ...state }
-     /*    newState.siteVidjets[vidjetName] = obj[vidjetName]
-        console.log(newState, 'newState')
-        setState(newState) */
-        setObjNewQuestion(obj)
-        const formData = new FormData()
-        formData.set('landing_prop_id', 2)
-        formData.set('catalog_id', catalogId)
-        formData.set('title', questionTitle)
-      /*   changeDataObjForBackend(formData, obj.questions) */
-        doFetch(changeDataObjForBackend(formData, obj.questions))
-    }
-
-    useEffect(() => {
-        if (!response) {
-            return
-        }
-        const list = [...vidjArr]
-        list.push({ title: 'question', id: String(response.landing_prop_data_id),blockTitle:response.$update_game.title, body: objNewQuestion.questions })
-        console.log('response',response)
-        console.log(list)
-        setVidjetData(list)
-    }, [response])
+  
     const openWidjet = () => {
         switch (currentWidjet) {
-            case 'questions': return <BlockQueston setVidjetData={setVidjetData} vidjArr={vidjArr} changeStateVidjet={changeStateVidjet} />
+            case 'questions': return <BlockQueston setVidjetData={setVidjetData} vidjArr={vidjArr}  />
             case 'text': return <Text setVidjetData={setVidjetData} vidjArr={vidjArr} />
             case 'banner': return <Banner setVidjetData={setVidjetData} vidjArr={vidjArr} />
             case 'contacts': return <Contacts setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
@@ -83,7 +51,6 @@ const BlockEditor = () => {
             default: return null
         }
     }
-    console.log('vidjArr', vidjArr)
 
     const showAddButtonSiteBody = () =>{
         if(vidjArr == null) return true

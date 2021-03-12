@@ -17,11 +17,13 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
     /* const [url] = useImageLoad(file) */
     const [files, setFiles] = useState([])
     const [changefile, setChangeFile] = useState(null)
-    const [interval, setInterval] = useState(1)
+    const [interval, setInterval] = useState(body ? body.interval : 1)
     const [respCarusel, doFetchCarusel] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [isValidLimitSlide, setIsValidLimitSlide] = useState(true)
     const [limitSlide, setLimitSlide] = useState(3)
+
+    console.log(body)
 
     useEffect(() => {
         if (files.length === limitSlide) {
@@ -83,6 +85,7 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
             const url = respCarusel.$fields.slider_photo.value
             content.id = respCarusel.landing_prop_data_id
             content.body.images = url
+            content.body.interval = interval
             list.unshift(content)
             setVidjetDataArray(list)
             closeWindow()

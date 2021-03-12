@@ -24,7 +24,7 @@ const FeedbackItem = ({ title, isInput, body, checkHandler, saveTitleHandler }) 
                 <React.Fragment>
                     <CKEditor
                         data={body.text}
-                        onBlur={(event) => saveTitleHandler(event.editor.getData())}
+                        onChange={(event) => saveTitleHandler(event.editor.getData())}
                         config={{
                             toolbar: [Utils.CKEditorTools],
                             height: '40px'

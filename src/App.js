@@ -161,22 +161,22 @@ function App() {
 
   //Функция только для фрейма
 
-   const findMobileGetParam = () => {
+  const findMobileGetParam = () => {
     const href = window.location.href.split('?')
     console.log(href, ';ladkjsflkjasdfljasdflkjasdfkljasfkljadsklfjdasklfjdaskljfdskljdskljdfs')
     const isMobile = href.indexOf(MOBILE_GET_PARAM) + 1
     return isMobile
   }
 
-  console.log(findMobileGetParam(),'firndmobilegetpos')
-/* 
-  if(findMobileGetParam()>0){
-    if(!decktopMode) return
-    setDecktopMode(false)
-  }
-   */
-   
- 
+  console.log(findMobileGetParam(), 'firndmobilegetpos')
+  /* 
+    if(findMobileGetParam()>0){
+      if(!decktopMode) return
+      setDecktopMode(false)
+    }
+     */
+
+
 
   /*   addGetForIframe() */
   // Страницы для роутинга
@@ -188,22 +188,22 @@ function App() {
     :
     (<Context.Provider value={[state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode]}>
       <div className="app">
-       {!isFrameMode  ?  <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> :null }
+        {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
 
-        {!mobileMode ? <SiteHeader styleClassHeader = {styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
+        {!mobileMode ? <SiteHeader styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
         <div className={menuDirectionClasses.join(' ')}>
-          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen} /> : null}
+          {!mobileMode ? <MenuCreation menuIsView={mobileMenuIsOpen}/> : null}
           <Switch>
-            <Route exact path='/'>
+            <Route exact  path='/work/user/site-creator/index.php'>
               {mobileMode ? <MobilePreview /> : null}
               <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
             </Route>
-            <Route exact path='/items'><Items menuId={urlCatalogId} /></Route>
+            <Route path='/items'><Items menuId={urlCatalogId} /></Route>
           </Switch>
         </div>
         {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
       </div>
-   
+
     </Context.Provider>
     );
 }

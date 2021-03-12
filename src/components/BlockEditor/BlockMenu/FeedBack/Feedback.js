@@ -106,13 +106,11 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
                         return data
                     }
                 })
-
             } else {
                 const list = [...vidjArray]
                 console.log('feedback data', data)
                 list.unshift({...data, id:respEditFeedback.landing_prop_data_id})
                 setVidjetDataArray(list)
-
             }
             closeWindow()
         }
@@ -134,8 +132,7 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
                 <p className='question-item-header mb-1'>Введите ваш e-mail адрес куда будут приходить сообщения</p>
                 <input type='email' placeholder={data.body.ourEmail.text} onBlur={(evt) => saveEmailHandler(evt.target.value)} />
                 {!isValid && <p className='text-danger'>Не правильный формат записи</p>}
-                {!isEmail && <p className='text-danger'>Обязательное поле</p>}
-          
+                {!isEmail && <p className='text-danger'>Обязательное поле</p>} 
             </div>
             {/* <div className='block-question-save'><p onClick={saveList} className='block-question-button-save'>Сохранить</p></div> */}
         </PopUp>

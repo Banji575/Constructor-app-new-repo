@@ -9,7 +9,16 @@ const Items = ({ menuId }) => {
     const [resp, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects')
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [itemList, setItemList] = useState([])
+    const [id, setId] = useState(menuId)
+    const [previewItem, setPreviewItem] = useState(null)
+    const [addItemFlag, setAddItemFlag] = useState(true)
 
+    const addItemInMenu = () => {
+        setAddItemFlag(s=>!s)
+        setPreviewItem(null)
+    }
+
+    console.log('menu id', menuId)
     useEffect(()=>{
         const formData = new FormData()
         formData.set('mode', 'get_catalog_objects')
@@ -18,21 +27,21 @@ const Items = ({ menuId }) => {
         formData.set('start', 0)
         formData.set('limit', 12)
         doFetch(formData)
-    },[])
-
+    },[menuId,addItemFlag])
+ 
     useEffect(()=>{
         if(!resp) return
+        console.log('asjdslkjdsfkl;jdasf', itemList)
         setItemList(resp.data)
-
+        
     },[resp])
 
-    const [id, setId] = useState(catalogId)
-    const [previewItem, setPreviewItem] = useState(null)
+   
 
     return (
         <React.Fragment>
             {previewItem
-                ? <ItemPage menuId = {menuId} closePopup = {setPreviewItem} id={previewItem} />
+                ? <ItemPage menuId = {menuId} closePopup = {addItemInMenu} id={previewItem} />
                 : <div className='container'>
                     <ItemsList itemList = {itemList} previewItem={setPreviewItem} id={menuId} />
                 </div>

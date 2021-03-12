@@ -12,6 +12,7 @@ import ButtonAddComponent from '../../../UI/ButtonAddComponent/ButtonAddComponen
 import Utils from '../../../scripts/Utils'
 
 const SocialVidjet = ({ body ,id, replaceVidj}) => {
+    console.log(body)
     const [viewEdit, setViewEdit] = useState(false)
     const [respDelSocial, doFetchDelSocial] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
     const [state, changeState, setState, catalogId] = useContext(Context)
