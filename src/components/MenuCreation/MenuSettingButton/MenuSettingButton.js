@@ -8,7 +8,7 @@ import PopUp from '../../../UI/PopUp/PopUp'
 import EditButton from '../../../UI/EditButton/EditButton'
 import Context from '../../../Context'
 import useFetch from '../../../hooks/useFetch'
-const MenuSettingButton = () => {
+const MenuSettingButton = ({callBack = ()=>{} }) => {
     const [isEdintText, setIsEditText] = useState(false)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_type')
     const [respMenuSettig, doFetchMenuSetting] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=menu_settings_update')
@@ -16,6 +16,7 @@ const MenuSettingButton = () => {
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [siteSetting, setSiteSetting] = useState({
         direction: state.menuDirection,
+        menuBackgroundBlock: state.menu_settings.background_menu_block || 'fff',
         menuFontFamily: state.menu_settings.font_family || 'Montserrat',
         menuFontSize: state.menu_settings.font_size || '12',
         menuWithAllFontColor: state.menu_settings.with_allocation_font_color || '803dff',
@@ -27,6 +28,7 @@ const MenuSettingButton = () => {
         breadCrumbsWithAllFontColor: state.bread_crumbs_settings.with_allocation_font_color || '',
         breadCrumbsWithoutAllFontColor: state.bread_crumbs_settings.without_allocation_font_color || ''
     })
+
     const closePopUp = () => {
         setIsEditText(s => !s)
     }
@@ -95,7 +97,8 @@ const MenuSettingButton = () => {
              <div className = 'edit-background mr-3'><p className = 'edit-background-text'>Фон</p>
                <InputColor
                     className='input-color-widjet'
-                    initialValue={"#5e72e4"}
+                    initialValue={'#'+state.menu_settings.background_menu_block || '#fff'}
+                    onChange={colorState => callBack(colorState)}
                     /*  onChange={(evt)=>setBackground(evt.rgba)} */
                     placement="right"
                 />

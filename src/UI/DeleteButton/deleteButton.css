@@ -1,5 +1,6 @@
 .delete-img {
     position: absolute;
     left: 13%;
-    top: 13%;
+    top: 50%;
+    transform: translateY(-50%);
 }

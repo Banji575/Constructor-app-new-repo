@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import Context from '../../Context'
 import useFetch from '../../hooks/useFetch'
 import MenuItem from './MenuItem/MenuItem'
@@ -10,10 +10,12 @@ import { getUrlParams } from '../../scripts/Common'
 import styled from 'styled-components';
 import './menuCreation.css'
 import './newMenuCreation.css';
+import MobileMenuIcon from './../../UI/MobileMenuIcon/MobileMenuIcon';
 
 
 const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
-    const [state, changeState, setState, calalogId] = useContext(Context)
+    const rootMenuContainer = useRef();
+    const [state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode] = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_menu_item')
     const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
@@ -21,7 +23,27 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const [direction, setDirection] = useState(state.menuDirection)
     const apiKey = 'api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bis2t0aoczw2a280e2e2ddedf8fe9acfe5625949396';
 
+    const [menuBackgroundBlock, setMenuBackgroundBlock] = useState(state.menu_settings.background_menu_block || '#fff')
     const newCatalogId = getUrlParams()['id'] || 0;
+
+    const changeMenuBackgroundBlock = (colorState = null) => {
+        console.log('arbaiten', colorState)
+        if(!colorState) return;
+        let fd = new FormData();
+        fd.set('background_menu_block', colorState.hex.replace('#', ''))
+        fd.set('catalog_id', newCatalogId);
+
+        fetch('https://cloudsgoods.com/api/CatalogController.php?mode=menu_settings_background_menu_block&' + apiKey, {
+            method: 'POST',
+            body: fd
+        })
+        .then(resp => resp.json())
+        .then(json => {
+            if(json.success && json.success != 'false') {
+                setMenuBackgroundBlock('#'+json.data.background_menu_block)
+            }
+        })
+    }
 
     const menuSetting = {
         fontFamily: state.menu_settings.font_family,
@@ -97,7 +119,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                     }
 
                     console.log('newMenu', newMenu)
-                    changeState({'siteMenu': newMenu })
+                    changeState({ 'siteMenu': newMenu })
 
                 }
             })
@@ -106,7 +128,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     /**
      * NEW MENU 
      * @returns 
-     */
+    */
 
     const StyledMenu = styled.div`
            font-size: ${state.menu_settings.font_size + 'px' || '12px'};
@@ -164,9 +186,12 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
             }
            }
         `;
+
+    const StyledMenuBlock = styled.div`
+        background-color: #${menuBackgroundBlock} 
+    `;
     const NewDrawMenu = ({ childrenList, lvl = 1 }) => {
         let menuSettings = state.menu_settings;
-        console.log('menuSettings', menuSettings)
         let parId = 0
 
         return (
@@ -178,7 +203,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                         <StyledMenu>
                             <ul className="new-menu-list" key={el.id} >
                                 <NewMenuItem
-                                    isMobileMenuView = {menuIsClose}
+                                    isMobileMenuView={menuIsClose}
                                     text={el.text}
                                     id={el.id}
                                     menuDeletter={deletItem}
@@ -188,14 +213,17 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                                     lvl={lvl}
                                     isAddNew={lvl <= 3}
                                     childrenList={el.childrenList}
-                                    togglerMobileMenu = {changeViewMenu}
-                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList} /> : <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', (el.id))}>Добавить раздел</button>}
+                                    togglerMobileMenu={changeViewMenu}
+                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList} /> : (decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', (el.id))}>Добавить раздел</button>)}
                                 />
                             </ul>
                         </StyledMenu>
                     )
                 })}
-                <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', parId)}>Добавить раздел</button>
+                {
+                    decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', parId)}>Добавить раздел</button>
+                }
+
             </React.Fragment>
         )
     }
@@ -215,7 +243,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
         findEl(newList, id)
         const formData = new FormData()
         formData.set('menu_id', id)
-        formData.set('catalog_id', calalogId)
+        formData.set('catalog_id', newCatalogId)
         formData.set('text', value)
         doFetchEditText(formData)
         console.log(value, id)
@@ -237,7 +265,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
         findEl(newList, id)
         const formData = new FormData()
         formData.set('menu_id', id)
-        formData.set('catalog_id', calalogId)
+        formData.set('catalog_id', newCatalogId)
         doFetch(formData)
     }
 
@@ -252,7 +280,6 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     useEffect(() => {
         if (respEditText) {
             // const siteMenu = [...state.siteMenu, { id:[resp.id], catalog_id:[resp.catalog_id],  parentId:[resp.parent_id],text: 'Новый раздел',  childrenList: [] }]
-
         }
     }, [respEditText])
 
@@ -260,19 +287,33 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
 
         const formData = new FormData()
         formData.set('parent_id', parent_id)
-        formData.set('catalog_id', calalogId)
+        formData.set('catalog_id', newCatalogId)
         formData.set('text', text)
 
         doFetchCreate(formData)
     }
-    console.log('state.siteMenu', state.siteMenu)
+
+
+
     return (
-        <React.Fragment>
-            <div className={classes.join(' ')} >
-                <MenuSettingButton state={state} />
+
+        <div className={classes.join(' ')} ref={rootMenuContainer} style ={{'background': menuBackgroundBlock}}>
+                {decktopMode &&
+                    <MenuSettingButton 
+                    state={state}
+                    callBack={changeMenuBackgroundBlock}
+                    // callBack={() => console.log('vasy')}
+                     />
+                }
+
                 {state.menuDirection == 2 ? <LoadingLogo /> : null}
 
-                <div className="new-menu-container">
+                <div className={decktopMode ? 'new-menu-container pb-3 pt-5' : 'new-menu-container pb-3'}>
+                    <div className="menu-hamburger">
+                        <MobileMenuIcon 
+                        menuIsClose={menuIsClose} 
+                        changeViewMenu={changeViewMenu} />
+                    </div>
                     <div className="new-menu">
                         <StyledMenu>
                             <ul className='new-menu-list'>
@@ -280,8 +321,8 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                                     <div className="new-menu-items">
                                         <NavLink
                                             className='menu-link'
-                                            to={`/work/user/site-creator/index.php/?id=${calalogId}`}
-                                            onClick={()=> changeViewMenu(true)}
+                                            to={`/work/user/site-creator/index.php/?id=${newCatalogId}`}
+                                            onClick={() => changeViewMenu(true)}
                                         >
                                             Главная
                                         </NavLink>
@@ -292,8 +333,8 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                         <NewDrawMenu childrenList={state.siteMenu} />
                     </div>
                 </div>
-            </div>
-        </React.Fragment>
+        </div>
+
     )
 }
 export default MenuCreation

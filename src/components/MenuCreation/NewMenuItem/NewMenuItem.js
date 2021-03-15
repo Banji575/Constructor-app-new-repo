@@ -15,7 +15,8 @@ import { faPlusCircle, faEllipsisH, faMinusCircle, faTrashAlt, faEdit } from '@f
 import { getUrlParams } from '../../../scripts/Common'
 
 
-const NewMenuItem = ({isMobileMenuView, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
+const NewMenuItem = ({ isMobileMenuView, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
+
     const [showReadPopap, setShowReadPopap] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [menuText, setMenuText] = useState(text)
@@ -26,7 +27,7 @@ const NewMenuItem = ({isMobileMenuView, togglerMobileMenu, childrenList, lvl, te
     const root = useRef()
     const rootMenu = useRef()
     const rootReadMenu = useRef()
-    const [state, changeState, setState, calalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId] = useContext(Context)
+    const [state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode] = useContext(Context)
 
     const newCatalogId = getUrlParams()['id'] || 0;
     // read text menu
@@ -111,13 +112,15 @@ const NewMenuItem = ({isMobileMenuView, togglerMobileMenu, childrenList, lvl, te
                     </div>
                 }
 
-                <NavLink onClick = {(evt)=>changeCatalogId(evt)} to={`/items?id=${calalogId}&menu_id=${id}`} className={"overflow-hidden"}>
+                <NavLink onClick={(evt) => changeCatalogId(evt)} to={`/items?id=${catalogId}&menu_id=${id}`} className={"overflow-hidden"}>
                     {menuText}
                 </NavLink>
+                {decktopMode &&
+                    <div className="new-menu-items-read-btn" role="button" ref={root} onClick={() => setShowReadPopap(!showReadPopap)}>
+                        <FontAwesomeIcon icon={faEllipsisH} />
+                    </div>
+                }
 
-                <div className="new-menu-items-read-btn" role="button" ref={root} onClick={() => setShowReadPopap(!showReadPopap)}>
-                    <FontAwesomeIcon icon={faEllipsisH} />
-                </div>
 
                 {(content && lvl < 3) &&
                     <div className="new-menu-items-children">
@@ -125,11 +128,11 @@ const NewMenuItem = ({isMobileMenuView, togglerMobileMenu, childrenList, lvl, te
                     </div>}
 
                 {showReadPopap && <div className="new-menu-items-read-popap">
-                    <div className="new-menu-items-read-popap__items text-danger" role="button"  onClick={() => deleteMenu()}>
+                    <div className="new-menu-items-read-popap__items text-danger" role="button" onClick={() => deleteMenu()}>
                         <FontAwesomeIcon icon={faTrashAlt} />
                     </div>
                     <div className="new-menu-items-read-popap__items " role="button" onClick={() => setIsReadMenu(true)}>
-                        <FontAwesomeIcon icon={faEdit}  />
+                        <FontAwesomeIcon icon={faEdit} />
                     </div>
                 </div>}
             </div>
@@ -144,7 +147,7 @@ const NewMenuItem = ({isMobileMenuView, togglerMobileMenu, childrenList, lvl, te
             }
         </li>
 
-            
+
     )
 }
 
