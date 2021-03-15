@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import useImageLoad from '../../../../../hooks/useImageLoad'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faAngleDown, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import delIcon from '../../../../../image/trash.png'
 import './caruselItem.css'
 
 
@@ -18,8 +19,11 @@ const CaruselItem = ({ file, index, delHandler, urlFile }) => {
             <p>{index + 1}</p>
         </div>
         {urlFile ? <img className='carusel-item-img' src={`https://cloudsgoods.com/images${urlFile}`} /> : <img className='carusel-item-img' src={url} />}
-        <div className='icon-conteiner' onClick={delHandler} color='green'>
-            <FontAwesomeIcon onClick={() => delHandler(file, index)} color={'red'} icon={faTrashAlt} />
+        <div className='icon-conteiner--carusel' onClick={delHandler} color='green'>
+            {/*   <FontAwesomeIcon onClick={() => delHandler(file, index)} color={'red'} icon={faTrashAlt} /> */}
+            <div>
+                <img src={delIcon} />
+            </div>
         </div>
     </div>
 

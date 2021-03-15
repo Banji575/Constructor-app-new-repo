@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useMemo } from 'react'
 import './timerVidjet.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp, faAngleDown, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -57,19 +57,25 @@ const createTime = (type, value = {}) => {
     // /console.log(type, toDateDate, toDateTime, onDateDatumPoint, onDateDuration, cyclingDuration, cyclingDatePoint)
 }
 
-const TimerVidjet = ({ body, id ,replaceVidj}) => {
+const TimerVidjet = ({ body, id ,replaceVidj, bgColor}) => {
 
     const [respDelVideo, doFetchDelVideo] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
+    const [respEditTimer, doFetchEditTimer] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const [state, changeState, setState, catalogId] = useContext(Context)
     const [type, setType] = useState(body.type)
     const {days, hours, minutes, seconds } = createTime(type, body)
-    const [backgrounColor, setBackgroundColor] = useState('')
+    const [backgrounColor, setBackgroundColor] = useState(bgColor)
     const [viewEdit, setViewEdit] = useState(false)
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const {isOpenEditBlock, setIsOpenEditBlock} = useContext(ContextAddBlock)
     const editHandler = () => {
         setViewEdit(true)
     }
+
+
+    
+
+    console.log('body timer', backgrounColor)
     const [second, setSecond] = useState(() => {
         if(body.type === 'cycle' ){
             const {seconds} = createTime(type, body)
@@ -107,6 +113,15 @@ const TimerVidjet = ({ body, id ,replaceVidj}) => {
         doFetchDelVideo(formData)
 
     }
+
+/*    const fetchBackgroundColor = (color) =>{
+        console.log(color)
+        const formData = new FormData()
+        formData.set('landing_prop_id', 7)
+        formData.set('catalog_id', catalogId)
+        formData.set('background_color', color)
+        doFetchEditTimer(formData)
+    } */
 
     const closeEdit = () => setViewEdit(false)
 

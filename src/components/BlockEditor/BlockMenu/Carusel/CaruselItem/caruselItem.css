@@ -27,3 +27,9 @@
 .carusel-item-index p {
     font-size: 24px;
 }
+
+.icon-conteiner--carusel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

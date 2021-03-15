@@ -16,7 +16,10 @@ const ViewSetting = ({decktopOrMobileMode}) => {
         /* decktopOrMobileMode() */
         setDecktopMode(s=>!s)
         setViewMode(state => !state)
+        console.log(decktopMode)
     }
+
+    
     const typeViewMode = (type) =>{
       
         console.log(type)
