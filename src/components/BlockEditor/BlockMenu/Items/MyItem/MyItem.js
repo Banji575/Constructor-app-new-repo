@@ -11,7 +11,7 @@ const MyItem = ({ showMyItem, renderCheckImg , loadArr, setLoadArr, setAllItemAr
     const [imageLoad, setImageIsLoad] = useState(false)
     const [checkedImg, setCheckedImg] = useState([])
     const [fileArr, setFileArr] = useState(null)
-    const [state, changeState, setState, catalogId, setVidjetData, vidjArr] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjArr} = useContext(Context)
     const [response, doFetch] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects&catalog_id=${catalogId}&objects_all=all`)
   /*   const [response, doFetch] = useFetch('https://cloudsgoods.com/api/actionsAdmin.php?') */
 

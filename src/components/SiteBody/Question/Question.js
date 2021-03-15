@@ -26,7 +26,7 @@ const Question = ({ body, id, replaceVidj, title, bgColor }) => {
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [respEditQuestion, doFetchEditQuestion] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const [respDelQuestion, doFetchDelQuestion] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [backgroundColor, setBackgroundColor] = useState(bgColor || '')
     const { isOpenEditBlock, setIsOpenEditBlock } = useContext(ContextAddBlock)
     const editHandler = () => {

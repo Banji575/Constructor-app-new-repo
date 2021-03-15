@@ -5,8 +5,8 @@ import Switch from '@material-ui/core/Switch'
 import Context from '../../../Context'
 const DirectionSetting = () => {
 
-    const [{verticalMenu}, changeState] = useContext(Context)
-
+    const {state, changeState} = useContext(Context)
+    const verticalMenu = state.verticalMenu;
     const direction = verticalMenu !== undefined ? verticalMenu : false
     console.log(direction, 'a;ljfdasljdasf;lj')
     const styles = {

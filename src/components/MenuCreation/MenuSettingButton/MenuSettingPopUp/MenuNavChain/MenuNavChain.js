@@ -6,7 +6,7 @@ import {fontSizeList} from '../../../../../scripts/SettingList'
 
 
 const MenuNavChain = ({changeSetting}) => {
-    const [state] = useContext(Context)
+    const {state} = useContext(Context)
 
     const saveMenuHandler = (propsName, value) => {
         console.log(propsName, value)

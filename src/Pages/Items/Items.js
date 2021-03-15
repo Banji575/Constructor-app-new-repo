@@ -7,7 +7,7 @@ import Context from '../../Context'
 
 const Items = ({ menuId }) => {
     const [resp, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [itemList, setItemList] = useState([])
     const [id, setId] = useState(menuId)
     const [previewItem, setPreviewItem] = useState(null)
@@ -18,7 +18,7 @@ const Items = ({ menuId }) => {
         setPreviewItem(null)
     }
 
-    console.log('menu id', menuId)
+    // console.log('menu id', state.menu)
     useEffect(()=>{
         const formData = new FormData()
         formData.set('mode', 'get_catalog_objects')

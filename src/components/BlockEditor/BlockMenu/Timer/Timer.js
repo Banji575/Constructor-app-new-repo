@@ -14,7 +14,7 @@ const generateId = () => Math.random()
 const Timer = ({ closeEdit, content, setVidjetDataArray, vidjArray }) => {
     const [timerParams, setTimerParams] = useState(content || { title: 'timer', type: 'to_date', id: generateId(), body: { toDateDate: dateFormat(new Date), toDateTime: '12:00', onDateDatumPoint: 'firstView', onDateDuration: '0:00:00', cyclingDatePoint: '12:00', cyclingDuration: '0:00', test: 'test' } })
     const [setCurrentWidjet, setIsEditer] = useContext(ContextEditor)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [respDelVideo, doFetchDelVideo] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
     const [type, setType] = useState(content ? content.body.type : 'to_date')
     const [respEditTimer, doFetchEditTimer] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')

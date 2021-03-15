@@ -16,7 +16,7 @@ import Carusel from '../../BlockEditor/BlockMenu/Carusel/Carusel'
 
 const CaruselVidjet = ({ body, id, replaceVidj }) => {
     const [respDelCarusel, doFetchDelCarusel] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [viewEdit, setViewEdit] = useState(false)
     const [data, setData] = useState(body)

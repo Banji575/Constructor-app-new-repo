@@ -34,7 +34,7 @@ const contactsItemsFields = [
 const Contacts = ({ content, setViewEdit, id, vidjArray, setVidjetDataArray }) => {
     console.log(id)
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [respEditContacts, doFetchEditContacts] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const [contacts, setContacts] = useState(() => content ? content : { address: { text: "", checked: false }, email: { text: "", checked: false }, phone: { text: "", checked: false }, fax: { text: "", checked: false } })
     const closeWindow = () => {

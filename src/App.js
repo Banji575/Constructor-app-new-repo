@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import ViewSetting from './components/ViewSetting/ViewSetting';
-import Body from './HOC/SiteBody'
 import Context from './Context'
 import SiteHeader from './components/SiteHeader/SiteHeader'
-import './app.css'
 import MenuCreation from './components/MenuCreation/MenuCreation';
 import useFetch from './hooks/useFetch'
 import Adapter from './scripts/Adapter';
-import BlockEditor from './components/BlockEditor/BlockEditor';
-import SiteBody from './components/SiteBody/SiteBody';
-import { VidjetAddWrapper } from './ContextAddBlock';
 import Main from './Pages/Main/Main';
 import Items from './Pages/Items/Items'
-import { Carousel } from 'react-bootstrap'
-import mobileDecktop from './image/IcoNos/mobileOn.png'
-
 import { Route, Switch } from 'react-router-dom'
-import Utils from './scripts/Utils';
-
 import MobilePreview from './Pages/MobilePreview/MobilePreview';
-import { faRemoveFormat } from '@fortawesome/free-solid-svg-icons';
+import './app.css'
+import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
+
+
+
+
 
 const URL = '/work/user/site-creator/index.php/'
 const catalogId = window.location.href.split('?').slice(1).map(i => i.split('='))[0][1]
 const MOBILE_GET_PARAM = 'mobile-mode'
 const isFrameMode = window.location.href.split('?').indexOf(MOBILE_GET_PARAM) + 1
-console.log('catalog', catalogId)
+
 
 function App() {
-  /* console.log(window.location.href.split('?').slice(1).map(i => i.split('='))[0][1]) */
   const [response, doFetch] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog&catalog_id=${catalogId}`)
   const [respReplace, doFetchReplace] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=replace_order_landing_prop_data&catalog_id=${catalogId}`)
   const [responseVidjetData, doFetchVidjetData] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_landing_props_data_in_catalog&catalog_id=${catalogId}`)
@@ -42,8 +36,38 @@ function App() {
   const [mobileMode, setMobileMode] = useState(false)
   const [urlCatalogId, setUrlCatalogId] = useState(/* Utils.getCatalogIdFromUrl() */2501)
   /* const href = window.location.href.split('?')[1].split('&')[1].split('=')[1] */
-  console.log('catalogId', urlCatalogId)
+  // console.log('catalogId', urlCatalogId)
+  const apiKey = 'api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bis2t0aoczw2a280e2e2ddedf8fe9acfe5625949396';
+  const [stateBreadCrumbs, setStateBreadCrumbs] = useState([])
 
+  const DEMO_STATE = {
+
+    bread_crumbs_settings: { },
+    count_objects: null,
+    create_date: null,
+    default_language_id: null,
+    footer: null,
+    google_analytics_id: null,
+    id: null,
+    languages_translate: null,
+    login: null,
+    menuDirection: null,
+    menu_settings: {},
+    origin_language_id: null,
+    remove_date: null,
+    removed: null,
+    settings: {},
+    siteLogo: null,
+    siteMenu: {},
+    siteTitle: null,
+    siteVidjets: null,
+    status: null,
+    titleBackground: null,
+    update_date: null,
+    user_id: null,
+  }
+
+  const [state, setState] = useState(DEMO_STATE)
 
   useEffect(() => {
     doFetch()
@@ -60,29 +84,35 @@ function App() {
     setVidjetLoading(true)
     const adapter = new Adapter(responseVidjetData)
     const data = adapter.createVidjetData()
+
     setVidjetData(data)
   }, [responseVidjetData])
 
-  useEffect(() => {
-    if (!response && !dataLoading) {
-      return
-    }
-    setDataLoading(true)
-    // setStateApp(response)
-  }, [response])
+
+
 
   useEffect(() => {
     if (!response && !responseVidjetData) {
       return
     }
-    const adapter = new Adapter(response, responseVidjetData)
-    const data = adapter.createData()
+    // const adapter = new Adapter(response, responseVidjetData)
+    // const data = adapter.createData()
 
-    setState(data)
-
+    // setState(data)
+    // if (!dataLoading) {
+    //   return
+    // }
+    // setDataLoading(true)
+    setStateApp(response)
+    // console.log('newstate', data)
   }, [response])
 
-  const [state, setState] = useState('')
+  // useEffect(() => {
+
+
+  // }, [response])
+
+
 
 
 
@@ -113,12 +143,12 @@ function App() {
     setVidjetData(list)
   }
 
-  useEffect(() => {
-    if (!respReplace) return
-    if (respReplace.success) {
+  // useEffect(() => {
+  //   if (!respReplace) return
+  //   if (respReplace.success) {
 
-    }
-  }, [respReplace])
+  //   }
+  // }, [respReplace])
 
 
 
@@ -169,43 +199,85 @@ function App() {
   }
 
   console.log(findMobileGetParam(), 'firndmobilegetpos')
-  /* 
-    if(findMobileGetParam()>0){
-      if(!decktopMode) return
-      setDecktopMode(false)
-    }
-     */
 
+  useEffect(() => {
+    fetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog&catalog_id=${catalogId}&${apiKey}`)
+      .then(resp => resp.json())
+      .then(json => {
+        if (!json) return
+        const adapter = new Adapter(json)
+        const datass = adapter.createData()
 
+        setState(datass)
+        console.log('useEffectssss', datass)
+      })
+  }, [])
 
-  /*   addGetForIframe() */
-  // Страницы для роутинга
-
-  return !dataLoading ?
-    (<div className='d-flex h-100' ><div class="spinner-border mx-auto my-auto" role="status">
-      <span class="sr-only ">Loading...</span>
-    </div></div>)
-    :
-    (<Context.Provider value={[state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode]}>
-      <div className="app">
-        {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
-
-        {!mobileMode ? <SiteHeader menuIsClose={mobileMenuIsOpen}  styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
-        <div className={menuDirectionClasses.join(' ')}>
-          {!mobileMode ? <MenuCreation changeViewMenu={setMobilemenuIsOpen} menuIsClose={mobileMenuIsOpen}/> : null}
-          <Switch>
-            <Route exact  path='/work/user/site-creator/index.php'>
-              {mobileMode ? <MobilePreview /> : null}
-              <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
-            </Route>
-            <Route path='/items'><Items menuId={urlCatalogId} /></Route>
-          </Switch>
+  return (
+    <React.Fragment>
+      
+      {!state.id &&
+        <div className='d-flex h-100' >
+          <div class="spinner-border mx-auto my-auto" role="status">
+            <span class="sr-only ">Loading...</span>
+          </div>
         </div>
-        {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
-      </div>
+      }
+      {state.id &&
+        <Context.Provider value={{state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode, setStateBreadCrumbs}}>
+          <div className="app">
+            {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
 
-    </Context.Provider>
-    );
+            {!mobileMode ? <SiteHeader menuIsClose={mobileMenuIsOpen} styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
+            <div className={menuDirectionClasses.join(' ')}>
+              {!mobileMode ? <MenuCreation changeViewMenu={setMobilemenuIsOpen} menuIsClose={mobileMenuIsOpen} /> : null}
+              <Switch>
+                <Route exact path='/work/user/site-creator/index.php'>
+                  {mobileMode ? <MobilePreview /> : null}
+                  <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
+                </Route>
+                <Route path='/items'>
+                  <Items menuId={urlCatalogId} />
+                </Route>
+              </Switch>
+            </div>
+          </div>
+
+        </Context.Provider>
+      }
+    </React.Fragment>
+  )
+  // Страницы для роутинга
+  // return !dataLoading ?
+  //   (<div className='d-flex h-100' ><div class="spinner-border mx-auto my-auto" role="status">
+  //     <span class="sr-only ">Loading...</span>
+  //   </div>
+  //   </div>)
+  //   :
+
+  //   ((dataLoading && state.id) &&
+  //     <Context.Provider value={state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode, setStateBreadCrumbs}>
+  //       <div className="app">
+  //         {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
+
+  //         {!mobileMode ? <SiteHeader menuIsClose={mobileMenuIsOpen} styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
+  //         <div className={menuDirectionClasses.join(' ')}>
+  //           {!mobileMode ? <MenuCreation changeViewMenu={setMobilemenuIsOpen} menuIsClose={mobileMenuIsOpen} /> : null}
+  //           <Switch>
+  //             <Route exact path='/work/user/site-creator/index.php'>
+  //               {mobileMode ? <MobilePreview /> : null}
+  //               <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
+  //             </Route>
+  //             <Route path='/items'>
+  //               <Items menuId={urlCatalogId} />
+  //             </Route>
+  //           </Switch>
+  //         </div>
+  //         {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
+  //       </div>
+
+  //     </Context.Provider>)
 }
+
 
 export default App;

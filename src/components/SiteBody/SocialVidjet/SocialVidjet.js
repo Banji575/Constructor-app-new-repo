@@ -15,13 +15,27 @@ const SocialVidjet = ({ body ,id, replaceVidj}) => {
     console.log(body)
     const [viewEdit, setViewEdit] = useState(false)
     const [respDelSocial, doFetchDelSocial] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const [respEditSocial, doFetchEditSocial] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [backgroundColor, setBackgroundColor] = useState('')
     const {isOpenEditBlock, setIsOpenEditBlock} = useContext(ContextAddBlock)
     const editHandler = () => {
         setViewEdit(true)
     }
+
+    const fetchBackgroundColor = (col) =>{
+            console.log('tesdfsfsdffafasasfasddfdasffdfsst', col)
+        const colorWithoutSharp = col.replace('#','')
+            console.log(id)
+        const formData = new FormData()
+
+        formData.set('landing_prop_id', id)
+        formData.set('background_color', colorWithoutSharp)
+        doFetchEditSocial(formData)
+        setBackgroundColor(col)
+    }
+
 
 
     const delHandler = () => {
@@ -48,12 +62,12 @@ const SocialVidjet = ({ body ,id, replaceVidj}) => {
     const socialSection = Object.keys(body)
     return (
         <div className='questions-container' style = {{backgroundColor:[backgroundColor]}}>
-                <WidjetWrapper id={id} replaceVidj = {replaceVidj} delHandler = {delHandler} setBackground = {setBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} editWindow={ <Social content = {body} setViewEdit={setViewEdit} id={id} /* changeStateVidjet={changeStateVidjet} isNew={false} listArr={body} */ />} >
+                <WidjetWrapper id={id} replaceVidj = {replaceVidj} delHandler = {delHandler} setBackground = {fetchBackgroundColor} isView={viewEdit} setViewEdit={setViewEdit} editWindow={ <Social content = {body} setViewEdit={setViewEdit} id={id} /* changeStateVidjet={changeStateVidjet} isNew={false} listArr={body} */ />} >
                 <div className='questions-body'>
                     <div className='social-vidjet-list-container  d-md-flex'>
                         {socialSection.map((el, i) => {
-                            console.log(Utils.checkSocialList(body[el]))
-                            console.log('dsafjasd;ljdasljdas',body[el])
+                            /* console.log(Utils.checkSocialList(body[el]))
+                            console.log('dsafjasd;ljdasljdas',body[el]) */
                             return <SocialVidjetItem key={i} data={body[el]} />
                         })}
                     </div>

@@ -8,7 +8,7 @@ import SaveSetting from './SaveSetting/SaveSetting';
 import Context from '../../Context'
 
 const ViewSetting = ({decktopOrMobileMode}) => {
-    const [state, changeState, setState, catalogId, setVidjetData, vidjArr,decktopMode,setDecktopMode] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjArr,decktopMode,setDecktopMode} = useContext(Context)
     const [viewMode, setViewMode] = useState(false)
     const changeViewMode = (viewMode) => {
         console.log('change view', decktopMode, viewMode)
@@ -16,7 +16,10 @@ const ViewSetting = ({decktopOrMobileMode}) => {
         /* decktopOrMobileMode() */
         setDecktopMode(s=>!s)
         setViewMode(state => !state)
+        console.log(decktopMode)
     }
+
+    
     const typeViewMode = (type) =>{
       
         console.log(type)

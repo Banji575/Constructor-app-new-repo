@@ -17,7 +17,7 @@ const BlockQueston = ({ listArr, id, setViewEdit, title, setVidjetData,vidjArr ,
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const [blockTitle, setBlockTitle] = useState(title ? title : '')
     const [setCurrentWidjet, setIsEditer] = useContext(ContextEditor)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [tempoparyList, setTemoraryList] = useState(questonsList)
     const [isMoreOne, setIsMoreOne] = useState(() => questonsList.length > 1 ? true : false)
 

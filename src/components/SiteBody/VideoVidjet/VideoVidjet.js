@@ -17,7 +17,7 @@ const getVideoLink = (link) => {
 const VideoVidjet = ({ body, id,replaceVidj }) => {
     const [respDelVideo, doFetchDelVideo] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [viewEdit, setViewEdit] = useState(false)
     const [backgroundColor, setBackgroundColor] = useState('')
     const {isOpenEditBlock, setIsOpenEditBlock} = useContext(ContextAddBlock)

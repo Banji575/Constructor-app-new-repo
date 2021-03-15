@@ -28,7 +28,7 @@ const checkLink = (str) => {
 const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
     const root = useRef()
     const [previewImage, setPreviewImage] = useState(null)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [file, setFile] = useState(null)
     const [oneLoad, setOneLoad] = useState(false)
     const [setCurrentWidjet, setIsEditer] = useContext(ContextEditor)
@@ -86,7 +86,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
     }
 
     useEffect(() => {
-/*         if (!respEditBanner) return
+        if (!respEditBanner) return
         setOneLoad(false)
         if (respEditBanner.success = 'Успешно!') {
             if (!vidjetObj) {
@@ -119,7 +119,7 @@ const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
                 closeWindow()
             }
         }
- */
+
     }, [respEditBanner])
 
     const closeWindow = () => {

@@ -1,16 +1,31 @@
 .items-list-items-tepmlate {
     overflow: hidden;
     position: relative;
-    width: 20%;
-    padding-bottom: 20%;
+    /*  width: 20%; */
+    /* padding-bottom: 20%; */
     /* пропорции блока определяются здесь */
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
     /* элемент центрируется */
+    width: 100%;
+    padding-top: 100%;
+}
+
+.items-list-items-tepmlate img,
+.my-items-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
 }
 
 .items-list-items-template-wrapper {
-    /*  position: absolute; */
+    position: absolute;
+    cursor: pointer;
     top: 0;
     left: 0;
     min-width: 100%;
@@ -55,4 +70,6 @@
 
 .items-list-items {
     display: flex;
+    overflow: scroll;
+    flex: 0 0 auto;
 }

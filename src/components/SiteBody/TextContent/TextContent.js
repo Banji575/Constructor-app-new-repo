@@ -17,11 +17,11 @@ const createHTML = str => parse(str) || ''
 const TextContent = ({ body, id, replaceVidj,bgColor }) => {
     const [description, setDescription] = useState(body.discription || '')
     const [viewEdit, setViewEdit] = useState(false)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [respDelQuestion, doFetchDelQuestion] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
     const [respColor, doFetchColor] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=landing_prop_data_update_background_color')
-    const [backgroundColor, setBackgroundColor] = useState(bgColor || '#fff')
+    const [backgroundColor, setBackgroundColor] = useState(bgColor || '#ffffff')
     const {isOpenEditBlock, setIsOpenEditBlock} = useContext(ContextAddBlock)
     
 
@@ -35,7 +35,7 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
     body.id = id
 
 
-    useEffect(()=>{
+/*     useEffect(()=>{
         if(backgroundColor == bgColor) {
             console.log('цвет перезагружаем')
         }
@@ -44,7 +44,7 @@ const TextContent = ({ body, id, replaceVidj,bgColor }) => {
         formData.set('background_color', backgroundColor.replace('#',''))
         doFetchColor(formData)
     },[backgroundColor])
-
+ */
 
     const deleteHandler = () => {
         const formData = new FormData()
