@@ -9,7 +9,7 @@ const ColorPicker = ({ propsName, show }) => {
     const [firstLoad, setFirstLoad] = useState(false)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_background_color')
     const [resTitleColor, doFetchTitleColor] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_title_background')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     useEffect(() => {
         if (!firstLoad) return
 

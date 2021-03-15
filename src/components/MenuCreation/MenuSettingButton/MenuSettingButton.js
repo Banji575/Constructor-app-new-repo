@@ -13,7 +13,7 @@ const MenuSettingButton = ({callBack = ()=>{} }) => {
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_type')
     const [respMenuSettig, doFetchMenuSetting] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=menu_settings_update')
     const [respBreadCrumbs, doFetchBreadCrumbs] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=bread_crumbs_settings_update')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [siteSetting, setSiteSetting] = useState({
         direction: state.menuDirection,
         menuBackgroundBlock: state.menu_settings.background_menu_block || 'fff',

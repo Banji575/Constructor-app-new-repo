@@ -21,7 +21,7 @@ const Feedback = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) =
     const [data, setData] = useState(content || { title: 'feedback', id: generateId(), body: { ourEmail: { text: '', show: true }, title: { text: '', show: false }, name: { text: '', show: false }, email: { text: '', show: false }, phone: { text: '', show: false }, message: { text: '', show: false } } })
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [respEditFeedback, doFetchEditFeedback] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [isValid, setIsValid] = useState(true)
     const [isEmail, setIsEmail] = useState(true)
     console.log(content)

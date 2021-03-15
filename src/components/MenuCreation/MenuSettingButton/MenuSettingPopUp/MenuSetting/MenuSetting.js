@@ -7,7 +7,7 @@ import {fontSizeList} from '../../../../../scripts/SettingList'
 
 import './menuSetting.css'
 const MenuSetting = ({ changeSetting }) => {
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
 
 
 

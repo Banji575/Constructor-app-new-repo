@@ -4,7 +4,7 @@ import useFetch from '../../../hooks/useFetch'
 import './loadingLogo.css'
 
 const LoadingLogo = () => {
-    const [state, changeState, _, calalogId] = useContext(Context)
+    const {state, changeState, _, calalogId} = useContext(Context)
     const [loadLogo, setLoadLogo] = useState(false)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=upload_logo')
     const fileChange = evt => {

@@ -10,7 +10,7 @@ import Loader from '../../../UI/Loader/Loader'
 const MyItems = ({ showMyItem, previewItem }) => {
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/actionsAdmin.php?')
 
-    const [state, changeState, setState, catalogId, setVidjetData, vidjArr] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjArr} = useContext(Context)
     const [itemList, setItemList] = useState()
     useEffect(() => {
         const formData = new FormData()

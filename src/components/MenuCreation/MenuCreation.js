@@ -15,7 +15,7 @@ import MobileMenuIcon from './../../UI/MobileMenuIcon/MobileMenuIcon';
 
 const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const rootMenuContainer = useRef();
-    const [state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode] = useContext(Context)
+    const {state = {}, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode} = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_menu_item')
     const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
@@ -190,10 +190,10 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const StyledMenuBlock = styled.div`
         background-color: #${menuBackgroundBlock} 
     `;
-    const NewDrawMenu = ({ childrenList, lvl = 1 }) => {
+    const NewDrawMenu = ({ childrenList, lvl = 1, parentArray = [{id: 0, text: 'Главная'}] }) => {
         let menuSettings = state.menu_settings;
         let parId = 0
-
+        
         return (
             <React.Fragment>
 
@@ -211,17 +211,20 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                                     changeState={changeState}
                                     apiKey={apiKey}
                                     lvl={lvl}
+                                    parentArray={parentArray}
                                     isAddNew={lvl <= 3}
                                     childrenList={el.childrenList}
                                     togglerMobileMenu={changeViewMenu}
-                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList} /> : (decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', (el.id))}>Добавить раздел</button>)}
+                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList}  parentArray={parentArray.concat([{id: el.id, text: el.text}])}/> : (decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый подкатегория', (el.id))}>Добавить подкатегорию</button>)}
                                 />
                             </ul>
                         </StyledMenu>
+                        
                     )
+                    
                 })}
                 {
-                    decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый пункт', parId)}>Добавить раздел</button>
+                    decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новая категория', parId)}>Добавить категорию</button>
                 }
 
             </React.Fragment>
@@ -330,7 +333,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                                 </li>
                             </ul>
                         </StyledMenu>
-                        <NewDrawMenu childrenList={state.siteMenu} />
+                        <NewDrawMenu childrenList={state.siteMenu}  />
                     </div>
                 </div>
         </div>

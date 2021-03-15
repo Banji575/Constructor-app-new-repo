@@ -11,7 +11,7 @@ import EditButton from '../../../../UI/EditButton/EditButton'
 const EditText = ({content}) => {
     const [isEdit, setIsEdit] = useState(false)
     const [textTile, setTextTitle] = useState('')
-    const [state, changeState, _, calalogId] = useContext(Context)
+    const {state, changeState, calalogId} = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_title')
 
     const changeText = () => {

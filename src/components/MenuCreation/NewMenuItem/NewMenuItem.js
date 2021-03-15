@@ -15,7 +15,7 @@ import { faPlusCircle, faEllipsisH, faMinusCircle, faTrashAlt, faEdit } from '@f
 import { getUrlParams } from '../../../scripts/Common'
 
 
-const NewMenuItem = ({ isMobileMenuView, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
+const NewMenuItem = ({parentArray, isMobileMenuView, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
 
     const [showReadPopap, setShowReadPopap] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -27,7 +27,7 @@ const NewMenuItem = ({ isMobileMenuView, togglerMobileMenu, childrenList, lvl, t
     const root = useRef()
     const rootMenu = useRef()
     const rootReadMenu = useRef()
-    const [state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode} = useContext(Context)
 
     const newCatalogId = getUrlParams()['id'] || 0;
     // read text menu
@@ -60,7 +60,7 @@ const NewMenuItem = ({ isMobileMenuView, togglerMobileMenu, childrenList, lvl, t
 
     //delete Menu
     const deleteMenu = () => {
-        let a = window.confirm("Вы уверены, что хотите удалить пункт меню? Будут удалены все связанные товары и подпункты меню!");
+        let a = window.confirm("Вы уверены, что хотите удалить категорию? Будут удалены все связанные товары и подкатегории!");
         if (a) {
             menuDeletter(id)
         }
@@ -100,7 +100,7 @@ const NewMenuItem = ({ isMobileMenuView, togglerMobileMenu, childrenList, lvl, t
     const changeCatalogId = (evt) => {
         setUrlCatalogId(id)
         togglerMobileMenu(true)
-        console.log('changeView', togglerMobileMenu)
+        console.log('parentArray', parentArray)
     }
 
     return (
@@ -138,8 +138,8 @@ const NewMenuItem = ({ isMobileMenuView, togglerMobileMenu, childrenList, lvl, t
             </div>
             {isReadMenu &&
                 <form className="input-group input-group-sm " onSubmit={submitFormRead} ref={rootReadMenu}>
-                    <input type="text" name="menu_id" defaultValue={id} hidden />
-                    <input type="text" name="text" class="form-control" placeholder="Название" aria-label="Название" aria-describedby="basic-addon2" defaultValue={menuText} />
+                    <input type="text"  name="menu_id" defaultValue={id} hidden />
+                    <input type="text" autoFocus={true} name="text" class="form-control" placeholder="Название" aria-label="Название" aria-describedby="basic-addon2" defaultValue={menuText} />
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" type="submit" >Ок</button>
                     </div>

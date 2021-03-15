@@ -10,7 +10,7 @@ import Utils from '../../scripts/Utils';
 import EditBackground from '../../components/SiteHeader/TextEditorPanel/EditBackground/EditBackground';
 const WidjetWrapper = ({ children, editWindow, isView, setViewEdit, delHandler, setBackground, backgroundColor, replaceVidj, id, changeBackground,cutHeight = false, fullScreen = false }) => {
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
-    const [state, changeState, setState, catalogId, setVidjetDataasdf, vidjetData, decktopMode] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetDataasdf, vidjetData, decktopMode} = useContext(Context)
 
     const index = useMemo(() => {
         let i;

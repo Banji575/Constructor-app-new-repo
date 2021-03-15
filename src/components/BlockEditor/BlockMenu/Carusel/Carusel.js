@@ -19,7 +19,7 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
     const [changefile, setChangeFile] = useState(null)
     const [interval, setInterval] = useState(body ? body.interval : 1)
     const [respCarusel, doFetchCarusel] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [isValidLimitSlide, setIsValidLimitSlide] = useState(true)
     const [limitSlide, setLimitSlide] = useState(3)
 

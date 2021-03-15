@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import Context from '../../Context'
 import './mobilePreview.css'
 const MobilePreview = () => {
-    const [state, changeState, setState, catalogId, setVidjetData, vidjArr,decktopMode,setDecktopMode] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjArr,decktopMode,setDecktopMode} = useContext(Context)
     const url = window.location.href
     return (
         <div className='mobile-preview-container'>

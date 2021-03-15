@@ -14,7 +14,7 @@ import Body from '../../../../HOC/SiteBody'
 const randomId = () => Math.random()
 /* console.log(ClassicEditor.builtinPlugins.map(plugin => plugin.pluginName)); */
 const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [setCurrentWidjet, setIsEditer] = useContext(ContextEditor)
     const [textContent, setTextContent] = useState(content || { id: randomId(), title: '', discription: '' })
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')

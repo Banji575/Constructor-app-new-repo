@@ -28,7 +28,7 @@ const checkLink = (str) => {
 const Banner = ({ vidjetObj, setViewEdit, setVidjetData, vidjArr, id }) => {
     const root = useRef()
     const [previewImage, setPreviewImage] = useState(null)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [file, setFile] = useState(null)
     const [oneLoad, setOneLoad] = useState(false)
     const [setCurrentWidjet, setIsEditer] = useContext(ContextEditor)
