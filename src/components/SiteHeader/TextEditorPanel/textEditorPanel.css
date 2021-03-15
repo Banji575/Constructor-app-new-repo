@@ -2,12 +2,13 @@
     display: flex;
     position: absolute;
     right: 10px;
-    top: 28%;
+    top: 0;
 }
 
 @media(max-width:425px) {
     .text-editor-panel {
         right: 6%;
-        top: 4%;
+        top: auto;
+        bottom: 100%;
     }
 }
