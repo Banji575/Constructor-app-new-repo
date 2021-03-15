@@ -1,7 +1,7 @@
 .text-editor-panel {
     display: flex;
     position: absolute;
-    right: 16%;
+    right: 10px;
     top: 28%;
 }
 

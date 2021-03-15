@@ -68,7 +68,7 @@ function App() {
       return
     }
     setDataLoading(true)
-    setStateApp(response)
+    // setStateApp(response)
   }, [response])
 
   useEffect(() => {
