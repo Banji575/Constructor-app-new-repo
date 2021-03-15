@@ -36,7 +36,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     /*   const [respWithoutCat, doFetchWithoutCat] = useFetch(`https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_props_data&object_id=${id}`) */
     const [respAddItem, doFetchAddItem] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=add_model_to_catalog`)
     const [itemProps, setItemProps] = useState(null)
-    const [editMode, setEditMode] = useState(true)
+    const [editMode, setEditMode] = useState(false)
     const [itemDesc, setItemDesc] = useState(null)
     const addItemOnMenu = () => {
         console.log('add item in menu', id)
@@ -101,7 +101,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                     </div>
                 </div>
                 <div className='container '>
-                    <EditItemPages />
+                    <EditItemPages editMode = {setEditMode}/>
                     <div className=' d-flex item-page-container-img mt-5'>
                         <img className='m-x-auto' src={itemDesc.image} />
                     </div>
@@ -121,10 +121,11 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                         })}
                     </div>
                 </div>
+                {editMode ? <PopUp title="Настройки отображения товара" closePopup={()=>setEditMode(false)} /* saveHandler={() => saveList()} */>
+                    <ItemCardSetting />
+                </PopUp> : null}
             </div>
-
             : null
-
     )
 }
 

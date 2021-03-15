@@ -7,13 +7,13 @@ import EditButton from '../../../../UI/EditButton/EditButton'
 import PopUp from '../../../../UI/PopUp/PopUp'
 import MenuSettingPopUp from '../../../MenuCreation/MenuSettingButton/MenuSettingPopUp/MenuSettingPopUp'
 import ColorPicker from '../../../../UI/ColorChange/ColorPicker/ColorPicker'
-const EditItemPages = () => {
+const EditItemPages = ({editMode}) => {
 
     return(
         <div className = 'item-editor-panel'>
             <div className = 'edit-background mr-3'><p className = 'edit-background-text'>Фон</p> <ColorPicker className = 'input-color-widjet'  propsName='titleBackground'/></div>
             <div className = 'edit-background'>
-            <EditButton/>
+            <EditButton openEdit = {editMode}/>
             </div>
         </div>
     )
