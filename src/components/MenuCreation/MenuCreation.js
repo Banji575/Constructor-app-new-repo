@@ -15,7 +15,7 @@ import MobileMenuIcon from './../../UI/MobileMenuIcon/MobileMenuIcon';
 
 const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const rootMenuContainer = useRef();
-    const {state = {}, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode} = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode} = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_menu_item')
     const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
@@ -49,7 +49,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
         fontFamily: state.menu_settings.font_family,
         fontSize: state.menu_settings.font_size + 'px'
     }
-    console.log('state', state['menu_settings'])
+    console.log('state', state)
 
     const menuFontFamily = state.menu_settings.font_family
     const wrapperClasses = ['wrapper', 'd-flex', 'container-menu']
@@ -91,7 +91,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
             .then(resp => resp.json())
             .then(json => {
                 if (json.success && json.success != 'false') {
-                    // let newMenu = [...state.siteMenu];
+                    // let newMenu = [...state.catalog_menu];
                     let newMenu = state.siteMenu;
                     let newData = {
                         catalog_id: newCatalogId,
@@ -103,7 +103,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                         text: json.text,
                         childrenList: []
                     }
-                    function searchMenu(arr) {
+                    function searchMenu(arr = []) {
                         arr.map((el, i) => {
                             if (el.id == parentId) {
                                 el.childrenList.push(newData)
@@ -191,12 +191,11 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
         background-color: #${menuBackgroundBlock} 
     `;
     const NewDrawMenu = ({ childrenList, lvl = 1, parentArray = [{id: 0, text: 'Главная'}] }) => {
-        let menuSettings = state.menu_settings;
+        
         let parId = 0
         
         return (
             <React.Fragment>
-
                 {childrenList.map((el, i) => {
                     parId = el.parent_id
                     return (
@@ -282,7 +281,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     }, [resp])
     useEffect(() => {
         if (respEditText) {
-            // const siteMenu = [...state.siteMenu, { id:[resp.id], catalog_id:[resp.catalog_id],  parentId:[resp.parent_id],text: 'Новый раздел',  childrenList: [] }]
+            // const siteMenu = [...state.catalog_menu, { id:[resp.id], catalog_id:[resp.catalog_id],  parentId:[resp.parent_id],text: 'Новый раздел',  childrenList: [] }]
         }
     }, [respEditText])
 
@@ -297,7 +296,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     }
 
 
-
+    
     return (
 
         <div className={classes.join(' ')} ref={rootMenuContainer} style ={{'background': menuBackgroundBlock}}>

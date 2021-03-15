@@ -18,7 +18,7 @@ const Items = ({ menuId }) => {
         setPreviewItem(null)
     }
 
-    console.log('menu id', state.menu)
+    // console.log('menu id', state.menu)
     useEffect(()=>{
         const formData = new FormData()
         formData.set('mode', 'get_catalog_objects')

@@ -121,7 +121,6 @@ const NewMenuItem = ({parentArray, isMobileMenuView, togglerMobileMenu, children
                     </div>
                 }
 
-
                 {(content && lvl < 3) &&
                     <div className="new-menu-items-children">
                         {content}

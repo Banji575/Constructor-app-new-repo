@@ -41,29 +41,33 @@ function App() {
   const [stateBreadCrumbs, setStateBreadCrumbs] = useState([])
 
   const DEMO_STATE = {
-    bread_crumbs_settings: {},
-    catalog_menu: [],
+
+    bread_crumbs_settings: { },
     count_objects: null,
-    count_objects: 71,
     create_date: null,
     default_language_id: null,
     footer: null,
     google_analytics_id: null,
-    id: catalogId,
-    login: '',
-    logo: '',
+    id: null,
+    languages_translate: null,
+    login: null,
+    menuDirection: null,
     menu_settings: {},
+    origin_language_id: null,
     remove_date: null,
-    removed: 0,
+    removed: null,
     settings: {},
-    status: '',
-    title: '',
-    update_date: '',
+    siteLogo: null,
+    siteMenu: {},
+    siteTitle: null,
+    siteVidjets: null,
+    status: null,
+    titleBackground: null,
+    update_date: null,
     user_id: null,
-    menu: {}
   }
 
-  const [state, setState] = useState({})
+  const [state, setState] = useState(DEMO_STATE)
 
   useEffect(() => {
     doFetch()
@@ -205,17 +209,13 @@ function App() {
         const datass = adapter.createData()
 
         setState(datass)
-        
-        console.log('useEffects', state)
-        // setTimeout(() => {
-        //   // setDataLoading(true)
-        //   console.log('useEffects', state)
-        // }, 3000);
+        console.log('useEffectssss', datass)
       })
   }, [])
 
   return (
     <React.Fragment>
+      
       {!state.id &&
         <div className='d-flex h-100' >
           <div class="spinner-border mx-auto my-auto" role="status">
@@ -224,7 +224,7 @@ function App() {
         </div>
       }
       {state.id &&
-        <Context.Provider value={state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode, setStateBreadCrumbs}>
+        <Context.Provider value={{state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode, setStateBreadCrumbs}}>
           <div className="app">
             {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
 
@@ -241,7 +241,6 @@ function App() {
                 </Route>
               </Switch>
             </div>
-            {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
           </div>
 
         </Context.Provider>
