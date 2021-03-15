@@ -5,6 +5,10 @@ import Context from '../../../Context'
 import './itemPage.css'
 import SiteLogo from '../../../UI/SiteLogo/SiteLogo'
 import logo from '../../../../src/image/siteLogo.png'
+import EditBackground from '../../SiteHeader/TextEditorPanel/EditBackground/EditBackground'
+import EditItemPages from './EditItemPages/EditItemPages'
+import PopUp from '../../../UI/PopUp/PopUp'
+import ItemCardSetting from './ItemCard/ItemCardSetting'
 const createPropsList = (list = []) => {
     const newArr = []
     list.forEach((el, i) => {
@@ -32,7 +36,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     /*   const [respWithoutCat, doFetchWithoutCat] = useFetch(`https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_props_data&object_id=${id}`) */
     const [respAddItem, doFetchAddItem] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=add_model_to_catalog`)
     const [itemProps, setItemProps] = useState(null)
-
+    const [editMode, setEditMode] = useState(true)
     const [itemDesc, setItemDesc] = useState(null)
     const addItemOnMenu = () => {
         console.log('add item in menu', id)
@@ -80,6 +84,10 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     }
 
 
+    const ModalWindow = (<PopUp title="Настройки отображения товара" /* closePopup={closeWindow} saveHandler={() => saveList()} */>
+        <ItemCardSetting />
+    </PopUp>)
+
 
     console.log(itemDesc)
     return (
@@ -93,7 +101,8 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                     </div>
                 </div>
                 <div className='container '>
-                    <div className=' d-flex item-page-container-img'>
+                    <EditItemPages />
+                    <div className=' d-flex item-page-container-img mt-5'>
                         <img className='m-x-auto' src={itemDesc.image} />
                     </div>
                     <div className='item-pages-title mb-5'> {itemDesc.title}</div>
@@ -113,8 +122,11 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                     </div>
                 </div>
             </div>
+
             : null
+
     )
 }
 
 export default ItemPage
+

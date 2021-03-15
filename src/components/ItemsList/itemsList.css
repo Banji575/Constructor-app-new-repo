@@ -73,3 +73,18 @@
     overflow: scroll;
     flex: 0 0 auto;
 }
+
+@media(max-width:475px) {
+    .add-item-buttom::after {
+        bottom: 10px;
+        right: 26px;
+    }
+    .add-item-buttom::before {
+        bottom: 10px;
+        right: 26px;
+    }
+    .items-list-items {
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
+}

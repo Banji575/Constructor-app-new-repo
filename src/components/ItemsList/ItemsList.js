@@ -30,16 +30,22 @@ const ItemsList = ({ id, previewItem, itemList }) => {
     return (
         <React.Fragment>
             <div>{id}</div>
+            <div className=" col-sm-1 col-md-2 mobile-view add-item-mobile">
+                        <div className='items-list-items-template-wrapper '>
+                            <div onClick={openAddItemBlock} className='add-item-buttom'>Добавить товар</div>
+                            {myItemsList ? <MyItems previewItem={previewItem} showMyItem={setMyItemsList} /> : null}
+                    </div>
+                </div>
             <div className='d-felx items-list-items'>
                 {itemList ? itemList.map((el, i) => {
                     return (
-                        <div className="col-2">
+                        <div className="col-6 col-md-3">
                             <div className='items-list-items-tepmlate'>
                                 <img src={el.default_look_preview_200} />
                             </div>
                         </div>)
                 }) : null}
-                <div className="col-2">
+                <div className=" col-sm-1 col-md-2 decktop-view">
                     <div className='items-list-items-tepmlate'>
                         <div className='items-list-items-template-wrapper'>
                             <div onClick={openAddItemBlock} className='add-item-buttom'>Добавить товар</div>
