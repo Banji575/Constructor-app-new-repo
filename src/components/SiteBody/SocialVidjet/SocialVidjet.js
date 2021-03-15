@@ -25,10 +25,11 @@ const SocialVidjet = ({ body ,id, replaceVidj}) => {
     }
 
     const fetchBackgroundColor = (col) =>{
+            console.log('tesdfsfsdffafasasfasddfdasffdfsst', col)
         const colorWithoutSharp = col.replace('#','')
             console.log(id)
         const formData = new FormData()
-        formData.set('catalog_id', catalogId)
+
         formData.set('landing_prop_id', id)
         formData.set('background_color', colorWithoutSharp)
         doFetchEditSocial(formData)
