@@ -10,6 +10,8 @@ const SiteHeader = ({menuIsClose, changeViewMenu , styleClassHeader}) => {
     const backgroundColor =  state.titleBackground
     const classes = ['site-header'].concat(styleClassHeader)
 
+    console.log('background title', state.titleBackground)
+
     if(!decktopMode){
         classes.push('site-header-preview-mode')
     } 
