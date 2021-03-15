@@ -51,8 +51,24 @@
     display: none;
 } 
 
+.menu-hamburger {
+    position: relative;
+    display: none;
+    width: 100%;
+    min-height: 40px;
+    align-items: center;
+}
+
+.menu-hamburger > .mobileMenuIcon {
+    top:50%;
+    transform: translateY(-50%)
+}
+
 @media(max-width: 562px) {
     .mobile-menu-wrapper {
         display: block;
+    }
+    .menu-hamburger {
+        display: flex;
     }
 }

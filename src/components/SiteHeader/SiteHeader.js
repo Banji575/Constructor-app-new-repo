@@ -18,7 +18,7 @@ const SiteHeader = ({menuIsClose, changeViewMenu , styleClassHeader}) => {
     console.log('site-list', state)
     return (
         <div className={classes.join(' ')} style = {{...styles}}>
-            <div className='container d-flex site-header-conteiner '>
+            <div className='container d-flex site-header-conteiner position-relative'>
                {state.menuDirection == '1' ?  <LoadingLogo /> : null}
                 <SiteTitle />
                { decktopMode ? <TextEditorPanel/> : null}
