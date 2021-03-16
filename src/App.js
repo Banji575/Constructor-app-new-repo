@@ -12,6 +12,7 @@ import MobilePreview from './Pages/MobilePreview/MobilePreview';
 import './app.css'
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
 import { getUrlParams } from './scripts/Common';
+import InfoModal from './components/InfoModal/InfoModal';
 
 
 
@@ -42,7 +43,22 @@ function App() {
   /* const href = window.location.href.split('?')[1].split('&')[1].split('=')[1] */
   // console.log('catalogId', urlCatalogId)
   const apiKey = 'api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bis2t0aoczw2a280e2e2ddedf8fe9acfe5625949396';
-  const [stateBreadCrumbs, setStateBreadCrumbs] = useState([])
+
+/**
+ * README
+ * При использовании setInfoModalState
+ * необходимо передавать предыдущий infoModalState
+ * пример: setInfoModalState(...infoModalState, [key]: value)
+ * 
+ */
+  const [infoModalState, setInfoModalState] = useState({
+    isOpen: false, // Флаг отображения
+    content: 'Пусто', // Видимый контент
+    title: 'Пустой тайтл', // Тайтл окна
+    saveButtonText: 'Сохранить', // Текст кнопки сохранить
+    showFooter: true, // Флаг отображения Footera с кнопками
+    onSave: (e) => console.log('Сохранено', e) // Функция, при нажатии на сохранить вид: (e) => false 
+  })
 
   const DEMO_STATE = {
     bread_crumbs_settings: {},
@@ -191,10 +207,23 @@ function App() {
       })
   }, [])
 
+  const contextValue = {
+    state, 
+    changeState, 
+    setState, 
+    catalogId, 
+    setVidjetData, 
+    vidjetData, 
+    decktopMode, 
+    setDecktopMode, 
+    setUrlCatalogId, 
+    mobileMode, 
+    infoModalState, 
+    setInfoModalState
+  }
   return (
     <React.Fragment>
-
-      {!state.id &&
+     {!state.id &&
         <div className='d-flex h-100' >
           <div class="spinner-border mx-auto my-auto" role="status">
             <span class="sr-only ">Loading...</span>
@@ -202,7 +231,7 @@ function App() {
         </div>
       }
       {state.id &&
-        <Context.Provider value={{ state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode}}>
+        <Context.Provider value={contextValue}>
           <div className="app">
             {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
 
@@ -224,40 +253,12 @@ function App() {
             </div>
           </div>
 
+          <InfoModal />
+          {/* <button className="" onClick={() => setInfoModalState({ ...infoModalState, saveButtonText: 'Попробуй нажми', content: 'Vasy жи есть', title: 'Нет документации', isOpen: true, showFooter: false })}>Открыть окно</button> */}
         </Context.Provider>
       }
     </React.Fragment>
   )
-  // Страницы для роутинга
-  // return !dataLoading ?
-  //   (<div className='d-flex h-100' ><div class="spinner-border mx-auto my-auto" role="status">
-  //     <span class="sr-only ">Loading...</span>
-  //   </div>
-  //   </div>)
-  //   :
-
-  //   ((dataLoading && state.id) &&
-  //     <Context.Provider value={state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode, setStateBreadCrumbs}>
-  //       <div className="app">
-  //         {!isFrameMode ? <ViewSetting decktopOrMobileMode={decktopOrMobileMode} /> : null}
-
-  //         {!mobileMode ? <SiteHeader menuIsClose={mobileMenuIsOpen} styleClassHeader={styleClassHeader} changeViewMenu={setMobilemenuIsOpen} /> : null}
-  //         <div className={menuDirectionClasses.join(' ')}>
-  //           {!mobileMode ? <MenuCreation changeViewMenu={setMobilemenuIsOpen} menuIsClose={mobileMenuIsOpen} /> : null}
-  //           <Switch>
-  //             <Route exact path='/work/user/site-creator/index.php'>
-  //               {mobileMode ? <MobilePreview /> : null}
-  //               <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
-  //             </Route>
-  //             <Route path='/items'>
-  //               <Items menuId={urlCatalogId} />
-  //             </Route>
-  //           </Switch>
-  //         </div>
-  //         {/*      <button onClick = {()=>setMobileMode(s=>!s)}>Mobile view</button> */}
-  //       </div>
-
-  //     </Context.Provider>)
 }
 
 

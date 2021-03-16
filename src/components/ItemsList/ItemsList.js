@@ -47,7 +47,7 @@ const ItemsList = ({ id, previewItem, itemList }) => {
         <React.Fragment>
             {!viewItemPage ?
                 <React.Fragment>
-                    <div>{id}</div>
+                    {/* <div>{id}</div> */}
                     <div className=" col-sm-1 col-md-2 mobile-view add-item-mobile">
                         <div className='items-list-items-template-wrapper '>
                             <div onClick={openAddItemBlock} className='add-item-buttom'>Добавить товар</div>
