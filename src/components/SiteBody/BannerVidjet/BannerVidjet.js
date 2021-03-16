@@ -17,7 +17,7 @@ const BannerVidjet = ({ body, id, replaceVidj }) => {
     const [linkSite, setLinkSite] = useState(body.linkSite)
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [respDelQuestion, doFetchDelQuestion] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [backgroundColor, setBackgroundColor] = useState('')
     const {isOpenEditBlock, setIsOpenEditBlock} = useContext(ContextAddBlock)
     console.log(backgroundColor)

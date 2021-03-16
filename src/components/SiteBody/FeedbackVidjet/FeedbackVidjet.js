@@ -14,7 +14,7 @@ import ButtonAddComponent from '../../../UI/ButtonAddComponent/ButtonAddComponen
 
 const FeedbackVidject = ({ body , id, replaceVidj}) => {
     const [viewEdit, setViewEdit] = useState(false)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [respDelFeedback, doFetchDelFeedback] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
     const [backgroundColor, setBackgroundColor] = useState('')

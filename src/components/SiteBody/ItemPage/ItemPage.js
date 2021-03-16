@@ -28,7 +28,7 @@ const createPropsList = (list = []) => {
 
 const ItemPage = ({ id, closePopup, menuId }) => {
     console.log('id', id, menuId)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [resp, doFetch] = useFetch(`https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_props_data&object_id=${id}`)
     const [resWithoutCat, doFetchWithoutCat] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects_by_ids&catalog_id=${catalogId}&catalog_object_ids[]=${id}`)
     /* const [respPhotoArr, doFetchItemPhoto] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects_by_ids&catalog_id=${catalogId}&catalog_object_ids[]=${id}`) */

@@ -14,7 +14,7 @@ const MenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting
     const [showInput, setShowInput] = useState(false)
     const [inputItemText, setItemText] = useState('')
     const [showPointList, setShowPointList] = useState(false)
-    const [state, changeState, setState, calalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode,setUrlCatalogId] = useContext(Context)
+    const {state, changeState, setState, calalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode,setUrlCatalogId} = useContext(Context)
     const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
     const [respNewMenuList, doFetchRestNewMenuList] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog&catalog_id=${calalogId}`)
     const [enterName, setEnterName] = useState(false)
@@ -44,7 +44,7 @@ const MenuItem = ({ children, isList, data, deletItem, editItem, id, menuSetting
             ...state,
             siteMenu
         }))
-        console.log('state',state)
+        console.log('state',state.siteMenu)
     },[respNewMenuList])
 
     const editItemInput = () => {

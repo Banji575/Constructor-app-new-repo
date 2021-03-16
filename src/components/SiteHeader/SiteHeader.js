@@ -2,11 +2,14 @@ import React, { useContext } from 'react'
 import LoadingLogo from './loadingLogo/LoadingLogo'
 import SiteTitle from './SiteTitle/SiteTitle'
 import './siteHeader.css'
-import Context from '../../Context'
+import Context from './../../Context'
 import TextEditorPanel from './TextEditorPanel/TextEditorPanel'
 import MobileMenuIcon from '../../UI/MobileMenuIcon/MobileMenuIcon'
 const SiteHeader = ({menuIsClose, changeViewMenu , styleClassHeader}) => {
-    const [state, changeState, setState, catalogId, setVidjetData, vidjetData,decktopMode] = useContext(Context)
+    
+    const {state = {}, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode} = useContext(Context)
+
+
     const backgroundColor =  state.titleBackground
     const classes = ['site-header'].concat(styleClassHeader)
 

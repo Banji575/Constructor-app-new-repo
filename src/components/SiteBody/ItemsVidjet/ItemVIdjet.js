@@ -13,7 +13,7 @@ const ItemsVidjet = ({ key, body, bgColor, id, replaceVidj }) => {
 
 const [viewEdit, setViewEdit] = useState(false)
     /*  const [response, doFetch] = useFetch('https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_by_ids') */
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [respDelItem, doFetchDelItem] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_catalog_landing_prop_data')
     /* Массив catalog_object_id */
     const [imageArr, setImageArr] = useState(body ? body.body.itemsId : [])

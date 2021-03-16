@@ -3,7 +3,7 @@ import './buttonAddComponent.css'
 import Context from '../../Context'
 const ButtonAddComponent = ({ onClick, isVidjetButton = false, countVidj }) => {
     const [mouseOn, setMouseOn] = useState(false)
-    const [state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode} = useContext(Context)
     const classes = ['button-add-component']
     if (isVidjetButton) {
         classes.push('button-add-absolute')

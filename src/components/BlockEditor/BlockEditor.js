@@ -26,7 +26,7 @@ const BlockEditor = () => {
     /*  const [isOpenEditBlock, setIsOpenEditBlock] = useState(true) */
    
     const [currentWidjet, setCurrentWidjet] = useState(null)
-    const [state, changeState, setState, catalogId, setVidjetData, vidjArr=[]] = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjArr=[]} = useContext(Context)
    
     const { isOpenEditBlock, setIsOpenEditBlock } = useContext(ContextAddBlock)
     const changeWidget = (text) => {

@@ -24,7 +24,7 @@ const Social = ({ content,setViewEdit ,id,setVidjetDataArray, vidjArray}) => {
     const [data, setData] = useState(content ? content : { title: 'social', id: genetateId(), social: { title: 'Социальные сети', vk: { checked: false, link: '' }, facebook: { checked: false, link: '' }, twitter: { checked: false, link: '' }, tiktok: { checked: false, link: '' } }, messeger: { title: 'Месседжеры', whatsup: { checked: false, link: '' }, telegram: { checked: false, link: '' }, skype: { checked: false, link: '' }, viber: { chedked: false, link: '' } } })
     const [respEditSocial, doFetchEditSocial] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const [respEditTimer, doFetchEditTimer] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [isValid, setIsValid] = useState(false)
 
     console.log('social', isValid)

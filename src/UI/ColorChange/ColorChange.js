@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import Context from '../../Context'
 import './colorChange.css'
 const ColorChange = ({ color, propsName }) => {
-    const [state, changeState] = useContext(Context)
+    const {state, changeState} = useContext(Context)
     const obj = { [propsName]: color }
     const classes = ['color-change']
     if (state[propsName] === color) {

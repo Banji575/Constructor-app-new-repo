@@ -21,7 +21,7 @@ const Items = ({ setViewEdit, content, vidjArray, setVidjetDataArray, id }) => {
     const [viewPopUp, setViewPopUp] = useState(false)
     const [file, setFile] = useState(null)
     const [loadArr, setLoadArr] = useState([])
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [myItemsPopup, setMyItemsPopup] = useState(false)
     const [vidjetTitle, setVidjetTitle] = useState(itemsContent.body.blockTitle)
     const [allItemsArr, setAllItemArr] = useState([])

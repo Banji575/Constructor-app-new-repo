@@ -15,7 +15,7 @@ const Video = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) => {
     const [validLink, setValidLink] = useState(true)
     const [title, setTitle] = useState(content ? content.body.title : '')
     const [setCurrentWidjet, setIsEditer, setVidjetData, vidjArr] = useContext(ContextEditor)
-    const [state, changeState, setState, catalogId] = useContext(Context)
+    const {state, changeState, setState, catalogId} = useContext(Context)
     const [respEditVideo, doFetchEditVideo] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
     const closeWindow = () => {
         if (setViewEdit) {

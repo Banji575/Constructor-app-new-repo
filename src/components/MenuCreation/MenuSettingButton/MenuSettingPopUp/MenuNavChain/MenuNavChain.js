@@ -6,10 +6,10 @@ import {fontSizeList} from '../../../../../scripts/SettingList'
 
 
 const MenuNavChain = ({changeSetting}) => {
-    const [state] = useContext(Context)
+    const {state} = useContext(Context)
 
     const saveMenuHandler = (propsName, value) => {
-        console.log(propsName, value)
+        
         changeSetting(state => ({
             ...state,
             [propsName]:value
@@ -26,7 +26,7 @@ const MenuNavChain = ({changeSetting}) => {
                     <h3 class="question-item-header my-3">Шрифт</h3>
                     <select onChange ={(evt)=>saveMenuHandler('breadCrumbsFontFamily',evt.target.value)}>
                     {fontsList.map((el,i)=>{
-                            return <option key = {i} value = {el}>{el}</option>
+                            return <option selected = {el == state.bread_crumbs_settings.font_family} key = {i} value = {el}>{el}</option>
                         })}
                     </select>
                 </div>
@@ -34,7 +34,7 @@ const MenuNavChain = ({changeSetting}) => {
                     <h3 class="question-item-header my-3">Размер шрифта</h3>
                     <select onChange ={(evt)=>saveMenuHandler('breadCrumbsFontSize',evt.target.value)}>
                         {fontSizeList.map((el,i)=>{
-                            return <option key = {i} value = {el}>{el}</option>
+                            return <option selected = {el == state.bread_crumbs_settings.font_size} key = {i} value = {el}>{el}</option>
                         })}
                     </select>
                 </div>
@@ -64,4 +64,4 @@ const MenuNavChain = ({changeSetting}) => {
     )
 }
 
-export default MenuNavChain
+export default MenuNavChain;

@@ -2,7 +2,7 @@ import Utils from './Utils'
 import parse from 'html-react-parser'
 const createHTML = str => parse(str).props.children || ''
 export default class Adapter {
-    constructor(response, responseVidjetData) {
+    constructor(response) {
         this.data = response.data
     }
 

@@ -5,7 +5,7 @@ import parse from 'html-react-parser'
 import './siteTitle.css'
 const createHTML = str => parse(str) || ''
 const SiteTitle = () => {
-    const [state, changeState, _, calalogId] = useContext(Context)
+    const {state = {}, changeState, _, calalogId} = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_title')
     const changeText = evt => {
         const value = evt.target.value

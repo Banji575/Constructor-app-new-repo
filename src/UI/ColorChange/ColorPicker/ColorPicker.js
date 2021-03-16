@@ -5,13 +5,13 @@ import useFetch from '../../../hooks/useFetch'
 
 import './colorPicker.css'
 const ColorPicker = ({ propsName, show }) => {
-  const [color, setColor] = React.useState({});
-  const [firstLoad, setFirstLoad] = useState(false)
-  const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_background_color')
-  const [resTitleColor, doFetchTitleColor] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_title_background')
-  const [state, changeState, setState, catalogId] = useContext(Context)
-  useEffect(() => {
-    if (!firstLoad) return
+    const [color, setColor] = React.useState({});
+    const [firstLoad, setFirstLoad] = useState(false)
+    const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_background_color')
+    const [resTitleColor, doFetchTitleColor] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_title_background')
+    const {state, changeState, setState, catalogId} = useContext(Context)
+    useEffect(() => {
+        if (!firstLoad) return
 
   }, [firstLoad])
 
