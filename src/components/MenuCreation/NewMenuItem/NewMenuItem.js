@@ -27,7 +27,7 @@ const NewMenuItem = ({parentArray, isMobileMenuView, togglerMobileMenu, children
     const root = useRef()
     const rootMenu = useRef()
     const rootReadMenu = useRef()
-    const {state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode} = useContext(Context)
+    const {state, changeState, catalogId, decktopMode, setUrlCatalogId} = useContext(Context)
 
     const newCatalogId = getUrlParams()['id'] || 0;
     // read text menu
