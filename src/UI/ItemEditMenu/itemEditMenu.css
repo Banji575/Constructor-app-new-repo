@@ -32,3 +32,15 @@
 .item-edit-show {
     display: block;
 }
+
+@media(max-width:1024px) {
+    .item-edit-wrapper {
+        width: 60%;
+    }
+}
+
+@media(max-width:425px) {
+    .item-edit-item {
+        font-size: 8px;
+    }
+}

@@ -56,6 +56,7 @@ const MyItems = ({ showMyItem, previewItem }) => {
                                 onClick={() => getItemsParams(el.id)}
                                 className='my-items-item'>
                                 <img className='my-items-elem-img' src={el.default_look_preview_700} />
+                                
                             </div>
                         </div>
                     }) : <Loader />}

@@ -97,9 +97,9 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                         <div onClick={() => { closePopup(null) }} ><p className='items-header-button cancel-button'>Отмена</p></div>
                     </div>
                 </div>
-                <div className='container '>
+                <div className='container text-center'>
                     <EditItemPages editMode={setEditMode} />
-                    <div className=' d-flex item-page-container-img mt-5'>
+                    <div className=' d-flex item-page-container-img mt-5 justify-content-center'>
                         <img className='m-x-auto' src={itemDesc.image} />
                     </div>
                     <div className='item-pages-title mb-5'> {itemDesc.title}</div>
