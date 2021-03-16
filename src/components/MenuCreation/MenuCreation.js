@@ -214,7 +214,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                                     isAddNew={lvl <= 3}
                                     childrenList={el.childrenList}
                                     togglerMobileMenu={changeViewMenu}
-                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList}  parentArray={parentArray.concat([{id: el.id, text: el.text}])}/> : (decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новый подкатегория', (el.id))}>Добавить подкатегорию</button>)}
+                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList}  parentArray={parentArray.concat([{id: el.id, text: el.text}])}/> : (decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новая подкатегория', (el.id))}>Добавить подкатегорию</button>)}
                                 />
                             </ul>
                         </StyledMenu>
