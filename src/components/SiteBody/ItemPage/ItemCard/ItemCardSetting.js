@@ -53,8 +53,9 @@ const ItemCardSetting = ({ itemSettings, closePopup/* ,whatsAppLink, setWhatsApp
                 }
             })
             .then(resp=>{
-                console.log(resp)
+                
             })
+
 
         //меняем режим отображения
 
