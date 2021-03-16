@@ -2,11 +2,11 @@ import React from 'react'
 import cartTemplate1 from '../../../../../image/itemCard.jpg'
 import cartTemplate2 from '../../../../../image/itemCard2.jpg'
 import './mainSettingItem.css'
-const MainSettingItem = ({viewItemsMode, setViewItemsMode, isShowWhatsApp, setIsShowWhatsApp}) => {
-    
+const MainSettingItem = ({ viewItemsMode, setViewItemsMode, isShowWhatsApp, setIsShowWhatsApp, whatsAppLink, setWhatsAppLink, whatsAppText, setWhatsAppText }) => {
+
     const itemViewActiveClass = 'item-view-mode-active'
 
-    const changeViewMenu = (typeMode) =>{
+    const changeViewMenu = (typeMode) => {
         setViewItemsMode(typeMode)
     }
 
@@ -16,10 +16,10 @@ const MainSettingItem = ({viewItemsMode, setViewItemsMode, isShowWhatsApp, setIs
                 <h3 class="question-item-header my-3">Отображение карточки товара</h3>
                 <div className='no-items-block-conteiner-title w-100'>Настройки отображения будут применены ко всем товарам на сайте</div>
                 <div className='d-flex pb-3 justify-content-center mt-1 item-view-mode'>
-                    <div className = {viewItemsMode === 'tabs' ? itemViewActiveClass : null}  onClick = {()=>changeViewMenu('tabs')}>
+                    <div className={viewItemsMode === 'tabs' ? itemViewActiveClass : null} onClick={() => changeViewMenu('tabs')}>
                         <img src={cartTemplate1} alt="" />
                     </div>
-                    <div className = {viewItemsMode === 'linear' ? itemViewActiveClass : null} onClick = {()=>changeViewMenu('linear')}>
+                    <div className={viewItemsMode === 'linear' ? itemViewActiveClass : null} onClick={() => changeViewMenu('linear')}>
                         <img src={cartTemplate2} alt="" />
                     </div>
                 </div>
@@ -32,14 +32,18 @@ const MainSettingItem = ({viewItemsMode, setViewItemsMode, isShowWhatsApp, setIs
                         <select className='phone-code-input'>
                             <option value="+7">+7</option>
                         </select>
-                        <input className='input-text w-50' type='number' />
+                        <input className='input-text w-50' type='number' value={whatsAppLink} onChange={evt => setWhatsAppLink(evt.target.value)} />
                     </div>
                     <div className='w-100 mt-3'>
-                        <textarea className='input-text w-100' placeholder='текст для автоматической подстановки в первое сообщение в WhatsApp' />
+                        <textarea
+                            className='input-text w-100'
+                            placeholder='текст для автоматической подстановки в первое сообщение в WhatsApp'
+                            onChange={evt => setWhatsAppText(evt.target.value)}
+                            value={whatsAppText} />
                         <p className='optionField'>*Не обязательное поле</p>
                     </div>
                     <div>
-                        <input id='whatsapp-link' type='checkbox' className='mr-1' checked = {isShowWhatsApp} onChange = {()=>setIsShowWhatsApp(s=>!s)} />
+                        <input id='whatsapp-link' type='checkbox' className='mr-1' checked={isShowWhatsApp} onChange={() => setIsShowWhatsApp(s => !s)} />
                         <label htmlFor='whatsapp-link'>Отображать ссылку на WhatsApp</label>
                     </div>
                 </div>

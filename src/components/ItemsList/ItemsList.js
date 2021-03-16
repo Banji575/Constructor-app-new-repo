@@ -12,6 +12,8 @@ const ItemsList = ({ id, previewItem, itemList }) => {
     const [myItemsList, setMyItemsList] = useState(false)
     const [prevItem, setPrevItem] = useState(itemList)
     const {state, changeState, setState, catalogId} = useContext(Context)
+    const [viewItemPage, setViewItemPage] = useState(false)
+    const [activeCatalogId, setActiveCatalogId] = useState(null)
     const [resp, doFetch] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=add_model_to_catalog&catalog_id=${catalogId}&menu_id=${id}`)
     useEffect(() => {
         doFetch()
