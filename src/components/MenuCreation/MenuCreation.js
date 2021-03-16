@@ -15,7 +15,7 @@ import MobileMenuIcon from './../../UI/MobileMenuIcon/MobileMenuIcon';
 
 const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const rootMenuContainer = useRef();
-    const {state, changeState, setState, catalogId, setVidjetData, vidjetData, decktopMode, setDecktopMode, setUrlCatalogId, mobileMode} = useContext(Context)
+    const { state, changeState, decktopMode, infoModalState, setInfoModalState } = useContext(Context)
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_menu_item')
     const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
@@ -28,7 +28,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
 
     const changeMenuBackgroundBlock = (colorState = null) => {
         console.log('arbaiten', colorState)
-        if(!colorState) return;
+        if (!colorState) return;
         let fd = new FormData();
         fd.set('background_menu_block', colorState.hex.replace('#', ''))
         fd.set('catalog_id', newCatalogId);
@@ -37,19 +37,18 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
             method: 'POST',
             body: fd
         })
-        .then(resp => resp.json())
-        .then(json => {
-            if(json.success && json.success != 'false') {
-                setMenuBackgroundBlock('#'+json.data.background_menu_block)
-            }
-        })
+            .then(resp => resp.json())
+            .then(json => {
+                if (json.success && json.success != 'false') {
+                    setMenuBackgroundBlock('#' + json.data.background_menu_block)
+                }
+            })
     }
 
     const menuSetting = {
         fontFamily: state.menu_settings.font_family,
         fontSize: state.menu_settings.font_size + 'px'
     }
-    console.log('state', state)
 
     const menuFontFamily = state.menu_settings.font_family
     const wrapperClasses = ['wrapper', 'd-flex', 'container-menu']
@@ -129,7 +128,6 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
      * NEW MENU 
      * @returns 
     */
-
     const StyledMenu = styled.div`
            font-size: ${state.menu_settings.font_size + 'px' || '12px'};
            font-family: ${state.menu_settings.font_family || 'Montserrat'};
@@ -190,10 +188,10 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const StyledMenuBlock = styled.div`
         background-color: #${menuBackgroundBlock} 
     `;
-    const NewDrawMenu = ({ childrenList, lvl = 1, parentArray = [{id: 0, text: 'Главная'}] }) => {
-        
+    const NewDrawMenu = ({ childrenList, lvl = 1, parentArray = [{ id: 0, text: 'Главная' }] }) => {
+
         let parId = 0
-        
+
         return (
             <React.Fragment>
                 {childrenList.map((el, i) => {
@@ -214,13 +212,13 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                                     isAddNew={lvl <= 3}
                                     childrenList={el.childrenList}
                                     togglerMobileMenu={changeViewMenu}
-                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList}  parentArray={parentArray.concat([{id: el.id, text: el.text}])}/> : (decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новая подкатегория', (el.id))}>Добавить подкатегорию</button>)}
+                                    content={el.childrenList.length ? <NewDrawMenu lvl={lvl + 1} childrenList={el.childrenList} parentArray={parentArray.concat([{ id: el.id, text: el.text }])} /> : (decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новая подкатегория', (el.id))}>Добавить подкатегорию</button>)}
                                 />
                             </ul>
                         </StyledMenu>
-                        
+
                     )
-                    
+
                 })}
                 {
                     decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новая категория', parId)}>Добавить категорию</button>
@@ -285,58 +283,57 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
         }
     }, [respEditText])
 
-    const addMenuItemHandler = (text = 'Новый раздел', parent_id = 0) => {
 
-        const formData = new FormData()
-        formData.set('parent_id', parent_id)
-        formData.set('catalog_id', newCatalogId)
-        formData.set('text', text)
+    useEffect(() => {
+        if(!response) return
+        if(response.success && response.success != 'false') {
+            setInfoModalState({ ...infoModalState,showFooter: false, isOpen: true, title: 'Успешно!', content: 'Категория успешно удалена!' })
+        } else {
+            setInfoModalState({ ...infoModalState,showFooter: false, isOpen: true, title: 'Ошибка!', content: 'Возникла ошибка при удалении, попробуйте выполнить позже!' })
+        }
+        
+        setTimeout(() => {
+            setInfoModalState({ ...infoModalState, isOpen: false })
+        }, 2000);
+    }, [response])
 
-        doFetchCreate(formData)
-    }
-
-
-    
-    return (
-
-        <div className={classes.join(' ')} ref={rootMenuContainer} style ={{'background': menuBackgroundBlock}}>
-                {decktopMode &&
-                    <MenuSettingButton 
+    return (<div className={classes.join(' ')} ref={rootMenuContainer} style={{ 'background': menuBackgroundBlock }}>
+            {decktopMode &&
+                <MenuSettingButton
                     state={state}
                     callBack={changeMenuBackgroundBlock}
-                    // callBack={() => console.log('vasy')}
-                     />
-                }
+                // callBack={() => console.log('vasy')}
+                />
+            }
 
-                {state.menuDirection == 2 ? <LoadingLogo /> : null}
+            {state.menuDirection == 2 ? <LoadingLogo /> : null}
 
-                <div className={decktopMode ? 'new-menu-container pb-3 pt-5' : 'new-menu-container pb-3'}>
-                    <div className="menu-hamburger">
-                        <MobileMenuIcon 
-                        menuIsClose={menuIsClose} 
+            <div className={decktopMode ? 'new-menu-container pb-3 pt-5' : 'new-menu-container pb-3'}>
+                <div className="menu-hamburger">
+                    <MobileMenuIcon
+                        menuIsClose={menuIsClose}
                         changeViewMenu={changeViewMenu} />
-                    </div>
-                    <div className="new-menu">
-                        <StyledMenu>
-                            <ul className='new-menu-list'>
-                                <li>
-                                    <div className="new-menu-items">
-                                        <NavLink
-                                            className='menu-link'
-                                            to={`/work/user/site-creator/index.php/?id=${newCatalogId}`}
-                                            onClick={() => changeViewMenu(true)}
-                                        >
-                                            Главная
-                                        </NavLink>
-                                    </div>
-                                </li>
-                            </ul>
-                        </StyledMenu>
-                        <NewDrawMenu childrenList={state.siteMenu}  />
-                    </div>
                 </div>
+                <div className="new-menu">
+                    <StyledMenu>
+                        <ul className='new-menu-list'>
+                            <li>
+                                <div className="new-menu-items">
+                                    <NavLink
+                                        className='menu-link'
+                                        to={`/work/user/site-creator/index.php/?id=${newCatalogId}`}
+                                        onClick={() => changeViewMenu(true)}
+                                    >
+                                        Главная
+                                        </NavLink>
+                                </div>
+                            </li>
+                        </ul>
+                    </StyledMenu>
+                    <NewDrawMenu childrenList={state.siteMenu} />
+                </div>
+            </div>
         </div>
-
     )
 }
 export default MenuCreation

@@ -15,7 +15,7 @@ import { faPlusCircle, faEllipsisH, faMinusCircle, faTrashAlt, faEdit } from '@f
 import { getUrlParams } from '../../../scripts/Common'
 
 
-const NewMenuItem = ({parentArray, isMobileMenuView, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
+const NewMenuItem = ({parentArray, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
 
     const [showReadPopap, setShowReadPopap] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -27,7 +27,7 @@ const NewMenuItem = ({parentArray, isMobileMenuView, togglerMobileMenu, children
     const root = useRef()
     const rootMenu = useRef()
     const rootReadMenu = useRef()
-    const {state, changeState, catalogId, decktopMode, setUrlCatalogId} = useContext(Context)
+    const {state, changeState, catalogId, decktopMode, setUrlCatalogId, infoModalState, setInfoModalState} = useContext(Context)
 
     const newCatalogId = getUrlParams()['id'] || 0;
     // read text menu
@@ -60,10 +60,20 @@ const NewMenuItem = ({parentArray, isMobileMenuView, togglerMobileMenu, children
 
     //delete Menu
     const deleteMenu = () => {
-        let a = window.confirm("Вы уверены, что хотите удалить категорию? Будут удалены все связанные товары и подкатегории!");
-        if (a) {
+        // let a = window.confirm("Вы уверены, что хотите удалить категорию? Будут удалены все связанные товары и подкатегории!");
+        
+        // if (a) {
+        //     menuDeletter(id)
+        // }
+        let content = 'Вы уверены, что хотите удалить пункт меню? Будут удалены все связанные товары и подпункты меню!';
+        let title = 'Внимание!'
+        let isOpen = true;
+        let saveButtonText = 'Удалить'
+        let showFooter = true;
+        let onSave = () => {
             menuDeletter(id)
-        }
+        };
+        setInfoModalState({...infoModalState, showFooter, content, title, isOpen, saveButtonText, onSave})
     }
 
     // toggle form read menu 
