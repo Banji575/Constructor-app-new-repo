@@ -20,7 +20,11 @@ const ItemCardSetting = ({ itemSettings ,closePopup}) => {
     const [webLink, setWebLink] = useState('')
     const [nameLink, setNameLink] = useState('')
     const [isShowWebLink, setShowWebLink] = useState('')
-    console.log(state)
+    
+    const saveList = () =>{
+        console.log('saveList')
+    }
+
     return (
         <PopUp title="Настройки отображения товара" closePopup={() => closePopup(false)} /* saveHandler={() => saveList()} */>
             <MainSettingItem
