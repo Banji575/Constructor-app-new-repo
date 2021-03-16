@@ -48,7 +48,7 @@ p {
     flex-direction: row;
 }
 
-.horizontalDirection  {
+.horizontalDirection {
     width: 100%;
     padding-left: 30%;
 }
@@ -148,6 +148,58 @@ div::-webkit-resizer {
     padding-left: 0;
     padding-right: 0;
 }
+
+.landing-btn {
+    display: inline-block;
+    border-radius: 10px;
+    color: #FFF;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    border: none;
+    font-weight: 400;
+    background-repeat: no-repeat !important;
+    user-select: none;
+    padding: 7px 20px;
+}
+
+.landing-btn:hover {
+    background: #fff !important;
+    color: #FF7600 !important;
+}
+
+.landing-btn--orange {
+    background: linear-gradient(to right, #FF7600, #ff9346, #F3CA3E);
+    box-shadow: 3px 3px 8px 0px rgba(255, 118, 0, 1);
+    color: #FFF;
+}
+
+.landing-btn--orange-light {
+    background: #fff;
+    border: 1px solid #FBC47A;
+    box-shadow: 3px 3px 8px 0px rgba(255, 118, 0, 1);
+    color: #FA9917;
+}
+
+.landing-btn--blue {
+    border: 1px solid #BBD8F7;
+    background: linear-gradient(88.73deg, #5690FF 1%, #BBD8F7 100%);
+    box-shadow: 3px 3px 7px 0 #7BB4F1;
+}
+
+.landing-btn--blue-gradient {
+    border-radius: 8px;
+    background: linear-gradient(88.73deg, #FA9917 0%, #A590DF 43%, #713FFD 100%);
+    box-shadow: 3px 3px 7px 0 #BDBDBD;
+}
+
+.landing-btn--purple-gradient {
+    border-radius: 8px;
+    background: linear-gradient(88.73deg, #BB0EB4 0%, #FFC3FD 100%);
+    box-shadow: 3px 3px 7px 0 #BB0EB4;
+}
+
 
 @media(max-width:640px) {
     .carousel-inner {

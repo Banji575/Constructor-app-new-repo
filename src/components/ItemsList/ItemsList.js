@@ -29,7 +29,7 @@ const ItemsList = ({ id, previewItem, itemList }) => {
 
     return (
         <React.Fragment>
-            <div>{id}</div>
+            {/* <div>{id}</div> */}
             <div className='d-felx items-list-items'>
                 {itemList ? itemList.map((el, i) => {
                     return (
