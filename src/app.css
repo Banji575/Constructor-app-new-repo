@@ -150,7 +150,10 @@ div::-webkit-resizer {
 }
 
 .decktop-view {
-    display: block;
+    /*  display: block; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .mobile-view {

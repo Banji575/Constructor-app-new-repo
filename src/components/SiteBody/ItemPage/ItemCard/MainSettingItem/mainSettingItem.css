@@ -1,0 +1,7 @@
+.item-view-mode-active {
+    border: 1px solid #39F;
+}
+
+.item-view-mode {
+    box-sizing: border-box;
+}

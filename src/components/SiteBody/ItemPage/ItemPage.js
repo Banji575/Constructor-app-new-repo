@@ -83,13 +83,10 @@ const ItemPage = ({ id, closePopup, menuId }) => {
         console.log('delHandler')
     }
 
+    const saveList = () => {
+        console.log('save list')
+    }
 
-    const ModalWindow = (<PopUp title="Настройки отображения товара" /* closePopup={closeWindow} saveHandler={() => saveList()} */>
-        <ItemCardSetting />
-    </PopUp>)
-
-
-    console.log(itemDesc)
     return (
         itemDesc ?
             <div className='item-page-conteiner'>
@@ -101,7 +98,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                     </div>
                 </div>
                 <div className='container '>
-                    <EditItemPages editMode = {setEditMode}/>
+                    <EditItemPages editMode={setEditMode} />
                     <div className=' d-flex item-page-container-img mt-5'>
                         <img className='m-x-auto' src={itemDesc.image} />
                     </div>
@@ -121,9 +118,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                         })}
                     </div>
                 </div>
-                {editMode ? <PopUp title="Настройки отображения товара" closePopup={()=>setEditMode(false)} /* saveHandler={() => saveList()} */>
-                    <ItemCardSetting />
-                </PopUp> : null}
+                {editMode ?<ItemCardSetting closePopup={setEditMode} itemSettings = {{price:itemDesc.price, id}}/> : null}
             </div>
             : null
     )

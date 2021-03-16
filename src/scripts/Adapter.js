@@ -27,6 +27,7 @@ export default class Adapter {
         const siteLogo = this.data.logo
         const siteTitle = this.data.title
         const direction = this.data.settings.menu_type_id
+        const viewItemsMode = this.data.settings.view_items_mode
 
         this.data.siteMenu = menuTree
         this.data.backgroundColor = /*  backgroundColor ? `#${backgroundColor}` : */ '#fff'
@@ -34,6 +35,7 @@ export default class Adapter {
         this.data.siteLogo = siteLogo
         this.data.siteTitle = siteTitle
         this.data.menuDirection = direction
+        this.data.viewItemsMode = viewItemsMode
         this.data.siteVidjets = {
             questions: []
         }

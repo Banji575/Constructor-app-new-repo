@@ -70,7 +70,7 @@
 
 .items-list-items {
     display: flex;
-    overflow: scroll;
+    overflow: auto;
     flex: 0 0 auto;
 }
 

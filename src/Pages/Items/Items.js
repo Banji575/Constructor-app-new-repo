@@ -37,7 +37,7 @@ const Items = ({ menuId }) => {
     },[resp])
 
    
-
+    console.log(menuId, previewItem)
     return (
         <React.Fragment>
             {previewItem
