@@ -54,6 +54,10 @@ const BreadCrumbs = ({ catalogId, currentId = 0 }) => {
         getArrayItem(state.siteMenu)
     }, [currentId]);
 
+    useEffect(() => {
+        getArrayItem(state.siteMenu)
+    }, [state.siteMenu]);
+
     const changeCatalogId = (id) => {
         setUrlCatalogId(id)
     }
