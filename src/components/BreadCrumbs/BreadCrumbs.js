@@ -35,7 +35,6 @@ const BreadCrumbs = ({ catalogId, currentId = 0 }) => {
             let newParrentArray = [...parrentArray, { id: el.id, text: el.text }]
 
             if (el.id == currentId) {
-                console.log('prishlo syda', arrs)
                 setBrList(newParrentArray)
                 return;
             }
@@ -68,7 +67,7 @@ const BreadCrumbs = ({ catalogId, currentId = 0 }) => {
                             {parrentArray.map((el, i) => {
                                 if (el.id == 0) {
                                     return (
-                                        <li key={i} className="breadcrumb-item pointer" onClick={() => changeCatalogId(el.id)}>
+                                        <li key={i} className="breadcrumb-item" onClick={() => changeCatalogId(el.id)}>
                                             <NavLink
                                                 to={`/work/user/site-creator/index.php/?id=${catalogId}`}
                                             >
@@ -78,7 +77,7 @@ const BreadCrumbs = ({ catalogId, currentId = 0 }) => {
                                     )
                                 } else if (i != (parrentArray.length - 1)) {
                                     return (
-                                        <li key={i} className="breadcrumb-item pointer" onClick={() => changeCatalogId(el.id)}>
+                                        <li key={i} className="breadcrumb-item" onClick={() => changeCatalogId(el.id)}>
                                             <NavLink
                                                 to={`/items?id=${catalogId}&menu_id=${el.id}`}
                                             >
@@ -87,7 +86,7 @@ const BreadCrumbs = ({ catalogId, currentId = 0 }) => {
                                         </li>
                                     )
                                 } else {
-                                    return (<li key={i} className="breadcrumb-item pointer active">
+                                    return (<li key={i} className="breadcrumb-item active">
                                         {el.text}
                                     </li>)
                                 }
