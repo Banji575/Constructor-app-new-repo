@@ -83,7 +83,7 @@ const BreadCrumbs = ({ catalogId, currentId = 0 }) => {
                                     return (
                                         <li key={i} className="breadcrumb-item" onClick={() => changeCatalogId(el.id)}>
                                             <NavLink
-                                                to={`/items?id=${catalogId}&menu_id=${el.id}`}
+                                                to={`/work/user/site-creator/items?id=${catalogId}&menu_id=${el.id}`}
                                             >
                                                 {el.text}
                                             </NavLink>

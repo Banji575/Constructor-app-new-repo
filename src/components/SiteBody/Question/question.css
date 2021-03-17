@@ -45,6 +45,12 @@
     /*  padding: 4px 10px; */
 }
 
+.icon-conteiner-item {
+    position: absolute;
+    background: transparent;
+    right: 0;
+}
+
 .icon-conteiner--double-icon {
     /*     width: 9%; */
     width: 90px;

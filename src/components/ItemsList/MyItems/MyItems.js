@@ -49,8 +49,8 @@ const MyItems = ({ showMyItem, previewItem }) => {
     return (
         <PopUp title="Товары" closePopup={() => showMyItem(false)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
             <div>
-            <NoItemComponent/>
-               {/*  <ul className='my-items-list'>
+            
+                <ul className='my-items-list'>
                     {itemList ? itemList.map((el, i,arr) => {
                         if(arr.length != 0){
                             return <div className="col-6 col-md-3">
@@ -64,7 +64,7 @@ const MyItems = ({ showMyItem, previewItem }) => {
                         </div>
                         } else return <NoItemComponent/>
                     }) : <Loader />}
-                </ul> */}
+                </ul>
             </div>
             <div className='d-flex justify-content-end'>
                 {/*  <Button title='Загрузить' onClick={() => loadItemhandler()}/> 

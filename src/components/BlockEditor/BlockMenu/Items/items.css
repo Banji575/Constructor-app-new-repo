@@ -34,6 +34,12 @@
     margin-top: 7%;
 }
 
+.item-conteiner-item {
+    position: absolute;
+    background-color: transparent !important;
+    right: 0;
+}
+
 @media(max-width:425px) {
     .input__file-button-text {
         font-size: 12px;
