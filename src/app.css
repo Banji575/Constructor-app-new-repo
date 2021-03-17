@@ -219,6 +219,10 @@ div::-webkit-resizer {
     position: relative;
 }
 
+.position-absolute {
+    position: absolute;
+}
+
 .no-border {
     border: none;
 }
@@ -252,4 +256,10 @@ div::-webkit-resizer {
     .horizontalDirection {
         padding-left: 0;
     }
+}
+
+p>p {
+    color: #212529;
+    font-family: 'Montserrat';
+    font-size: 14px;
 }

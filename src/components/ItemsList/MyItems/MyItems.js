@@ -47,7 +47,7 @@ const MyItems = ({ showMyItem, previewItem }) => {
     }, [response])
 
     return (
-        <PopUp title="Товары" closePopup={() => showMyItem(false)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
+        <PopUp title="Товары" closePopup={() => previewItem(null)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
             <div>
             
                 <ul className='my-items-list'>

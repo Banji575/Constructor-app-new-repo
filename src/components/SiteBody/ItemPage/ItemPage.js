@@ -9,6 +9,8 @@ import EditBackground from '../../SiteHeader/TextEditorPanel/EditBackground/Edit
 import EditItemPages from './EditItemPages/EditItemPages'
 import PopUp from '../../../UI/PopUp/PopUp'
 import ItemCardSetting from './ItemCard/ItemCardSetting'
+import PreviewFile from './PreviewFile/PrewiewFile'
+import Utils from '../../../scripts/Utils'
 const createPropsList = (list = []) => {
     const newArr = []
     list.forEach((el, i) => {
@@ -38,6 +40,8 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     const [itemProps, setItemProps] = useState(null)
     const [editMode, setEditMode] = useState(false)
     const [itemDesc, setItemDesc] = useState(null)
+    const [activeImg, setActiveImg] = useState(null)
+    const [alterContent, setAlterContent] = useState(null)
     const addItemOnMenu = () => {
         console.log('add item in menu', id)
         const formData = new FormData()
@@ -71,12 +75,15 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     useEffect(() => {
         if (!resWithoutCat) return
         console.log(id, resWithoutCat)
+       
     }, [resWithoutCat])
 
     useEffect(() => {
         if (!respPhotoArr) return
         console.log(id, respPhotoArr)
         setItemDesc(respPhotoArr.data)
+        setAlterContent(respPhotoArr.data.photo_web_path)
+        setActiveImg(respPhotoArr.data.image)
     }, [respPhotoArr])
 
     const delHandler = () => {
@@ -88,7 +95,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     }
 
     return (
-        itemDesc ?
+        itemDesc && activeImg ?
             <div className='item-page-conteiner'>
                 <div className='d-flex item-page-header justify-content-around position-relative'>
                     <SiteLogo img={logo} link={'https://cloudsgoods.com/'} />
@@ -97,15 +104,20 @@ const ItemPage = ({ id, closePopup, menuId }) => {
                         <div className = 'cancel-add-button' onClick={() => { closePopup(null) }} ><p className='items-header-button cancel-button'>Отмена</p></div>
                     </div>
                 </div>
-                <div className='container text-center position-relative'>
-                    <EditItemPages editMode={setEditMode} />
-                    <div className=' d-flex item-page-container-img mt-5 justify-content-center'>
-                        <img className='m-x-auto' src={itemDesc.image} />
+                <div className='container  position-relative'>
+                    <EditItemPages  editMode={setEditMode} />
+                    <div className=' d-flex item-page-container-img mt-5 justify-content-center position-padding  position-relative'>
+                        <img className='m-x-auto image-position' src={activeImg} />
                     </div>
-                    <div className='item-pages-title mb-5'> {itemDesc.title}</div>
-                    <p className='item-pages-price'>Цена: {itemDesc.price}Р</p>
-                    <p><a>Текст ссылки производителя</a></p>
-                    <div>Характеристика</div>
+                   { alterContent ?  <PreviewFile activeImg = {activeImg} changeImg = {setActiveImg} imgArr = {alterContent}/> : null}
+                    <div className='item-pages-title mb-3'> {itemDesc.title}</div>
+                    <p className='item-pages-price mb-5'>Цена: {itemDesc.price}Р</p>
+                    <p className = 'mb-5'><a className = 'no-items-link'>Текст ссылки производителя</a></p>
+                    <div className = 'item-page-item-header mb-3'>Описание</div>
+                    <p>
+                        {Utils.createHTML(itemDesc.description) }
+                    </p>
+                    <div className = 'item-page-item-header mb-3'>Характеристика</div>
                     <div className='item-page-propserties-container'>
                         {itemProps && itemProps.map(el => {
                             const props = Object.keys(el)[0]

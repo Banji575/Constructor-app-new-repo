@@ -50,7 +50,7 @@ const ItemsList = ({ id, previewItem, itemList }) => {
                     <div className=" col-sm-1 col-md-2 mobile-view add-item-mobile ">
                         <div className='items-list-items-template-wrapper '>
                             <div onClick={openAddItemBlock} className='add-item-buttom'>Добавить товар</div>
-                            {myItemsList ? <MyItems previewItem={previewItem} showMyItem={setMyItemsList} /> : null}
+                            {myItemsList ? <MyItems previewItem={previewItem} showMyItem={setViewItemPage} /> : null}
                         </div>
                     </div>
                     <div className='d-felx items-list-items justify-content-around mt-3'>
@@ -63,7 +63,7 @@ const ItemsList = ({ id, previewItem, itemList }) => {
                             <div className='items-list-items-tepmlate'>
                                 <div onClick={openAddItemBlock} className='items-list-items-template-wrapper'>
                                     <div className='add-item-buttom'>Добавить товар</div>
-                                    {myItemsList ? <MyItems previewItem={previewItem} showMyItem={setMyItemsList} /> : null}
+                                    {myItemsList ? <MyItems previewItem={previewItem} showMyItem={setViewItemPage} /> : null}
                                 </div>
                             </div>
                         </div>
