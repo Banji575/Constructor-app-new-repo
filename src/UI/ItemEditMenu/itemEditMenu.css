@@ -31,6 +31,7 @@
 
 .item-edit-show {
     display: block;
+    z-index: 501;
 }
 
 @media(max-width:1024px) {

@@ -21,9 +21,9 @@ const Item = ({ el, openItemPage }) => {
     }
 
     return (
-        <div ref={root} className="col-5 col-md-3 m-1 item-border " >
+        <div ref={root} className="col-5 col-md-3 m-1" >
             <div className='tree-dotted' onClick={(evt) => setShowMenu(true)}>...</div>
-            <div className='items-list-items-tepmlate'>
+            <div className='items-list-items-tepmlate  item-border' >
                 <img src={el.default_look_preview_200} />
             </div>
             <div>

@@ -1,8 +1,9 @@
 .tree-dotted {
     position: absolute;
-    top: -6px;
-    right: 5px;
+    top: -5px;
+    right: 24px;
     cursor: pointer;
+    z-index: 500;
 }
 
 .item-border {

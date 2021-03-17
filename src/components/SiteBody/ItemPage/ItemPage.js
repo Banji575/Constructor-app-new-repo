@@ -90,14 +90,14 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     return (
         itemDesc ?
             <div className='item-page-conteiner'>
-                <div className='d-flex item-page-header justify-content-around'>
+                <div className='d-flex item-page-header justify-content-around position-relative'>
                     <SiteLogo img={logo} link={'https://cloudsgoods.com/'} />
-                    <div className='d-flex justify-content-end'>
-                        <div onClick={() => addItemOnMenu()} ><p className='items-header-button add-button'>Добавить товар</p></div>
-                        <div onClick={() => { closePopup(null) }} ><p className='items-header-button cancel-button'>Отмена</p></div>
+                    <div className='d-flex justify-content-end item-page-add-button-block'>
+                        <div className = 'add-item-button' onClick={() => addItemOnMenu()} ><p className='items-header-button add-button'>Добавить товар</p></div>
+                        <div className = 'cancel-add-button' onClick={() => { closePopup(null) }} ><p className='items-header-button cancel-button'>Отмена</p></div>
                     </div>
                 </div>
-                <div className='container text-center'>
+                <div className='container text-center position-relative'>
                     <EditItemPages editMode={setEditMode} />
                     <div className=' d-flex item-page-container-img mt-5 justify-content-center'>
                         <img className='m-x-auto' src={itemDesc.image} />

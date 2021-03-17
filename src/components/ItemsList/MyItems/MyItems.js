@@ -4,6 +4,7 @@ import useFetch from '../../../hooks/useFetch'
 import Context from '../../../Context'
 import MyItemElem from '../../BlockEditor/BlockMenu/Items/MyItem/MyItemElem/MyItemElem'
 import Loader from '../../../UI/Loader/Loader'
+import NoItemComponent from '../../../UI/NoItemComponent/NoItemComponent'
 
 
 
@@ -48,9 +49,11 @@ const MyItems = ({ showMyItem, previewItem }) => {
     return (
         <PopUp title="Товары" closePopup={() => showMyItem(false)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
             <div>
-                <ul className='my-items-list'>
-                    {itemList ? itemList.map((el, i) => {
-                        return <div className="col-6 col-md-3">
+            <NoItemComponent/>
+               {/*  <ul className='my-items-list'>
+                    {itemList ? itemList.map((el, i,arr) => {
+                        if(arr.length != 0){
+                            return <div className="col-6 col-md-3">
                             <div
                                 key={i}
                                 onClick={() => getItemsParams(el.id)}
@@ -59,8 +62,9 @@ const MyItems = ({ showMyItem, previewItem }) => {
                                 
                             </div>
                         </div>
+                        } else return <NoItemComponent/>
                     }) : <Loader />}
-                </ul>
+                </ul> */}
             </div>
             <div className='d-flex justify-content-end'>
                 {/*  <Button title='Загрузить' onClick={() => loadItemhandler()}/> 
