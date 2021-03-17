@@ -44,7 +44,7 @@ p {
 }
 
 .horizontalDirection {
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .horizontalDirection {

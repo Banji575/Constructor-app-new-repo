@@ -1,4 +1,4 @@
-:root{
+:root {
     --max-device-sm: 562px;
 }
 
@@ -156,7 +156,8 @@ li .new-menu-list li .new-menu-items {
 .active-new-menu-items {
     background-color: red;
 }
-.new-menu-items.open >.new-menu-items-read-btn{
+
+.new-menu-items.open>.new-menu-items-read-btn {
     display: none;
 }
 
@@ -181,16 +182,20 @@ li .new-menu-list li .new-menu-items {
     position: relative;
     padding: 0;
 }
+
 .horizontalDirection .new-menu-items.open {
     padding: 5px 15px;
 }
-.horizontalDirection .new-menu-items.open >.new-menu-items-read-btn{
+
+.horizontalDirection .new-menu-items.open>.new-menu-items-read-btn {
     display: none;
 }
+
 .horizontalDirection .new-menu-items {
     display: flex;
     flex-direction: column;
 }
+
 /* --------------------------------------- */
 
 
@@ -202,25 +207,32 @@ li .new-menu-list li .new-menu-items {
         padding-left: 0px;
 
     }
+
     .new-menu-items {
         padding-left: 34px;
     }
+
     .new-menu {
         flex-direction: column;
         align-items: flex-start;
     }
+
     .new-menu-items-toggler {
         left: 5px;
     }
+
     .new-menu-btn-add {
         flex: 0 0 auto;
         width: auto;
         margin-left: 0;
     }
+
     .horizontalDirection .new-menu {
         padding-left: 0;
     }
-    .new-menu-container {
-        /* padding-top: 50px; */
+
+    .horizontalDirection .new-menu-items.open {
+        padding-left: 34px;
+        padding-right: 10px;
     }
 }
