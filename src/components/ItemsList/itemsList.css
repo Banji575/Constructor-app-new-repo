@@ -47,8 +47,8 @@
 .add-item-buttom::after {
     position: absolute;
     content: '';
-    width: 25px;
-    height: 3px;
+    width: 18px;
+    height: 2px;
     bottom: -60%;
     right: 50%;
     transform: translateX(50%);
@@ -60,8 +60,8 @@
     position: absolute;
     position: absolute;
     content: '';
-    width: 25px;
-    height: 3px;
+    width: 18px;
+    height: 2px;
     bottom: -60%;
     right: 50%;
     transform: translateX(50%) rotate(90deg);
@@ -70,6 +70,21 @@
 
 .items-list-items {
     display: flex;
-    overflow: scroll;
+    overflow: auto;
     flex: 0 0 auto;
+}
+
+@media(max-width:475px) {
+    .add-item-buttom::after {
+        bottom: 10px;
+        right: 26px;
+    }
+    .add-item-buttom::before {
+        bottom: 10px;
+        right: 26px;
+    }
+    .items-list-items {
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
 }

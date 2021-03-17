@@ -32,7 +32,7 @@ const MyItemElem = ({ src, addImgCheckArr, id, loadArr, setLoadArr }) => {
         classes.push('my-items-check')
     } */
     return (
-        <li onClick={() => checkImgHandler()} className="col-2">
+        <li onClick={() => checkImgHandler()} className=" col-2">
             <div className={classes.join(' ')}>
                 <img className='my-items-elem-img' src={src} />
             </div>

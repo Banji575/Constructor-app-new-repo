@@ -1,0 +1,21 @@
+.item-editor-panel {
+    display: flex;
+    position: absolute;
+    right: 20%;
+    top: 12%;
+}
+
+.pop-up-header {
+    color: #254768;
+    font-size: 22px;
+}
+
+
+/* 
+@media(max-width:425px) {
+    .item-editor-panel {
+        right: 6%;
+        top: auto;
+        bottom: 100%;
+    }
+} */

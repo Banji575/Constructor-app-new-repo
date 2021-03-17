@@ -13,56 +13,53 @@ const ColorPicker = ({ propsName, show }) => {
     useEffect(() => {
         if (!firstLoad) return
 
-    }, [firstLoad])
+  }, [firstLoad])
 
-    const fileChange = evt => {
-        if (typeof evt !== 'object') {
-            return
-        }
-        if (state[propsName] == evt.hex) return
-            /*     if (state[propsName] === undefined) return */
-        if (propsName === 'backgroundColor') {
-            const color = evt.hex.slice(1, -2)
-            const formData = new FormData()
-            setColor(color)
-            formData.set('background', color)
-            formData.set('catalog_id', catalogId)
-            doFetch(formData)
-        }
-        if (propsName === 'titleBackground') {
-            const color = evt.hex.slice(1, -2)
-            setColor('#' + color)
-            const formData = new FormData()
-            formData.set('background', color)
-            formData.set('catalog_id', catalogId)
-            doFetchTitleColor(formData)
-        }
-
+  const fileChange = evt => {
+    if (typeof evt !== 'object') {
+      return
     }
-    useEffect(() => {
-        if (!resTitleColor) return
-        changeState({ titleBackground: color })
+    if (state[propsName] == evt.hex) return
+    /*     if (state[propsName] === undefined) return */
+    if (propsName === 'backgroundColor') {
+      const color = evt.hex.slice(1, -2)
+      const formData = new FormData()
+      setColor(color)
+      formData.set('background', color)
+      formData.set('catalog_id', catalogId)
+      doFetch(formData)
+    }
+    if (propsName === 'titleBackground') {
+      const color = '#' + evt.hex.slice(1, -2)
+      setColor(color)
+      const formData = new FormData()
+      formData.set('background', color)
+      formData.set('catalog_id', catalogId)
+      doFetchTitleColor(formData)
+    }
 
-    }, [resTitleColor])
+  }
+  useEffect(() => {
+    if (!resTitleColor) return
+    changeState({ titleBackground: color })
 
-    useEffect(() => {
-        if (!response) return
-        changeState({ backgroundColor: color })
-    }, [response])
+  }, [resTitleColor])
+
+  useEffect(() => {
+    if (!response) return
+    changeState({ backgroundColor: color })
+  }, [response])
 
 
-    return ( <
-        div onClick = {
-            (evt) => { console.log(evt) }
-        } >
-        <
-        InputColor initialValue = { state[propsName] || "#5e72e4" }
-        onChange = { fileChange }
-        placement = "right"
-        className = 'input-color-widjet' /
-        >
-        <
-        /div>
-    );
+  return (
+    <div onClick={(evt) => {console.log(evt)}}>
+      <InputColor
+        initialValue={state[propsName] || "#5e72e4"}
+        onChange={fileChange}
+        placement="right"
+        className = 'input-color-widjet'
+      />
+    </div>
+  );
 }
 export default ColorPicker

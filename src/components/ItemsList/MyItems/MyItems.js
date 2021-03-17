@@ -50,7 +50,7 @@ const MyItems = ({ showMyItem, previewItem }) => {
             <div>
                 <ul className='my-items-list'>
                     {itemList ? itemList.map((el, i) => {
-                        return <div className="col-2">
+                        return <div className="col-6 col-md-3">
                             <div
                                 key={i}
                                 onClick={() => getItemsParams(el.id)}
