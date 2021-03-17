@@ -79,7 +79,9 @@
         display: none;
     }
 
-    .menu-creation-container.menu-creation-container---view {
+
+    .menu-creation-container.menu-creation-container---view,
+    .horizontalDirection .menu-creation-container.menu-creation-container---view {
         display: flex;
         top: 0;
         right: 0;
@@ -90,6 +92,7 @@
         position: fixed;
         background: #fff;
         z-index: 99;
+        max-width: 100%;
     }
 
 }
