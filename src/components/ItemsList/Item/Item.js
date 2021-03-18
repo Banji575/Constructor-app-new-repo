@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import ItemEditMenu from '../../../UI/ItemEditMenu/ItemEditMenu'
 import './item.css'
 
-const Item = ({ el, openItemPage }) => {
+const Item = ({ el, openItemPage,delHandler }) => {
     const [showMenu, setShowMenu] = useState(false)
     const root = useRef()
+
 
     useEffect(() => {
         const onClick = e => {
@@ -20,6 +21,8 @@ const Item = ({ el, openItemPage }) => {
         openItemPage(el.id)
     }
 
+
+
     return (
         <div ref={root} className="col-5 col-md-3 m-1" >
             <div className='tree-dotted' onClick={(evt) => setShowMenu(true)}>...</div>
@@ -30,7 +33,7 @@ const Item = ({ el, openItemPage }) => {
                     <p className='items-p' >{el.price} ₽</p>
                     <p className='items-p'> {el.title}</p>
                 </div>
-            <ItemEditMenu openEdit={openEdit} isShow={showMenu} />
+            <ItemEditMenu catalogObjId = {el.catalog_object_id} delHandler = {delHandler} openEdit={openEdit} isShow={showMenu} />
         </div>
     )
 }

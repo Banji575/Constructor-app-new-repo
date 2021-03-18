@@ -98,7 +98,6 @@ const SocialItem = ({ title, isChecked, link, name, data, saveItem, blockName,is
             setIsEdit(false)
             setIsValidSocialLink(true)
         }
-
     }
 
     return (

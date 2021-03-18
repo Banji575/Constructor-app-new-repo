@@ -1,8 +1,8 @@
 import React from 'react'
 import './saveSetting.css'
-const SaveSetting = () => {
+const SaveSetting = ({onClickHandler}) => {
     return ( 
-        <div className='preview-block  preview-block-save '>
+        <div onClick = {()=>onClickHandler()} className='preview-block  preview-block-save '>
             <p className='preview-item preview-item-save'>Сохранить</p>
         </div>
     )

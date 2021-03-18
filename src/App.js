@@ -221,6 +221,9 @@ function App() {
     infoModalState, 
     setInfoModalState
   }
+
+  console.log('app catalogId', catalogId)
+
   return (
     <React.Fragment>
      {!state.id &&

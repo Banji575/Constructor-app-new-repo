@@ -1,16 +1,20 @@
 import React, { useEffect, useContext, useState } from 'react'
 import useFetch from '../../../hooks/useFetch'
+import { Tabs, Tab } from 'react-bootstrap'
 import WidjetWrapper from '../../../UI/VidjetVrapper/WidjetWrapper'
 import Context from '../../../Context'
 import './itemPage.css'
 import SiteLogo from '../../../UI/SiteLogo/SiteLogo'
-import logo from '../../../../src/image/siteLogo.png'
+import logo from '../../../../src/image/newLogoDecktop.png'
 import EditBackground from '../../SiteHeader/TextEditorPanel/EditBackground/EditBackground'
 import EditItemPages from './EditItemPages/EditItemPages'
 import PopUp from '../../../UI/PopUp/PopUp'
 import ItemCardSetting from './ItemCard/ItemCardSetting'
 import PreviewFile from './PreviewFile/PrewiewFile'
 import Utils from '../../../scripts/Utils'
+import ViewSetting from '../../ViewSetting/ViewSetting'
+import DocumentLink from '../../../UI/DocumentLink/DocumentLink'
+/* import Tabs from '../../../UI/Tabs/Tabs' */
 const createPropsList = (list = []) => {
     const newArr = []
     list.forEach((el, i) => {
@@ -30,7 +34,7 @@ const createPropsList = (list = []) => {
 
 const ItemPage = ({ id, closePopup, menuId }) => {
     console.log('id', id, menuId)
-    const {state, changeState, setState, catalogId} = useContext(Context)
+    const { state, changeState, setState, catalogId } = useContext(Context)
     const [resp, doFetch] = useFetch(`https://cloudsgoods.com/api/ObjectController.php?mode=get_objects_props_data&object_id=${id}`)
     const [resWithoutCat, doFetchWithoutCat] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects_by_ids&catalog_id=${catalogId}&catalog_object_ids[]=${id}`)
     /* const [respPhotoArr, doFetchItemPhoto] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=get_catalog_objects_by_ids&catalog_id=${catalogId}&catalog_object_ids[]=${id}`) */
@@ -75,7 +79,7 @@ const ItemPage = ({ id, closePopup, menuId }) => {
     useEffect(() => {
         if (!resWithoutCat) return
         console.log(id, resWithoutCat)
-       
+
     }, [resWithoutCat])
 
     useEffect(() => {
@@ -94,43 +98,95 @@ const ItemPage = ({ id, closePopup, menuId }) => {
         console.log('save list')
     }
 
+    
+
     return (
         itemDesc && activeImg ?
             <div className='item-page-conteiner'>
-                <div className='d-flex item-page-header justify-content-around position-relative'>
+                <div className='d-flex item-page-header position-relative'>
                     <SiteLogo img={logo} link={'https://cloudsgoods.com/'} />
-                    <div className='d-flex justify-content-end item-page-add-button-block'>
-                        <div className = 'add-item-button' onClick={() => addItemOnMenu()} ><p className='items-header-button add-button'>Добавить товар</p></div>
-                        <div className = 'cancel-add-button' onClick={() => { closePopup(null) }} ><p className='items-header-button cancel-button'>Отмена</p></div>
+                    <div className='d-flex justify-content-sm-end justify-content-md-start item-page-add-button-block'>
+                        <div className='add-item-button' onClick={() => addItemOnMenu()} ><p className='items-header-button add-button mb-0 mt-3'>Добавить товар</p></div>
+                        <div className='cancel-add-button' onClick={() => { closePopup(null) }} ><p className='items-header-button cancel-button mb-0 mt-3'>Отмена</p></div>
                     </div>
                 </div>
                 <div className='container  position-relative'>
-                    <EditItemPages  editMode={setEditMode} />
-                    <div className=' d-flex item-page-container-img mt-5 justify-content-center position-padding  position-relative'>
+                    <EditItemPages editMode={setEditMode} isAbsolute={false} />
+                    <div className=' d-flex item-page-container-img mt-3 justify-content-center position-padding  position-relative'>
                         <img className='m-x-auto image-position' src={activeImg} />
                     </div>
-                   { alterContent ?  <PreviewFile activeImg = {activeImg} changeImg = {setActiveImg} imgArr = {alterContent}/> : null}
+                    {alterContent ? <PreviewFile activeImg={activeImg} changeImg={setActiveImg} imgArr={alterContent} /> : null}
                     <div className='item-pages-title mb-3'> {itemDesc.title}</div>
                     <p className='item-pages-price mb-5'>Цена: {itemDesc.price}Р</p>
-                    <p className = 'mb-5'><a className = 'no-items-link'>Текст ссылки производителя</a></p>
-                    <div className = 'item-page-item-header mb-3'>Описание</div>
-                    <p>
-                        {Utils.createHTML(itemDesc.description) }
-                    </p>
-                    <div className = 'item-page-item-header mb-3'>Характеристика</div>
-                    <div className='item-page-propserties-container'>
-                        {itemProps && itemProps.map(el => {
-                            const props = Object.keys(el)[0]
-                            return (
-                                <div className='d-flex'>
-                                    <p className='item-page-props-title'>{props}</p>
-                                    <p className='item-page-props-desc'>{el[props]}</p>
+                    <p className='mb-5'><a className='no-items-link'>Текст ссылки производителя</a></p>
+                    {state.viewItemsMode === 'linear' ?
+                        <React.Fragment>
+                            <div className='item-page-item-header mb-3'>Описание</div>
+                            <p>
+                            {itemDesc.description ?
+                            Utils.createHTML(itemDesc.description)
+                            : <p>Нет характеристик</p>
+                                
+                        }
+                            </p>
+                            <div className='item-page-item-header mb-3'>Характеристика</div>
+                            <div className='item-page-propserties-container'>
+                                {   itemProps.length != 0
+                                    ? itemProps.map(el => {
+                                        const props = Object.keys(el)[0]
+                                        return (
+                                            <div className='d-flex'>
+                                                <p className='item-page-props-title'>{props}</p>
+                                                <p className='item-page-props-desc'>{el[props]}</p>
+                                            </div>
+                                        )
+                                    }) : <p>Нет характеристик</p>}
+                            </div>
+                            <div className='item-page-item-header mb-3'>Документы</div>
+                            <div className='item-page-propserties-container d-flex'>
+                                {itemDesc.documents ?
+                                    itemDesc.documents.map((el, i) => {
+                                        return <DocumentLink type={el} linkNum={i} />
+                                    }) :
+                                    <p>Нет документов</p>
+                                }
+                            </div>
+                        </React.Fragment> :
+                        <Tabs className='tabs-style' defaultActiveKey="profile" id="uncontrolled-tab-example">
+                            <Tab eventKey="home" title="Описание">
+                                <p className='mt-3'>
+                                    {Utils.createHTML(itemDesc.description)}
+                                </p>
+                            </Tab>
+                            <Tab eventKey="profile" title="Характеристики">
+                                <div className='item-page-propserties-container'>
+                                    {itemProps && itemProps.map(el => {
+                                        const props = Object.keys(el)[0]
+                                        return (
+                                            <div className='d-flex mt-3'>
+                                                <p className='item-page-props-title'>{props}</p>
+                                                <p className='item-page-props-desc'>{el[props]}</p>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            )
-                        })}
-                    </div>
+                            </Tab>
+                            <Tab eventKey="contact" title="Документы" >
+                                <div className='d-flex mt-3'>
+
+                                    {itemDesc.documents ?
+                                        itemDesc.documents.map((el, i) => {
+                                            return <DocumentLink type={el} linkNum={i} />
+                                        }) :
+                                        <p>Нет документов</p>
+                                    }
+                                    {/* {<a href = {`https://cloudsgoods.com/api/actionsAdmin.php?mode=object_download_document&object_id=4986&key_file=${i}`}> itemDesc.documents[0]</a>} */}
+                                </div>
+                            </Tab>
+                        </Tabs>
+                    }
                 </div>
-                {editMode ?<ItemCardSetting closePopup={setEditMode} itemSettings = {{price:itemDesc.price, id}}/> : null}
+                {editMode ? <ItemCardSetting closePopup={setEditMode} itemSettings={{ price: itemDesc.price, id }} /> : null}
             </div>
             : null
     )

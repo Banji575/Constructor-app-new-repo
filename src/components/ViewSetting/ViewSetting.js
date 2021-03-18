@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import SiteLogo from '../../UI/SiteLogo/SiteLogo';
 import logo from '../../../src/image/newLogoDecktop.png'
 import './viewSetting.css'
@@ -6,22 +6,39 @@ import PreviewBlock from './PreviewBlock/PreviewBlock';
 import PreviewMode from './PreviewMode/PreviewMode';
 import SaveSetting from './SaveSetting/SaveSetting';
 import Context from '../../Context'
+import InfoModal from '../InfoModal/InfoModal';
 
-const ViewSetting = ({decktopOrMobileMode}) => {
-    const {state, changeState, setState, catalogId, setVidjetData, vidjArr,decktopMode,setDecktopMode} = useContext(Context)
+const ViewSetting = ({ decktopOrMobileMode }) => {
+    const { state, infoModalState, setInfoModalState, changeState, setState, catalogId, setVidjetData, vidjArr, decktopMode, setDecktopMode } = useContext(Context)
     const [viewMode, setViewMode] = useState(false)
     const changeViewMode = (viewMode) => {
         console.log('change view', decktopMode, viewMode)
         /* Отключил для включения сначала десктоп версии предпросмотра */
         /* decktopOrMobileMode() */
-        setDecktopMode(s=>!s)
+        setDecktopMode(s => !s)
         setViewMode(state => !state)
         console.log(decktopMode)
     }
 
-    
-    const typeViewMode = (type) =>{
-      
+
+    const saveSite = () => {
+        setInfoModalState(s => ({
+            ...s,
+            isOpen: true, // Флаг отображения
+            content: 'Ваш каталог будет сохранен на сервисе. Вы сможете его опубликовать или внести перейдя в категорию <b>МОИ ВЕБ-САЙТЫ</b> ', // Видимый контент
+            title: 'Сохранение каталога',
+            showFooter: false,
+        }))
+
+        setTimeout(() => {
+            setInfoModalState(s=>({ 
+                ...s, isOpen: false 
+            }))
+            window.location.replace('https://cloudsgoods.com/work/user/my/siteBuilder.php')
+        }, 1000)
+    }
+
+    const typeViewMode = (type) => {
         console.log(type)
     }
 
@@ -40,12 +57,12 @@ const ViewSetting = ({decktopOrMobileMode}) => {
                     </div>
                 </React.Fragment>
             ) : (
-                    <React.Fragment>
-                        <PreviewMode   decktopOrMobileMode = {decktopOrMobileMode} typeViewMode = {typeViewMode} changeViewMode={changeViewMode} />
-                    </React.Fragment>
+                <React.Fragment>
+                    <PreviewMode decktopOrMobileMode={decktopOrMobileMode} typeViewMode={typeViewMode} changeViewMode={changeViewMode} />
+                </React.Fragment>
 
-                )}
-            <SaveSetting />
+            )}
+            <SaveSetting onClickHandler={saveSite} />
         </div>
     )
 }

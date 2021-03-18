@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Utils from '../../scripts/Utils';
 import Context from './../../Context';
 
 
@@ -15,6 +16,16 @@ const InfoModal = () => {
             infoModalState.onSave(e)
         }
     }
+
+    // useEffect(()=>{
+    //     console.log(infoModalState.timeOutFunc)
+    //     if(infoModalState.timeOutFunc){
+    //         const callback = infoModalState.timeOutFunc
+    //         setTimeout(()=>callback(), 1000)
+    //         console.log('a;lkjf;lajsdfjasdfklj')
+    //     }
+
+    // },[])
     return (
         <React.Fragment>
             <div className={infoModalState.isOpen ? "modal fade show d-block" : "modal fade"} tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -27,7 +38,7 @@ const InfoModal = () => {
                             </button>
                         </div>
                         <div className="modal-body">
-                            {infoModalState.content || ''}
+                            {Utils.createHTML(infoModalState.content) || ''}
                         </div>
 
                         {infoModalState.showFooter &&

@@ -33,8 +33,12 @@ const Video = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) => {
     }
 
     const saveList = () => {
-        console.log(title, link)
+        console.log(title,checkLink(link))
         link === '' ? setValidLink(false) : setValidLink(true)
+        if(!checkLink(link)){
+            setValidLink(false)
+            return
+        }
         const formData = new FormData()
         formData.set('landing_prop_id', 3)
         formData.set('catalog_id', catalogId)
@@ -93,7 +97,7 @@ const Video = ({ content, setViewEdit, id, setVidjetDataArray, vidjArray }) => {
                     {/* <textarea className='video-textarea' value={title} onChange={(evt) => setTitle(evt.target.value)} /> */}
                     <p className='question-item-header mt-3'>Ссылка на видео</p>
                     <input className = 'input-text' type='text' value={link}/*  onChange={(evt) => checkLink(evt.target.value)} */ onChange = {evt=>setLink(evt.target.value)}/>
-                    {!validLink ? <p className='text-danger'>Поле не должно быть пустым</p> : null}
+                    {!validLink ? <p className='text-danger'>Не правильный формат ссылки</p> : null}
                 </div>
                 {/* <div className='block-question-save'><p onClick={saveList} className='block-question-button-save'>Сохранить</p></div> */}
         </PopUp>

@@ -10,7 +10,7 @@ const apiKey = '&api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bi
 
 const ItemCardSetting = ({ itemSettings, closePopup/* ,whatsAppLink, setWhatsAppLink */ }) => {
     console.log(itemSettings)
-    const { state, catalogId } = useContext(Context)
+    const { state, changeState, setState, catalogId } = useContext(Context)
     const [viewItemsMode, setViewItemsMode] = useState(state.viewItemsMode)
     const [whatsAppLink, setWhatsAppLink] = useState(state.settings.phone_whats_app)
     const [whatsAppText, setWhatsAppText] = useState(state.settings.text_whats_app)
@@ -24,9 +24,11 @@ const ItemCardSetting = ({ itemSettings, closePopup/* ,whatsAppLink, setWhatsApp
     const [respWhatsApp, doFetchWhatsApp] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=catalog_settings_update_phone_whats_app&catalog_id=${catalogId}`)
     const [respViewMode, doFetchViewMode] = useFetch(`https://cloudsgoods.com/api/CatalogController.php?mode=catalog_settings_update_view_items_mode&catalog_id=${catalogId}`)
 
-    const saveList = () => {
 
+
+    const saveList = () => {
         console.log('save list')
+
         // меняем whatsApp
         const formDataWhatsApp = new FormData()
         formDataWhatsApp.set('phone_whats_app', `+7${whatsAppLink}`)
@@ -49,17 +51,21 @@ const ItemCardSetting = ({ itemSettings, closePopup/* ,whatsAppLink, setWhatsApp
         fetch(`https://cloudsgoods.com/api/CatalogController.php?mode=catalog_settings_update_phone_whats_app&catalog_id=${catalogId}${apiKey}`, bodyWhatsApp)
             .then(resp => {
                 if (resp.status === 200) {
+                    console.log(resp)
                   return fetch(`https://cloudsgoods.com/api/CatalogController.php?mode=catalog_settings_update_view_items_mode&catalog_id=${catalogId}${apiKey}`,bodyViewMode)
                 }
             })
-            .then(resp=>{
-                
+            .then(resp=>resp.json())
+            .then(json=>{
+                const viewItemsMode = json.data.view_items_mode
+ 
+                setState(s=>({
+                    ...s,
+                    viewItemsMode
+                }))
+                closePopup(false)
             })
-
-
         //меняем режим отображения
-
-
     }
 
     useEffect(() => {

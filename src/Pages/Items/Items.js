@@ -18,6 +18,10 @@ const Items = ({ menuId }) => {
         setAddItemFlag(s => !s)
         setPreviewItem(null)
     }
+    const closePreview = () =>{
+        console.log('as;ljdaskljasflkjadskljadlkjdas')
+        setPreviewItem(null)
+    }
 
     // console.log('menu id', state.menu)
     useEffect(() => {
@@ -44,7 +48,7 @@ const Items = ({ menuId }) => {
             {previewItem
                 ? <ItemPage menuId={menuId} closePopup={addItemInMenu} id={previewItem} />
                 : <div className='container'>
-                    <ItemsList itemList={itemList} previewItem={setPreviewItem} id={menuId} />
+                    <ItemsList setItemList = {setItemList} closePreview = {closePreview} itemList={itemList} previewItem={setPreviewItem} id={menuId} />
                 </div>
             }
         </React.Fragment>

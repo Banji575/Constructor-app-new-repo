@@ -8,7 +8,7 @@ import NoItemComponent from '../../../UI/NoItemComponent/NoItemComponent'
 
 
 
-const MyItems = ({ showMyItem, previewItem }) => {
+const MyItems = ({closePopup, showMyItem, previewItem }) => {
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/actionsAdmin.php?')
 
     const {state, changeState, setState, catalogId, setVidjetData, vidjArr} = useContext(Context)
@@ -45,19 +45,18 @@ const MyItems = ({ showMyItem, previewItem }) => {
                setImageIsLoad(true)
                console.log(fileArr) */
     }, [response])
-
     return (
-        <PopUp title="Товары" closePopup={() => previewItem(null)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
+        <PopUp title="Выберите модель" closePopup={()=>closePopup(null)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
             <div>
             
-                <ul className='my-items-list'>
+                <ul className='my-items-list p-0'>
                     {itemList ? itemList.map((el, i,arr) => {
                         if(arr.length != 0){
-                            return <div className="col-6 col-md-3">
+                            return <div className="col-6 col-md-3  mb-3 ">
                             <div
                                 key={i}
                                 onClick={() => getItemsParams(el.id)}
-                                className='my-items-item'>
+                                className='my-items-item position-relative'>
                                 <img className='my-items-elem-img' src={el.default_look_preview_700} />
                                 
                             </div>

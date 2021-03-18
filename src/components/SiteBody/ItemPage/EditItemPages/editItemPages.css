@@ -2,7 +2,7 @@
     display: flex;
     position: absolute;
     right: 4%;
-    top: -2%;
+    top: 0%;
     z-index: 600;
 }
 
@@ -18,12 +18,15 @@
     padding: 0;
 }
 
+.item-editor-panel--rel {
+    position: relative;
+    justify-content: flex-end;
+}
 
-/* 
 @media(max-width:425px) {
     .item-editor-panel {
-        right: 6%;
+        /*     right: 6%;
         top: auto;
-        bottom: 100%;
+        bottom: 100%; */
     }
-} */
+}

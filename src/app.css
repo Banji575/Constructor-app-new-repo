@@ -156,6 +156,13 @@ div::-webkit-resizer {
     justify-content: center;
 }
 
+.decktop-view--jusify-normal {
+    /*  display: block; */
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+}
+
 .mobile-view {
     display: none;
 }
