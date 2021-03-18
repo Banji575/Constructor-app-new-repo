@@ -1,13 +1,21 @@
 .item-editor-panel {
     display: flex;
     position: absolute;
-    right: 20%;
-    top: 12%;
+    right: 4%;
+    top: -2%;
+    z-index: 600;
 }
 
 .pop-up-header {
     color: #254768;
     font-size: 22px;
+}
+
+.edit-background--itempgaes {
+    width: 44px;
+    display: flex;
+    justify-content: center;
+    padding: 0;
 }
 
 

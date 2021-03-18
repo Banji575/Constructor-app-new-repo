@@ -12,7 +12,7 @@ const EditItemPages = ({editMode}) => {
     return(
         <div className = 'item-editor-panel'>
             <div className = 'edit-background mr-3'><p className = 'edit-background-text'>Фон</p> <ColorPicker className = 'input-color-widjet'  propsName='titleBackground'/></div>
-            <div className = 'edit-background'>
+            <div className = 'edit-background edit-background--itempgaes'>
             <EditButton openEdit = {editMode}/>
             </div>
         </div>

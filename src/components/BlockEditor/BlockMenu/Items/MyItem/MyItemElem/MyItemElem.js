@@ -27,12 +27,12 @@ const MyItemElem = ({ src, addImgCheckArr, id, loadArr, setLoadArr }) => {
         })
         setCheckImg(state => !state)
     }
-    const classes = ['my-items-item']
+    const classes = ['my-items-item no-border justify-content-center']
     /* if(checkImg){
         classes.push('my-items-check')
     } */
     return (
-        <li onClick={() => checkImgHandler()} className=" col-2">
+        <li onClick={() => checkImgHandler()} className="col-5 col-md-4 frame-border m-1">
             <div className={classes.join(' ')}>
                 <img className='my-items-elem-img' src={src} />
             </div>

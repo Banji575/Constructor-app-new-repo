@@ -191,7 +191,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const NewDrawMenu = ({ childrenList, lvl = 1, parentArray = [{ id: 0, text: 'Главная' }] }) => {
 
         let parId = 0
-
+        console.log('NewDrawMenu', parId)
         return (
             <React.Fragment>
                 {childrenList.map((el, i) => {
@@ -321,7 +321,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                                 <div className="new-menu-items">
                                     <NavLink
                                         className='menu-link'
-                                        to={`/work/user/site-creator/index.php/?id=${newCatalogId}`}
+                                        to={`/work/user/site-creator/index.php?id=${newCatalogId}`}
                                         onClick={() => changeViewMenu(true)}
                                     >
                                         Главная

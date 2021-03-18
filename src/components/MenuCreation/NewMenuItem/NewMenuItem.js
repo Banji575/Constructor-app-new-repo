@@ -122,7 +122,7 @@ const NewMenuItem = ({parentArray, togglerMobileMenu, childrenList, lvl, text, i
                     </div>
                 }
 
-                <NavLink onClick={(evt) => changeCatalogId(evt)} to={`/items?id=${catalogId}&menu_id=${id}`} className={"overflow-hidden"}>
+                <NavLink onClick={(evt) => changeCatalogId(evt)} to={`/work/user/site-creator/items?id=${catalogId}&menu_id=${id}`} className={"overflow-hidden"}>
                     {menuText}
                 </NavLink>
                 {decktopMode &&

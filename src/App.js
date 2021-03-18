@@ -244,7 +244,7 @@ function App() {
                   {mobileMode ? <MobilePreview /> : null}
                   <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
                 </Route>
-                <Route path='/items'>
+                <Route path='/work/user/site-creator/items'>
                   <BreadCrumbs catalogId={catalogId} currentId={urlCatalogId} />
                   <Items menuId={urlCatalogId} />
                 </Route>
