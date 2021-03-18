@@ -205,6 +205,9 @@ li .new-menu-list li .new-menu-items {
 
     }
 
+    .horizontalDirection .new-menu .new-menu-btn-add {
+        max-width: 100%;
+    }
     .new-menu-items {
         padding-left: 34px;
     }
@@ -231,5 +234,16 @@ li .new-menu-list li .new-menu-items {
     .horizontalDirection .new-menu-items.open {
         padding-left: 34px;
         padding-right: 10px;
+    }
+    .verticalDirection .new-menu-items.open>.new-menu-items-children {
+        position: relative;
+    }
+    .verticalDirection .new-menu-items.open {
+        padding-right: 0;
+        flex-direction: column;
+        padding-top: 5px;
+    }
+    .new-menu-items.open > .new-menu-items-toggler {
+        top: 20px;
     }
 }

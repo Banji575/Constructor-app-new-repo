@@ -137,7 +137,6 @@ function App() {
     })
     direction === 'up' ? [list[i], list[i - 1]] = [list[i - 1], list[i]] : [list[i], list[i + 1]] = [list[i + 1], list[i]]
 
-
     const formData = new FormData()
     formData.set('landing_prop_data_id', elId)
     formData.set('order_num', direction === 'up' ? i : i + 2)

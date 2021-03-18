@@ -19,11 +19,11 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=delete_menu_item')
     const [resp, doFetchCreate] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=create_menu_item')
     const [respEditText, doFetchEditText] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=update_menu_item')
-    const [enterName, setEnterName] = useState(false)
-    const [direction, setDirection] = useState(state.menuDirection)
+    
     const apiKey = 'api_key=mwshe2txo5nlz5dw6mvflji7y0srqyrn2l04l99v--tb3ys30i7m9bis2t0aoczw2a280e2e2ddedf8fe9acfe5625949396';
 
     const [menuBackgroundBlock, setMenuBackgroundBlock] = useState(state.menu_settings.background_menu_block || '#fff')
+    const [arrayOpenMenu, setArrayOpenMenu] = useState([])
     const newCatalogId = getUrlParams()['id'] || 0;
 
     const changeMenuBackgroundBlock = (colorState = null) => {
@@ -200,6 +200,7 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                         <StyledMenu>
                             <ul className="new-menu-list" key={el.id} >
                                 <NewMenuItem
+                                    isOpen = {arrayOpenMenu.indexOf(el.id) != -1}
                                     isMobileMenuView={menuIsClose}
                                     text={el.text}
                                     id={el.id}
