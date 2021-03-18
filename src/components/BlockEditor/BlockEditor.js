@@ -26,7 +26,7 @@ const BlockEditor = () => {
     /*  const [isOpenEditBlock, setIsOpenEditBlock] = useState(true) */
    
     const [currentWidjet, setCurrentWidjet] = useState(null)
-    const {state, changeState, setState, catalogId, setVidjetData, vidjArr=[]} = useContext(Context)
+    const {state, changeState, setState, catalogId, setVidjetData, vidjArr=[], vidjetData} = useContext(Context)
    
     const { isOpenEditBlock, setIsOpenEditBlock } = useContext(ContextAddBlock)
     const changeWidget = (text) => {
@@ -37,26 +37,28 @@ const BlockEditor = () => {
   
     const openWidjet = () => {
         switch (currentWidjet) {
-            case 'questions': return <BlockQueston setVidjetData={setVidjetData} vidjArr={vidjArr}  />
-            case 'text': return <Text setVidjetData={setVidjetData} vidjArr={vidjArr} />
-            case 'banner': return <Banner setVidjetData={setVidjetData} vidjArr={vidjArr} />
-            case 'contacts': return <Contacts setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
-            case 'social': return <Social setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
-            case 'callback': return <Feedback setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
-            case 'timer': return <Timer setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
-            case 'video': return <Video setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
+            case 'questions': return <BlockQueston setVidjetData={setVidjetData} vidjArr={vidjetData}  />
+            case 'text': return <Text setVidjetData={setVidjetData} vidjArr={vidjetData} />
+            case 'banner': return <Banner setVidjetData={setVidjetData} vidjArr={vidjetData} />
+            case 'contacts': return <Contacts setVidjetDataArray={setVidjetData} vidjArray={vidjetData} />
+            case 'social': return <Social setVidjetDataArray={setVidjetData} vidjArray={vidjetData} />
+            case 'callback': return <Feedback setVidjetDataArray={setVidjetData} vidjArray={vidjetData} />
+            case 'timer': return <Timer setVidjetDataArray={setVidjetData} vidjArray={vidjetData} />
+            case 'video': return <Video setVidjetDataArray={setVidjetData} vidjArray={vidjetData} />
             /* case 'map': return <Maps /> */
-            case 'items': return <Items setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
-            case 'carusel': return <Carusel setVidjetDataArray={setVidjetData} vidjArray={vidjArr} />
+            case 'items': return <Items setVidjetDataArray={setVidjetData} vidjArray={vidjetData} />
+            case 'carusel': return <Carusel setVidjetDataArray={setVidjetData} vidjArray={vidjetData} />
             default: return null
         }
     }
 
     const showAddButtonSiteBody = () =>{
-        if(vidjArr == null) return true
-        if(vidjArr.length === 0) return true
+        if(vidjetData == null) return true
+        if(vidjetData.length === 0) return true
         return false
     }
+
+    console.log('дебажим двойные кнопки',vidjetData )
 
 /*     console.log(showAddButtonSiteBody(), vidjArr.length === 0) */
 

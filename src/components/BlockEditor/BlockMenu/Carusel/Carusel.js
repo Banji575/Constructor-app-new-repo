@@ -19,7 +19,7 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
     const [changefile, setChangeFile] = useState(null)
     const [interval, setInterval] = useState(body ? body.interval : 1)
     const [respCarusel, doFetchCarusel] = useFetch('https://cloudsgoods.com/api/CatalogController.php?mode=set_landing_prop_data')
-    const {state, changeState, setState, catalogId} = useContext(Context)
+    const { state, changeState, setState, catalogId } = useContext(Context)
     const [isValidLimitSlide, setIsValidLimitSlide] = useState(true)
     const [limitSlide, setLimitSlide] = useState(3)
 
@@ -53,11 +53,11 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
     }
 
     const saveList = () => {
-        console.log('carusel body',body, id)
-        if(body){
-            const list= [...vidjArr]
-            list.forEach(el=>{
-                if(el.id===id){
+        console.log('carusel body', body, id)
+        if (body) {
+            const list = [...vidjArr]
+            list.forEach(el => {
+                if (el.id === id) {
                     console.log(el)
                 }
             })
@@ -120,9 +120,12 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
             setVidjetData(list)
 
         }
-
-
     }
+    const changeInterval = (sign) =>{
+        if(interval <= 1 && sign === '-') return
+        setInterval(s=> sign === '+' ? s+=1 : s-=1)
+    }
+
     const CarouselList = ({ files, urls }) => {
         console.log('создаем карусель лист ')
         if (urls != null) {
@@ -150,9 +153,12 @@ const Carusel = ({ body, id, setViewEdit, vidjArray, setVidjetDataArray }) => {
                     {!isValidLimitSlide ? <p className='text-danger'>Не больше трех слайдов</p> : null}
                     <div className='mt-4 carusel-input-duration-container'>
                         <h3 className='question-item-header mb-4'>Автоматическая смена слайдов</h3>
-                        <div className='d-flex '>
+                        <div className='d-flex position-relative'>
+                            
+                            <button onClick = {()=>changeInterval('-')} className='button-input-number'>-</button>
                             <input type='number' className=' question-item-input w-8 carusel-input-duration' value={interval} onChange={(evt) => setInterval(evt.target.value)} />
                             <p className='items-label m-0'>Cек</p>
+                            <button onClick = {()=>changeInterval('+')} className='button-input-number'>+</button>
                         </div>
                     </div>
                 </div>

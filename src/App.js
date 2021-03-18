@@ -137,7 +137,6 @@ function App() {
     })
     direction === 'up' ? [list[i], list[i - 1]] = [list[i - 1], list[i]] : [list[i], list[i + 1]] = [list[i + 1], list[i]]
 
-
     const formData = new FormData()
     formData.set('landing_prop_data_id', elId)
     formData.set('order_num', direction === 'up' ? i : i + 2)
@@ -244,7 +243,7 @@ function App() {
                   {mobileMode ? <MobilePreview /> : null}
                   <Main state={state} vidjetData={vidjetData} replaceVidj={replaceVidj} setVidjetData={setVidjetData} mobileMode={mobileMode} />
                 </Route>
-                <Route path='/items'>
+                <Route path='/work/user/site-creator/items'>
                   <BreadCrumbs catalogId={catalogId} currentId={urlCatalogId} />
                   <Items menuId={urlCatalogId} />
                 </Route>

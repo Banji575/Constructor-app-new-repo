@@ -15,10 +15,10 @@ import { faPlusCircle, faEllipsisH, faMinusCircle, faTrashAlt, faEdit } from '@f
 import { getUrlParams } from '../../../scripts/Common'
 
 
-const NewMenuItem = ({parentArray, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
+const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
 
     const [showReadPopap, setShowReadPopap] = useState(false)
-    const [isOpenMenu, setIsOpenMenu] = useState(false)
+    const [isOpenMenu, setIsOpenMenu] = useState(isOpen)
     const [menuText, setMenuText] = useState(text)
     const [isReadMenu, setIsReadMenu] = useState(isRead)
     const [isActiveMenu, setActiveMenu] = useState(false)
@@ -27,7 +27,7 @@ const NewMenuItem = ({parentArray, togglerMobileMenu, childrenList, lvl, text, i
     const root = useRef()
     const rootMenu = useRef()
     const rootReadMenu = useRef()
-    const {state, changeState, catalogId, decktopMode, setUrlCatalogId, infoModalState, setInfoModalState} = useContext(Context)
+    const {state, setState, changeState, catalogId, decktopMode, setUrlCatalogId, infoModalState, setInfoModalState} = useContext(Context)
 
     const newCatalogId = getUrlParams()['id'] || 0;
     // read text menu
@@ -47,13 +47,17 @@ const NewMenuItem = ({parentArray, togglerMobileMenu, childrenList, lvl, text, i
                         arr.forEach((elem, i, array) => {
                             if (elem.id == currentId) {
                                 elem.text = value
-                                changeState({ siteMenu: newList })
+                                elem.isOpen = true;
+                                // changeState({ siteMenu: newList })
+                                setState({...state, siteMenu: newList});
                             } else {
                                 findEl(elem.childrenList, currentId)
                             }
                         })
                     }
                     findEl(newList, id)
+                    // setState({...state, siteMenu: [{childrenList: []})
+                    console.log('state', state)
                 }
             })
     }
@@ -122,7 +126,7 @@ const NewMenuItem = ({parentArray, togglerMobileMenu, childrenList, lvl, text, i
                     </div>
                 }
 
-                <NavLink onClick={(evt) => changeCatalogId(evt)} to={`/items?id=${catalogId}&menu_id=${id}`} className={"overflow-hidden"}>
+                <NavLink onClick={(evt) => changeCatalogId(evt)} to={`/work/user/site-creator/items?id=${catalogId}&menu_id=${id}`} className={"overflow-hidden"}>
                     {menuText}
                 </NavLink>
                 {decktopMode &&

@@ -4,6 +4,7 @@ import useFetch from '../../../hooks/useFetch'
 import Context from '../../../Context'
 import MyItemElem from '../../BlockEditor/BlockMenu/Items/MyItem/MyItemElem/MyItemElem'
 import Loader from '../../../UI/Loader/Loader'
+import NoItemComponent from '../../../UI/NoItemComponent/NoItemComponent'
 
 
 
@@ -46,18 +47,22 @@ const MyItems = ({ showMyItem, previewItem }) => {
     }, [response])
 
     return (
-        <PopUp title="Товары" closePopup={() => showMyItem(false)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
+        <PopUp title="Товары" closePopup={() => previewItem(null)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
             <div>
+            
                 <ul className='my-items-list'>
-                    {itemList ? itemList.map((el, i) => {
-                        return <div className="col-6 col-md-3">
+                    {itemList ? itemList.map((el, i,arr) => {
+                        if(arr.length != 0){
+                            return <div className="col-6 col-md-3">
                             <div
                                 key={i}
                                 onClick={() => getItemsParams(el.id)}
                                 className='my-items-item'>
                                 <img className='my-items-elem-img' src={el.default_look_preview_700} />
+                                
                             </div>
                         </div>
+                        } else return <NoItemComponent/>
                     }) : <Loader />}
                 </ul>
             </div>

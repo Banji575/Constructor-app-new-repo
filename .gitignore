@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 src/fonts
+.eslintcache
 
 # testing
 /coverage
@@ -19,7 +20,7 @@ src/fonts
 .env.test.local
 .env.production.local
 
-.eslintcache
+
 
 
 npm-debug.log*

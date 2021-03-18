@@ -1,0 +1,36 @@
+.preview-file-img-conteiner {
+    width: 40%;
+    display: flex;
+    position: relative;
+    padding-top: 50%;
+}
+
+.my-items-preview {
+    padding-top: 100%;
+}
+
+.my-items-preview:hover {
+    transform: none
+}
+
+.image-position {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    right: 0;
+    max-height: 100%;
+    margin: auto;
+}
+
+.position-padding {
+    padding-top: 50%;
+}
+
+.item-page-item-header {
+    color: #333;
+    font-family: 'Montserrat';
+    font-size: 18px;
+    font-weight: 700;
+}
