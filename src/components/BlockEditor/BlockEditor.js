@@ -70,7 +70,6 @@ const BlockEditor = () => {
                 {openWidjet()}
             </div>
         </ContextEditor.Provider>
-
     )
 }
 

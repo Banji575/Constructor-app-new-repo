@@ -8,16 +8,16 @@ import NoItemComponent from '../../../UI/NoItemComponent/NoItemComponent'
 
 
 
-const MyItems = ({ showMyItem, previewItem }) => {
+const MyItems = ({ closePopup, showMyItem, previewItem }) => {
     const [response, doFetch] = useFetch('https://cloudsgoods.com/api/actionsAdmin.php?')
 
-    const {state, changeState, setState, catalogId, setVidjetData, vidjArr} = useContext(Context)
-    const [itemList, setItemList] = useState()
+    const { state, changeState, setState, catalogId, setVidjetData, vidjArr } = useContext(Context)
+    const [itemList, setItemList] = useState(null)
     useEffect(() => {
         const formData = new FormData()
         formData.set('mode', 'get_my_objects')
         /*  formData.set('catalog_id', catalogId) */
-        formData.set('menu_id', 0)
+        /*  formData.set('menu_id', 0) */
         formData.set('start', 0)
         formData.append('limit', 50)
         doFetch(formData)
@@ -35,6 +35,7 @@ const MyItems = ({ showMyItem, previewItem }) => {
         const list = []
         items.forEach(el => list.push(el))
         setItemList(list)
+        console.log(response)
         /*   response.data.foreEach(el=> list.push(el)) */
 
         /*        const list = []
@@ -46,24 +47,43 @@ const MyItems = ({ showMyItem, previewItem }) => {
                console.log(fileArr) */
     }, [response])
 
+
+    const elem = (arr = []) => {
+        if (!arr) return <Loader/>
+        if (arr.length !== 0) {
+           return arr.map((el, i) => {
+                return <div className="col-6 col-md-3  mb-3 ">
+                    <div
+                        key={i}
+                        onClick={() => getItemsParams(el.id)}
+                        className='my-items-item position-relative'>
+                        <img className='my-items-elem-img' src={el.default_look_preview_700} />
+                    </div>
+                </div>
+            })
+        } else return  <NoItemComponent />
+
+    }
+
     return (
-        <PopUp title="Товары" closePopup={() => previewItem(null)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
+        <PopUp title="Выберите модель" closePopup={() => closePopup(null)} /* showSave = {false} */ /* saveHandler={() => saveList()} */>
             <div>
-            
-                <ul className='my-items-list'>
-                    {itemList ? itemList.map((el, i,arr) => {
-                        if(arr.length != 0){
-                            return <div className="col-6 col-md-3">
-                            <div
-                                key={i}
-                                onClick={() => getItemsParams(el.id)}
-                                className='my-items-item'>
-                                <img className='my-items-elem-img' src={el.default_look_preview_700} />
-                                
+                <ul className='my-items-list p-0'>
+                    {/* {itemList ? itemList.map((el, i, arr) => {
+                        if (itemList.length != 0) {
+                            return <div className="col-6 col-md-3  mb-3 ">
+                                <div
+                                    key={i}
+                                    onClick={() => getItemsParams(el.id)}
+                                    className='my-items-item position-relative'>
+
+                                    <img className='my-items-elem-img' src={el.default_look_preview_700} />
+                                </div>
                             </div>
-                        </div>
-                        } else return <NoItemComponent/>
-                    }) : <Loader />}
+                        } else return <NoItemComponent />
+                        
+                    }) : <Loader />} */}
+                    {elem(itemList)}
                 </ul>
             </div>
             <div className='d-flex justify-content-end'>
