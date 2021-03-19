@@ -86,17 +86,27 @@ const NewMenuItem = ({ arrayOpenMenu, isOpen, setArrayOpenMenu, parentArray, tog
     }, [isReadMenu]);
 
     // toggle level menu
+    // toggle level menu
     useEffect(() => {
-
         const onClick = e => {
-            // console.log('Сработало', arrayOpenMenu)
-            if (!rootMenu.current ) return;
-            console.log('rootMenu', { rootMenu: rootMenu.current.contains(e.target) })
+            if (!rootMenu.current || isOpenMenu == isOpen) return;
+            console.log({rootMenu: rootMenu.current.contains(e.target)})
             return rootMenu.current.contains(e.target) || toggleOpenMenu(false)
         }
         document.addEventListener('click', onClick);
         return () => document.removeEventListener('click', onClick);
     }, [isOpen])
+    // useEffect(() => {
+
+    //     const onClick = e => {
+    //         // console.log('Сработало', arrayOpenMenu)
+    //         if (!rootMenu.current ) return;
+    //         console.log('rootMenu', { rootMenu: rootMenu.current.getAttribute('data-id')})
+    //         return rootMenu.current.contains(e.target) || toggleOpenMenu(false)
+    //     }
+    //     document.addEventListener('click', onClick);
+    //     return () => document.removeEventListener('click', onClick);
+    // }, [isOpen])
 
     const toggleOpenMenu = (flag) => {
         let f = typeof flag != 'undefined' ? flag : !isOpen;
