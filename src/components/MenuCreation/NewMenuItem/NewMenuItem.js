@@ -86,10 +86,22 @@ const NewMenuItem = ({ arrayOpenMenu, isOpen, setArrayOpenMenu, parentArray, tog
     }, [isReadMenu]);
 
     // toggle level menu
+    // useEffect(() => {
+    //     const onClick = e => {
+    //         if (!rootMenu.current || isOpenMenu == isOpen) return;
+    //         console.log({rootMenu: rootMenu.current.contains(e.target)})
+    //         return rootMenu.current.contains(e.target) || toggleOpenMenu(false)
+    //     }
+    //     document.addEventListener('click', onClick);
+    //     return () => document.removeEventListener('click', onClick);
+    // }, [isOpen])
+
     useEffect(() => {
         const onClick = e => {
+            // console.log('Сработало', arrayOpenMenu)
             if (!rootMenu.current || isOpenMenu == isOpen) return;
-            console.log({rootMenu: rootMenu.current.contains(e.target)})
+            console.log('before')
+            console.log('rootMenu', { rootMenu: rootMenu.current.contains(e.target)})
             return rootMenu.current.contains(e.target) || toggleOpenMenu(false)
         }
         document.addEventListener('click', onClick);
@@ -98,6 +110,7 @@ const NewMenuItem = ({ arrayOpenMenu, isOpen, setArrayOpenMenu, parentArray, tog
 
     const toggleOpenMenu = (flag) => {
         let f = typeof flag != 'undefined' ? flag : !isOpen;
+        console.log('flag', f)
         let newArrayOpenMenu = [...arrayOpenMenu];
         let curIndex = newArrayOpenMenu.indexOf(id)
         if (f) {
@@ -111,7 +124,7 @@ const NewMenuItem = ({ arrayOpenMenu, isOpen, setArrayOpenMenu, parentArray, tog
     }
 
     useEffect(() => {
-        
+
     }, [])
 
     // toggle popap read

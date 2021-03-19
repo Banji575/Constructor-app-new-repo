@@ -65,17 +65,17 @@ p {
     background: #fff;
     z-index: 9;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-    /* padding-left: 11%; */
+    justify-content: start;
+    flex-direction: column;
+    overflow: hidden;
+    flex-grow: 1;
+    position: fixed;
 }
 
 .verticalDirection .menu-creation-container {
     justify-content: flex-end;
 }
 
-.horizontalDirection .menu-creation-container {
-    justify-content: start;
-    flex-direction: column;
-}
 
 
 /* scroll */

@@ -184,7 +184,6 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
             }
            }
         `;
-
     const StyledMenuBlock = styled.div`
         background-color: #${menuBackgroundBlock} 
     `;
@@ -197,8 +196,8 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                 {childrenList.map((el, i) => {
                     parId = el.parent_id
                     return (
-                        <StyledMenu>
-                            <ul className="new-menu-list" key={el.id} >
+                        <StyledMenu key={i}>
+                            <ul className="new-menu-list" key={el.id}>
                                 <NewMenuItem
                                     arrayOpenMenu = {arrayOpenMenu}
                                     isOpen = {arrayOpenMenu.indexOf(el.id) != -1}
@@ -304,7 +303,6 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                 <MenuSettingButton
                     state={state}
                     callBack={changeMenuBackgroundBlock}
-                // callBack={() => console.log('vasy')}
                 />
             }
 
