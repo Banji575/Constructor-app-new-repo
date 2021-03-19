@@ -76,6 +76,7 @@ const Text = ({ content, closeEdit, vidjArr, setVidjetData, replaceVidj }) => {
                 }
                 list.push(newObj)
             }
+            console.log(list)
             setVidjetData(list)
         }
     }, [respEditText])

@@ -108,5 +108,4 @@ const ItemsList = ({ id, previewItem, itemList,setItemList,closePreview}) => {
        </React.Fragment>
     )
 }
-
 export default ItemsList

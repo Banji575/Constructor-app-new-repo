@@ -191,6 +191,5 @@ const ItemPage = ({ id, closePopup, menuId }) => {
             : null
     )
 }
-
 export default ItemPage
 
