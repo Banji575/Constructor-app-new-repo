@@ -200,7 +200,9 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                         <StyledMenu>
                             <ul className="new-menu-list" key={el.id} >
                                 <NewMenuItem
+                                    arrayOpenMenu = {arrayOpenMenu}
                                     isOpen = {arrayOpenMenu.indexOf(el.id) != -1}
+                                    setArrayOpenMenu = {setArrayOpenMenu}
                                     isMobileMenuView={menuIsClose}
                                     text={el.text}
                                     id={el.id}
@@ -219,7 +221,6 @@ const MenuCreation = ({ menuIsClose, changeViewMenu }) => {
                         </StyledMenu>
 
                     )
-
                 })}
                 {
                     decktopMode && <button className="new-menu-btn-add new-menu-items" type="button" onClick={() => addNewMenu('Новая категория', parId)}>Добавить категорию</button>

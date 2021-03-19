@@ -15,7 +15,7 @@ import { faPlusCircle, faEllipsisH, faMinusCircle, faTrashAlt, faEdit } from '@f
 import { getUrlParams } from '../../../scripts/Common'
 
 
-const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
+const NewMenuItem = ({ arrayOpenMenu, isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, childrenList, lvl, text, id, content, isRead = false, apiKey = '', menuDeletter, parentId }) => {
 
     const [showReadPopap, setShowReadPopap] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(isOpen)
@@ -27,7 +27,7 @@ const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, 
     const root = useRef()
     const rootMenu = useRef()
     const rootReadMenu = useRef()
-    const {state, setState, changeState, catalogId, decktopMode, setUrlCatalogId, infoModalState, setInfoModalState} = useContext(Context)
+    const { state, setState, changeState, catalogId, decktopMode, setUrlCatalogId, infoModalState, setInfoModalState } = useContext(Context)
 
     const newCatalogId = getUrlParams()['id'] || 0;
     // read text menu
@@ -49,14 +49,13 @@ const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, 
                                 elem.text = value
                                 elem.isOpen = true;
                                 // changeState({ siteMenu: newList })
-                                setState({...state, siteMenu: newList});
+                                setState({ ...state, siteMenu: newList });
                             } else {
                                 findEl(elem.childrenList, currentId)
                             }
                         })
                     }
                     findEl(newList, id)
-                    // setState({...state, siteMenu: [{childrenList: []})
                     console.log('state', state)
                 }
             })
@@ -64,11 +63,7 @@ const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, 
 
     //delete Menu
     const deleteMenu = () => {
-        // let a = window.confirm("Вы уверены, что хотите удалить категорию? Будут удалены все связанные товары и подкатегории!");
-        
-        // if (a) {
-        //     menuDeletter(id)
-        // }
+
         let content = 'Вы уверены, что хотите удалить пункт меню? Будут удалены все связанные товары и подпункты меню!';
         let title = 'Внимание!'
         let isOpen = true;
@@ -77,13 +72,13 @@ const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, 
         let onSave = () => {
             menuDeletter(id)
         };
-        setInfoModalState({...infoModalState, showFooter, content, title, isOpen, saveButtonText, onSave})
+        setInfoModalState({ ...infoModalState, showFooter, content, title, isOpen, saveButtonText, onSave })
     }
 
     // toggle form read menu 
     useEffect(() => {
         const onClick = e => {
-            if (!isReadMenu) return;
+            if (!isReadMenu || !rootReadMenu.current) return;
             return rootReadMenu.current.contains(e.target) || setIsReadMenu(false);
         }
         document.addEventListener('click', onClick);
@@ -93,12 +88,31 @@ const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, 
     // toggle level menu
     useEffect(() => {
         const onClick = e => {
-            if (!rootMenu.current) return;
-            return rootMenu.current.contains(e.target) || setIsOpenMenu(false);
+            if (!rootMenu.current || isOpenMenu == isOpen) return;
+            console.log({rootMenu: rootMenu.current.contains(e.target)})
+            return rootMenu.current.contains(e.target) || toggleOpenMenu(false)
         }
         document.addEventListener('click', onClick);
         return () => document.removeEventListener('click', onClick);
-    }, [isOpenMenu])
+    }, [isOpen])
+
+    const toggleOpenMenu = (flag) => {
+        let f = typeof flag != 'undefined' ? flag : !isOpen;
+        let newArrayOpenMenu = [...arrayOpenMenu];
+        let curIndex = newArrayOpenMenu.indexOf(id)
+        if (f) {
+            newArrayOpenMenu.push(id)
+        } else {
+            newArrayOpenMenu.splice(curIndex, 1)
+        }
+        console.log('arrayOpenMenu', newArrayOpenMenu)
+        setArrayOpenMenu(newArrayOpenMenu)
+        return
+    }
+
+    useEffect(() => {
+        
+    }, [])
 
     // toggle popap read
     useEffect(() => {
@@ -114,15 +128,16 @@ const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, 
     const changeCatalogId = (evt) => {
         setUrlCatalogId(id)
         togglerMobileMenu(true)
+        setArrayOpenMenu([])
         console.log('parentArray', parentArray)
     }
 
     return (
         <li data-id={id} className={isActiveMenu ? 'active-new-menu-items' : ''} ref={rootMenu}>
-            <div className={'new-menu-items ' + (lvl >= 3 ? ' pl-1 ' : '') + (isReadMenu ? 'd-none' : '') + (isOpenMenu ? ' open' : '')}>
+            <div className={'new-menu-items ' + (lvl >= 3 ? ' pl-1 ' : '') + (isReadMenu ? 'd-none' : '') + (isOpen ? ' open' : '')}>
                 {(lvl < 3 && content) &&
-                    <div className="new-menu-items-toggler" onClick={() => setIsOpenMenu(!isOpenMenu)}>
-                        <FontAwesomeIcon icon={isOpenMenu ? faMinusCircle : faPlusCircle} />
+                    <div className="new-menu-items-toggler" onClick={() => toggleOpenMenu()}>
+                        <FontAwesomeIcon icon={isOpen ? faMinusCircle : faPlusCircle} />
                     </div>
                 }
 
@@ -151,7 +166,7 @@ const NewMenuItem = ({isOpen, setArrayOpenMenu, parentArray, togglerMobileMenu, 
             </div>
             {isReadMenu &&
                 <form className="input-group input-group-sm " onSubmit={submitFormRead} ref={rootReadMenu}>
-                    <input type="text"  name="menu_id" defaultValue={id} hidden />
+                    <input type="text" name="menu_id" defaultValue={id} hidden />
                     <input type="text" autoFocus={true} name="text" class="form-control" placeholder="Название" aria-label="Название" aria-describedby="basic-addon2" defaultValue={menuText} />
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" type="submit" >Ок</button>
