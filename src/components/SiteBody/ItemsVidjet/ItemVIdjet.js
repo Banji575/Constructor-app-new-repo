@@ -67,10 +67,8 @@ const [viewEdit, setViewEdit] = useState(false)
     }, [respGetItems])
 
     return (
-
-        <div className='questions-container' >
             <WidjetWrapper /* setBackground={setBackground} */ id={id} delHandler={delHandler} replaceVidj={replaceVidj} setBackground={setBackground} isView={viewEdit} setViewEdit={setViewEdit} editWindow={<Items setViewEdit={setViewEdit} content={{ title: 'items', id, bgColor: 'ffffff', body: body.body }} />}>
-                <div className='items-vidjet'>
+                <div className='items-vidjet position-relative'>
                     <h3 className='text-center'>{Utils.createHTML(blockVidjet)}</h3>
                     <div className='items-conteiner d-flex '>
                         {itemsArr.map((el, i) => {
@@ -87,12 +85,11 @@ const [viewEdit, setViewEdit] = useState(false)
                             )
                         })}
                     </div>
+                    <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>
                 </div>
-                <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/>
+               
             </WidjetWrapper>
-            {/*   <ButtonAddComponent isVidjetButton = {true} onClick={() => setIsOpenEditBlock(false)}/> */}
-        </div>
-    )
+    ) 
 }
 
 export default ItemsVidjet;

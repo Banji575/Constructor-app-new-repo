@@ -123,6 +123,10 @@ div::-webkit-resizer {
     height: 60vh;
 }
 
+.carousel-inner img {
+    width: 100% !important;
+}
+
 .carousel-inner {
     /*  height: 200px; */
 }
