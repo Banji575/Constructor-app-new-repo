@@ -53,8 +53,9 @@ const BlockEditor = () => {
     }
 
     const showAddButtonSiteBody = () =>{
-        if(vidjetData == null) return true
-        if(vidjetData.length === 0) return true
+        // if(vidjetData == null) return true
+        // if(vidjetData.length === 0) return true
+        if(!vidjetData) return true
         return false
     }
 
